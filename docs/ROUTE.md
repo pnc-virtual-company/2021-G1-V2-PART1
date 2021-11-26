@@ -1,16 +1,19 @@
-## ROUTE DOCUMENTATION EXAMPLE
+## ROUTE DOCUMENTATION
 
 
-### 1. Book Routes
+### 1. Book Route
 ---
 
 | HTTP REQUEST| ROUTES | DESCRIPTION |
 | :---        | :----   |          :--- |
-| GET         | /books       |The route for get all books   |
-| GET         | /books/{id}        |The route to get a book by given id |
-| POST        | /books        |  The route to create a new book |
-| PUT         | /books/{id}        | The route to update a book by given id |
-| DELETE      | /books/{id}        | The route to delete a book|
+| POST        | /signup       |The route for create new user   |
+| POST        | /signin       |The route for login own user   |
+| POST        | /signout      |The route for logn out from user   |
+| GET         | /events       |The route for get all events   |
+| GET         | /events/{id}  |The route to get a event by given id |
+| POST        | /events       |  The route to create a new event |
+| PUT         | /events/{id}  | The route to update a event by given id |
+| DELETE      | /events/{id}  | The route to delete a event|
 ### 2. Route Updated By:
 
 ---
