@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //public
 Route::get('/signup', [UserController::class, 'getAlluser']);//register, create new account
-Route::post('/signup', [UserController::class, 'signup']);//register, create new account
+
 
 //private Route
 Route::group(['middleware' => ['auth:sanctum']], function() {
