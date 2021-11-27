@@ -16,11 +16,16 @@
   </header>
 </template>
 
-<style scoped>
+<style >
+body {
+  margin: 0;
+  padding: 0;
+
+}
 header {
   width: 100%;
   height: 5rem;
-  background-color: #11005c;
+  background-color: #000000;
 }
 
 nav {
