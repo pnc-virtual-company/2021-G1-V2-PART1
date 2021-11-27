@@ -9,7 +9,7 @@
           <router-link to="/findevent">Find event</router-link>
         </li>
         <li>
-          <router-link to="/category">Category</router-link>
+          <router-link to="/categories">Category</router-link>
         </li>
       </ul>
     </nav>
@@ -53,8 +53,9 @@ a {
 
 a:hover,
 a:active {
-  color: #f1a80a;
-  border-color: #f1a80a;
-  background-color: #1a037e;
+  color: #949391;
+  border-color: #f7f3f3;
+  background-color: #1a037ec4;
+  text-decoration: underline;
 }
 </style>
