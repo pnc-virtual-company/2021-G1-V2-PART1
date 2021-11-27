@@ -51,7 +51,7 @@ class UserController extends Controller
             'token'=> $token,
         ]);
     }
-
+    
 }
 
 // "1|kkS0kI5nBzKFg12lDvAfRclXMMXLcWVUnfQimjsz

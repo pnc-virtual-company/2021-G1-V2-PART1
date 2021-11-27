@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div>
     <h1>hello</h1>
     <sign-in>hello</sign-in>
@@ -24,14 +25,13 @@ export default {
   // }
 }
 </script>
+=======
+   <section>
+    <navigation></navigation>
+    <router-view></router-view>
+  </section>
+</template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+
+>>>>>>> 3cdf0c7e09933fdd7236aa52f94dbcebfde25e10
+
