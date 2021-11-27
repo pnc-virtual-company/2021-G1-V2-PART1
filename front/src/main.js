@@ -1,20 +1,20 @@
-<<<<<<< HEAD
 import { createApp } from 'vue'
+import { createRouter, createWebHistory } from "vue-router";
 import App from './App.vue'
-import Signin  from './components/Signin-Signup/Signin.vue'
+// import Themenu from './components/navigation/Themenu.vue'
+// import signin from './components/Signin_signup/signin.vue'
+import signup from './components/Signin-signup/signup.vue'
+const router = createRouter({
+    history: createWebHistory(),
+    routes: [
+      // { path: '/', component: signin },
+      { path: '/', component: signup },
+      // { path: '/teams', component: TeamsList },
+      // { path: '/users', component: UsersList },
+      // { path: '/teams/:teamId', component: TeamInformation, props: true }
+    ]
+  });
 
-const app = createApp(App);
-app.component('sign-in', Signin);
-app.mount('#app');
-
-
-
-=======
-import { createApp } from "vue";
-import App from "./App.vue";
-
-
-const app = createApp(App);
-
-app.mount("#app");
->>>>>>> 3cdf0c7e09933fdd7236aa52f94dbcebfde25e10
+  const app = createApp(App);
+  app.use(router);
+  app.mount("#app");
