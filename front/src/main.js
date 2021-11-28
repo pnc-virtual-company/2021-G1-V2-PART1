@@ -7,14 +7,14 @@ import signup from './components/Signin-signup/signup.vue'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-      // { path: '/', component: signin },
-      { path: '/', component: signup },
-      // { path: '/teams', component: TeamsList },
-      // { path: '/users', component: UsersList },
-      // { path: '/teams/:teamId', component: TeamInformation, props: true }
+        // { path: '/', component: signin },
+        { path: '/', component: signup },
+        // { path: '/teams', component: TeamsList },
+        // { path: '/users', component: UsersList },
+        // { path: '/teams/:teamId', component: TeamInformation, props: true }
     ]
-  });
+});
 
-  const app = createApp(App);
-  app.use(router);
-  app.mount("#app");
+const app = createApp(App);
+app.use(router);
+app.mount("#app");

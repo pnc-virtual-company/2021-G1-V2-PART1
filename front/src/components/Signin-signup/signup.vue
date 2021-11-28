@@ -23,9 +23,8 @@
                 <div>
                     <input type="file" name="fileImg">
                 </div>
-                <div class="add_back">
-                    <button class="back">Back</button>
-                    <button class="next">Next</button>
+                <div class="add">
+                    <button >Next</button>
                 </div>
             </div>
         </form>
@@ -68,7 +67,6 @@ export default {
         align-items: center;
         margin: 0;
         padding: 0;
-        margin-top: 1%;
 
     }
     .register{
@@ -93,21 +91,20 @@ export default {
         justify-content: center;
     }
     form{
-        padding-top: 30px;
         width:50%;
-        background: #ffffff;
+        background: #e8eaf6;
     }
     input[type=text], input[type=email], input[type=password]{
-        width: 90%;
+        width: 70%;
         height: 5vh;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         outline: none;
         border:1px solid gray;
         border-radius: 5px;
     }
     .container{
 
-        margin-left: 10%;
+        margin-left: 20%;
         
     }
     h3{
@@ -115,22 +112,16 @@ export default {
         text-shadow: 1px 1px gray;
 
     }
-    .add_back{
-        padding-top: 20px;
-    }
     button{
         width: 70px;
-        margin-left: 50px;
+        margin-left:47%;
         height: 5vh;
         border-radius: 5px;
-        background-color: #1ed30d98;
+        background-color: #0026ca;
         color:white;
         border: none;
         font-size: 15px;
         cursor: pointer;
 
-    }
-    .back{
-        background: gray;
     }
 </style>
