@@ -116,12 +116,10 @@ export default {
         margin-bottom: 20px;
         outline: none;
         border:1px solid gray;
-        border-radius: 5px;
+        border-radius: 6px;
     }
     .container{
-
         margin-left: 10%;
-        
     }
     h3{
         font-size: 30px;
