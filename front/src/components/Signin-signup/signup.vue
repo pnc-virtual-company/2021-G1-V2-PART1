@@ -21,7 +21,7 @@
                     <input type="password" placeholder="Password" v-model="storePassword">
                 </div>
                 <div>
-                    <input type="file" name="fileImg">
+                    <input type="file" name="fileImg" @change="onFileselected">
                 </div>
                 <div class="add_back">
                     <button class="back">Back</button>
@@ -43,14 +43,23 @@ export default {
             storeName: '',
             storeEmail: '',
             storePassword: '',
+            storeGender: '',
+            storeImage: null,
         }
     },
     methods: {
-        NewUser(){
-            this.$emit("new-user", this.storeName, this.storePassword, this.storeEmail);
+        onFileselected(event) {
+            this.storeImage = event.target.files[0].name
+            console.log(this.storeImage);
+        },
+        createUser() {
+            this.$emit("new-user", this.storeName, this.storeGender, this.storePassword, this.storeEmail);
             this.storeName = '';
+            this.storeGender = '',
             this.storePassword = '';
-            this.storeEmail = ''
+            this.storeEmail = '';
+            // console.log("created");
+            // console.log(this.change);
         },
     },
 }
