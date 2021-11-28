@@ -9,23 +9,27 @@
             <div class="container">
                 <h3>Register</h3>
                 <div>
-                    <input type="text" placeholder="Full name" autofocus v-model="storeName"/>
+                    <input type="text" placeholder="Full name" autofocus v-model="storeName" required/>
                 </div>
                 <div>
-                    <input type="text" placeholder="Sex" v-model="storeGender">
+                    <input type="text" placeholder="Sex" v-model="storeGender" required/>
                 </div>
                 <div>
-                    <input type="email" placeholder="Email" v-model="storeEmail">
+                    <input type="email" placeholder="Email" v-model="storeEmail" required/>
                 </div>
                 <div>
-                    <input type="password" placeholder="Password" v-model="storePassword">
+                    <input type="password" placeholder="Password" v-model="storePassword" required/>
                 </div>
                 <div>
                     <input type="file" name="fileImg">
                 </div>
                 <div class="add_back">
-                    <button class="back">Back</button>
-                    <button class="next">Next</button>
+                     <button class="back">
+                        <router-link v-bind:to="'/signin'" > Back</router-link>
+                    </button>
+                     <button class="next">
+                        <router-link v-bind:to="'/menu'" > Next </router-link>
+                    </button>
                 </div>
             </div>
         </form>
@@ -95,8 +99,6 @@ export default {
     form{
         padding-top: 30px;
         width:50%;
-        background: #e8eaf6;
-        font-family: "Times New Roman", Times, serif;
         background: #ffffff;
     }
     input[type=text], input[type=email], input[type=password]{
@@ -121,16 +123,16 @@ export default {
         padding-top: 20px;
     }
     button{
-        border: none;
-        padding: 7px;
+        width: 80px;
+        margin-left: 50px;
+        height: 5vh;
         border-radius: 5px;
-        background: #288a1f98;
-        color: white;
-        margin-left: 35%;
-        width: 90px;
-    }
-    button:hover{
-        background: #2c722698;
+        background-color: #15910a98;
+        color:white;
+        border: none;
+        font-size: 15px;
+        cursor: pointer;
+
     }
     .back{
         background: gray;

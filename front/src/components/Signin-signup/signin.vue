@@ -15,15 +15,20 @@
                     <input type="password" placeholder="Password" v-model="storePassword">
                 </div>
                 <div class="forget-1">
-                    <p>Forgot password ?</p>
+                    <!-- <p>Forgot password ?</p> -->
+                    <a href="signup">Forgot password ?</a>
                 </div>
                 <div class="add">
-                    <button>LOG IN</button>
+                    <button class="login">
+                        <router-link v-bind:to="'/menu'" > Login </router-link>
+                    </button>
+                    
                 </div>
-             
+               
                 <div class="signup-1">
                     <p>Have any account?</p>
-                    <h4>Sign Up</h4>
+                    <h4> <router-link v-bind:to="'/signup'" > Sign Up</router-link></h4>
+                    
                 </div>
             </div>
         </form>
@@ -110,5 +115,15 @@ export default {
     .add{
         margin-top: 15%;
     }
-   
+   a{
+        text-decoration: none;
+    }
+    .login{
+        margin-left: 110px;
+    }
+    .forget-1{
+        margin-top: 10px;
+        color:gray;
+        font-size: 15px;
+    }
 </style>
