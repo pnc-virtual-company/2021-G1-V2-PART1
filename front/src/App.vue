@@ -1,4 +1,5 @@
-<template>
+
+<template> 
   <section>
     <!-- <signin><signin> -->
     <signup></signup>

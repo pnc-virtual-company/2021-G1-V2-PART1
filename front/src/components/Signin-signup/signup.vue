@@ -9,22 +9,27 @@
             <div class="container">
                 <h3>Register</h3>
                 <div>
-                    <input type="text" placeholder="Full name" autofocus v-model="storeName"/>
+                    <input type="text" placeholder="Full name" autofocus v-model="storeName" required/>
                 </div>
                 <div>
-                    <input type="text" placeholder="Sex" v-model="storeGender">
+                    <input type="text" placeholder="Sex" v-model="storeGender" required/>
                 </div>
                 <div>
-                    <input type="email" placeholder="Email" v-model="storeEmail">
+                    <input type="email" placeholder="Email" v-model="storeEmail" required/>
                 </div>
                 <div>
-                    <input type="password" placeholder="Password" v-model="storePassword">
+                    <input type="password" placeholder="Password" v-model="storePassword" required/>
                 </div>
                 <div>
                     <input type="file" name="fileImg">
                 </div>
-                <div class="add">
-                    <button >Next</button>
+                <div class="add_back">
+                     <button class="back">
+                        <router-link v-bind:to="'/signin'" > Back</router-link>
+                    </button>
+                     <button class="next">
+                        <router-link v-bind:to="'/menu'" > Next </router-link>
+                    </button>
                 </div>
             </div>
         </form>
@@ -67,6 +72,7 @@ export default {
         align-items: center;
         margin: 0;
         padding: 0;
+        margin-top: 1%;
 
     }
     .register{
@@ -91,20 +97,21 @@ export default {
         justify-content: center;
     }
     form{
+        padding-top: 30px;
         width:50%;
-        background: #e8eaf6;
+        background: #ffffff;
     }
     input[type=text], input[type=email], input[type=password]{
-        width: 70%;
+        width: 90%;
         height: 5vh;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         outline: none;
         border:1px solid gray;
         border-radius: 5px;
     }
     .container{
 
-        margin-left: 20%;
+        margin-left: 10%;
         
     }
     h3{
@@ -112,16 +119,22 @@ export default {
         text-shadow: 1px 1px gray;
 
     }
+    .add_back{
+        padding-top: 20px;
+    }
     button{
         width: 70px;
-        margin-left:47%;
+        margin-left: 50px;
         height: 5vh;
         border-radius: 5px;
-        background-color: #0026ca;
+        background-color: #1ed30d98;
         color:white;
         border: none;
         font-size: 15px;
         cursor: pointer;
 
+    }
+    .back{
+        background: gray;
     }
 </style>
