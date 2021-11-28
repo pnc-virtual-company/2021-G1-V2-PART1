@@ -1,10 +1,31 @@
-
-<template> 
+<template>
   <section>
-    <!-- <signin><signin> -->
-    <signup></signup>
-    <navigation></navigation>
+    <the-navigation></the-navigation>
     <router-view></router-view>
   </section>
 </template>
 
+<script>
+
+export default {
+  components: {
+    // TheNavigation,
+  },
+  data() {
+    return {
+      users: [
+        { id: 'u1', fullName: 'Ronan OGOR', role: 'The king' },
+        { id: 'u2', fullName: 'Him Hey', role: 'The Queen' },
+        { id: 'u3', fullName: 'Rady Y', role: 'The API emperor' },
+        { id: 'u4', fullName: 'Sovanda', role: 'The VUE magician' },
+      ],
+    };
+  },
+  provide() {
+    return {
+      teams: this.teams,
+      users: this.users,
+    };
+  },
+};
+</script>

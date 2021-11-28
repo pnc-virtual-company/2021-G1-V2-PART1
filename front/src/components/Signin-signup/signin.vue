@@ -1,33 +1,33 @@
 <template>
     <section>
        <div class="register">
-        <div class="logoevent">
-            <h1>Event me</h1>
-        </div>
-        
-        <form @submit.prevent="createUser">
-            <div class="container">
-                <h3>LOG IN</h3>
-                <div>
-                    <input type="text" placeholder="Email Or Mobile Number" autofocus v-model="storeName"/>
-                </div>
-                <div>
-                    <input type="password" placeholder="Password" v-model="storePassword">
-                </div>
-                <div class="forget-1">
-                    <p>Forgot password ?</p>
-                </div>
-                <div class="add">
-                    <button>LOG IN</button>
-                </div>
-             
-                <div class="signup-1">
-                    <p>Have any account?</p>
-                    <h4>Sign Up</h4>
-                </div>
+            <div class="logoevent">
+                <h1>Event me</h1>
             </div>
-        </form>
-    </div>
+            
+            <form @submit.prevent="createUser">
+                <div class="container">
+                    <h3>LOG IN</h3>
+                    <div>
+                        <input type="text" class="text" placeholder="Email Or Mobile Number" autofocus v-model="storeName"/>
+                    </div>
+                    <div>
+                        <input type="password" class="password" placeholder="Password" v-model="storePassword">
+                    </div>
+                    <div class="forget-1">
+                        <p>Forgot password ?</p>
+                    </div>
+                    <div class="add">
+                        <button><router-link v-bind:to="'/menu'" >LOGN IN</router-link></button>
+                    </div>
+                
+                    <div class="signup-1">
+                        <p>Have any account?</p>
+                        <h4>Sign Up</h4>
+                    </div>
+                </div>
+            </form>
+        </div>
     </section>
 </template>
 <script>
@@ -52,17 +52,13 @@ export default {
     body{
         background-image: url('https://jooinn.com/images/time-4.jpg');
         background-size: cover;
-       
     }
-    section{
+    section {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0;
+        margin: auto;
         padding: 0;
-        width: 75%;
-        margin-top: 1%;
-        margin-left: 10%;
     }
     .register{
         display: flex;
@@ -83,7 +79,7 @@ export default {
     form{
         background: #ffffff;
     }
-    input[type=text], input[type=email], input[type=password]{
+    .text, .password{
         width: 90%;
         height: 40px;
         margin-bottom: 10px;
@@ -109,6 +105,9 @@ export default {
     }
     .add{
         margin-top: 15%;
+    }
+    a {
+        text-decoration: none;
     }
    
 </style>

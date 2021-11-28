@@ -62,7 +62,7 @@ export default {
         background-size: cover;
 
     }
-    section{
+    /* section{
         display: flex;
         justify-content: center;
         align-items: center;
@@ -70,7 +70,7 @@ export default {
         padding: 0;
         margin-top: 1%;
 
-    }
+    } */
     .register{
         display: flex;
         justify-content: center;
@@ -99,14 +99,14 @@ export default {
         font-family: "Times New Roman", Times, serif;
         background: #ffffff;
     }
-    input[type=text], input[type=email], input[type=password]{
+    /* input[type=text], input[type=email], input[type=password]{
         width: 90%;
         height: 5vh;
         margin-bottom: 20px;
         outline: none;
         border:1px solid gray;
         border-radius: 5px;
-    }
+    } */
     .container{
 
         margin-left: 10%;

@@ -1,17 +1,16 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from "vue-router";
 import App from './App.vue'
-// import Themenu from './components/navigation/Themenu.vue'
+import TheNavigation from './components/menu/TheNavigation.vue';
 // import signin from './components/Signin_signup/signin.vue'
-import signup from './components/Signin-Signup/signup.vue'
-import Signin from './components/Signin-Signup/Signin.vue'
+import signup from './components/Signin-signup/signup.vue'
+import signin from './components/Signin-signup/signin.vue'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        {path: '/', component: Signin},
-      { path: '/', component: signup },
-      
-      // { path: '/teams', component: TeamsList },
+        {path: '/', component: signin},
+        { path: '/signup', component: signup },
+      { path: '/menu', component: TheNavigation },
       // { path: '/users', component: UsersList },
       // { path: '/teams/:teamId', component: TeamInformation, props: true }
     ]
