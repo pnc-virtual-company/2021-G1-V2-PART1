@@ -7,52 +7,59 @@
         
         <form @submit.prevent="createUser">
             <div class="container">
-                <h3>LOG IN</h3>
+                <h3>Register</h3>
                 <div>
-                    <input type="text" placeholder="Email Or Mobile Number" autofocus v-model="storeName"/>
+                    <input type="text" placeholder="Full name" autofocus v-model="storeName"/>
+                </div>
+                <div>
+                    <input type="text" placeholder="Sex" v-model="storeGender">
+                </div>
+                <div>
+                    <input type="email" placeholder="Email" v-model="storeEmail">
                 </div>
                 <div>
                     <input type="password" placeholder="Password" v-model="storePassword">
                 </div>
-                <div class="forget-1">
-                    <p>Forgot password ?</p>
+                <div>
+                    <input type="file" name="fileImg">
                 </div>
                 <div class="add">
-                    <button>LOG IN</button>
-                </div>
-             
-                <div class="signup-1">
-                    <p>Have any account?</p>
-                    <h4>Sign Up</h4>
+                    <button >Next</button>
                 </div>
             </div>
         </form>
     </div>
+      
     </section>
+   
 </template>
+
 <script>
 export default {
     emits: ["new-user"],
     data() {
         return{
             storeName: '',
+            storeEmail: '',
             storePassword: '',
         }
     },
     methods: {
         NewUser(){
-            this.$emit("new-user", this.storeName, this.storePassword);
+            this.$emit("new-user", this.storeName, this.storePassword, this.storeEmail);
             this.storeName = '';
             this.storePassword = '';
+            this.storeEmail = ''
         },
     },
 }
 </script>
+    
 <style>
     body{
         background-image: url('https://jooinn.com/images/time-4.jpg');
         background-size: cover;
-       
+
     }
     section{
         display: flex;
@@ -60,9 +67,7 @@ export default {
         align-items: center;
         margin: 0;
         padding: 0;
-        width: 75%;
-        margin-top: 1%;
-        margin-left: 10%;
+
     }
     .register{
         display: flex;
@@ -70,9 +75,14 @@ export default {
         align-items: spece-between;
         margin-top: 3%;
         width: 100%;
+        
+        
+        
     }
     .logoevent{
         background-color: #9e9e9e;
+        width: 50%;
+        height: 85vh;
         color: white;
         text-shadow: 5px 5px #70625c;
         font-size: 100px;
@@ -81,34 +91,38 @@ export default {
         justify-content: center;
     }
     form{
-        background: #ffffff;
+        width:50%;
+        background: #e8eaf6;
+        font-family: "Times New Roman", Times, serif;
     }
     input[type=text], input[type=email], input[type=password]{
-        width: 90%;
-        height: 40px;
+        width: 70%;
+        height: 5vh;
         margin-bottom: 10px;
         outline: none;
         border:1px solid gray;
-        border-radius: 3px;
+        border-radius: 5px;
     }
     .container{
-        font-family: sans-serif;
-        margin-left: 8%;  
+
+        margin-left: 20%;
+        
     }
     h3{
         font-size: 30px;
         text-shadow: 1px 1px gray;
+
     }
-    .signup-1{
-        margin-left: 30%;
-        margin-top: 30%;
+    button{
+        border: none;
+        padding: 7px;
+        border-radius: 5px;
+        background: #288a1f98;
+        color: white;
+        margin-left: 35%;
+        width: 90px;
     }
-    h4{
-        margin-left: 15%;
-        margin-top: -6%;
+    button:hover{
+        background: #2c722698;
     }
-    .add{
-        margin-top: 15%;
-    }
-   
 </style>
