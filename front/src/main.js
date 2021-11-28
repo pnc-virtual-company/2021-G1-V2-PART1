@@ -11,6 +11,11 @@ const router = createRouter({
         { path: '/signin', component: signin },
         { path: '/signup', component: signup },
         { path: '/menu', component: TheNavigation },
+
+        // =================Event======================
+        // { path: '/myevent', component: TheNavigation },
+        // { path: '/findevent', component: TheNavigation },
+        // { path: '/categories', component: TheNavigation },
         // { path: '/users', component: UsersList },
         // { path: '/teams/:teamId', component: TeamInformation, props: true }
     ]

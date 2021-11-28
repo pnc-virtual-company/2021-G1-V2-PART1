@@ -5,7 +5,7 @@
                 <h1>Event me</h1>
             </div>
             
-            <form @submit.prevent="createUser">
+            <form @submit.prevent="LoginUser">
                 <div class="container">
                     <h3>LOG IN</h3>
                 <div>
@@ -16,10 +16,9 @@
                     </div>
                     <div class="forget-1">
                         <p><router-link v-bind:to="'/signup'" >Forgot password ?</router-link></p>
-        
                     </div>
                     <div class="add">
-                        <button><router-link v-bind:to="'/menu'" >LOGN IN</router-link></button>
+                        <button @click="LoginUser"><router-link  :to="'/menu'">SIGN IN</router-link></button>
                     </div>
                 
                     <div class="signup-1">
@@ -28,38 +27,51 @@
                     </div>
                 </div>
             </form>
+
         </div>
     </section>
 </template>
 <script>
+import axios from 'axios';
+const API_URL = "http://127.0.0.1:8000/api";
+
 export default {
-    emits: ["new-user"],
+    // inject: ['users'],
     data() {
         return{
             storeName: '',
             storePassword: '',
+            users: [],
+            isValid: false,
+
         }
     },
     methods: {
-        NewUser(){
-            this.$emit("new-user", this.storeName, this.storePassword);
-            this.storeName = '';
-            this.storePassword = '';
+        LoginUser(){
+            for(let user of this.users){
+                if(user.name === this.storeName && user.password === this.storePassword){
+                    console.log(user);
+                }   
+                
+            }
         },
     },
+     mounted() {
+      axios.get(API_URL + "/users").then(res => {
+        this.users = res.data;
+        // console.log(this.users);
+      })
+  },
 }
 </script>
 <style>
-    body{
-        background-image: url('https://jooinn.com/images/time-4.jpg');
-        background-size: cover;
-    }
     section {
         display: flex;
         justify-content: center;
         align-items: center;
         margin: auto;
         padding: 0;
+        margin-top: 10px;
     }
     .register{
         display: flex;

@@ -20,13 +20,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //public
-Route::post('/signup', [UserController::class, 'signup']);//register, create new account
-Route::get('users',[UserController::class,'getAlluser']);
-Route::get('users/{id}',[UserController::class,'show']);
+Route::get('/users',[UserController::class,'getAlluser']);
+Route::post('/signup', [UserController::class, 'create']);  //register, create new account
+Route::get('/users/{id}',[UserController::class,'show']);
 
 //private Route
 Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::post('/signin', [UserController::class, 'signin']);
-    Route::put('users/{id}', [UserController::class, 'updateUser']);
-    Route::delete('users/{id}', [UserController::class, 'destroy']);
+    Route::put('/users/{id}', [UserController::class, 'updateUser']);
+    Route::delete('/users/{id}', [UserController::class, 'destroy']);
 });

@@ -12,14 +12,16 @@
                     <input class="text" type="text" placeholder="Full name" autofocus v-model="storeName" required/>
                 </div>
                 <div>
-                    <input  class="text" type="text" placeholder="Sex" v-model="storeGender" required/>
-                </div>
-                <div>
                     <input class="email" type="email" placeholder="Email" v-model="storeEmail" required/>
                 </div>
                 <div>
                     <input class="password" type="password" placeholder="Password" v-model="storePassword" required/>
                 </div>
+
+                 <div>
+                    <input  class="text" type="text" placeholder="Sex" v-model="storeGender" required/>
+                </div>
+
                 <div>
                     <input type="file" name="fileImg" @change="onFileselected">
                 </div>
@@ -57,24 +59,20 @@ export default {
             console.log(this.storeImage);
         },
         createUser() {
-            this.$emit("new-user", this.storeName, this.storeGender, this.storePassword, this.storeEmail, this.storeImage);
+            this.$emit("new-user", this.storeName,this.storeEmail, this.storePassword,this.storeGender);
             this.storeName = '';
             this.storeGender = '',
             this.storePassword = '';
             this.storeEmail = '';
             console.log("created");
-            console.log(this.storeImage);
+            // console.log(this.storeImage);
+
         },
     },
 }
 </script>
     
 <style>
-    body{
-        background-image: url('https://jooinn.com/images/time-4.jpg');
-        background-size: cover;
-
-    }
     section{
         display: flex;
         justify-content: center;
@@ -87,7 +85,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: spece-between;
-        margin-top: 3%;
+        margin-top: 4%;
         width: 100%;
     }
     .logoevent{
