@@ -21,14 +21,14 @@
                     <input type="password" placeholder="Password" v-model="storePassword" required/>
                 </div>
                 <div>
-                    <input type="file" name="fileImg">
+                    <input type="file" name="fileImg" @change="onFileselected">
                 </div>
                 <div class="add_back">
                      <button class="back">
                         <router-link v-bind:to="'/signin'" > Back</router-link>
                     </button>
                      <button class="next">
-                        <router-link v-bind:to="'/menu'" > Next </router-link>
+                        <router-link @click="createUser" v-bind:to="'/menu'" > Next </router-link>
                     </button>
                 </div>
             </div>
@@ -47,14 +47,23 @@ export default {
             storeName: '',
             storeEmail: '',
             storePassword: '',
+            storeGender: '',
+            storeImage: null,
         }
     },
     methods: {
-        NewUser(){
-            this.$emit("new-user", this.storeName, this.storePassword, this.storeEmail);
+        onFileselected(event) {
+            this.storeImage = event.target.files[0].name
+            console.log(this.storeImage);
+        },
+        createUser() {
+            this.$emit("new-user", this.storeName, this.storeGender, this.storePassword, this.storeEmail, this.storeImage);
             this.storeName = '';
+            this.storeGender = '',
             this.storePassword = '';
-            this.storeEmail = ''
+            this.storeEmail = '';
+            console.log("created");
+            console.log(this.storeImage);
         },
     },
 }
