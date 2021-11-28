@@ -1,7 +1,6 @@
 <template>
-<<<<<<< HEAD
+
   <div>
-    <h1>hello</h1>
     <sign-in>hello</sign-in>
   </div>
   <!-- <img alt="Vue logo" src="./assets/logo.png">
@@ -25,13 +24,5 @@ export default {
   // }
 }
 </script>
-=======
-   <section>
-    <navigation></navigation>
-    <router-view></router-view>
-  </section>
-</template>
 
-
->>>>>>> 3cdf0c7e09933fdd7236aa52f94dbcebfde25e10
-
+   
