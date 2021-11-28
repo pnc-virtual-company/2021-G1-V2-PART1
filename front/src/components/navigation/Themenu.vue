@@ -3,10 +3,10 @@
     <nav>
       <ul>
         <li>
-          <router-link to="/teachers">Teacher</router-link>
+          <!-- <router-link to="/teachers">Teacher</router-link> -->
         </li>
         <li>
-          <router-link to="/students">Students</router-link>
+          <!-- <router-link to="/students">Students</router-link> -->
         </li>
       </ul>
     </nav>

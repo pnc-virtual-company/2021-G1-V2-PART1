@@ -68,7 +68,7 @@ class UserController extends Controller
             'name' => 'min:5|max:20',
             'email' => 'required',
             'password' => 'required|confirmed',
-            'profileImg' => 'required|image|max:1999',
+            'profileImg' => 'image|mimes:jpg,jpg,png,gif|max:1999',
             
         ]);
         $request->file('profileImg')->store('public/images');
@@ -106,5 +106,5 @@ class UserController extends Controller
     
 }
 
-// 1|gVYBT69cwEn91Kkx9dQyFWoOzgny1ZQEBVaOwbDQ
-
+// 6|yzxiWtneiDTZQ6nlCBUUPoHOup5lOrXBHksaEqJU
+// 4|qz4gISOYhTW4prUscrmoNdmzCH3irvrDrCl82mOz

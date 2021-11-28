@@ -9,23 +9,27 @@
             <div class="container">
                 <h3>Register</h3>
                 <div>
-                    <input type="text" placeholder="Full name" autofocus v-model="storeName"/>
+                    <input type="text" placeholder="Full name" autofocus v-model="storeName" required/>
                 </div>
                 <div>
-                    <input type="text" placeholder="Sex" v-model="storeGender">
+                    <input type="text" placeholder="Sex" v-model="storeGender" required/>
                 </div>
                 <div>
-                    <input type="email" placeholder="Email" v-model="storeEmail">
+                    <input type="email" placeholder="Email" v-model="storeEmail" required/>
                 </div>
                 <div>
-                    <input type="password" placeholder="Password" v-model="storePassword">
+                    <input type="password" placeholder="Password" v-model="storePassword" required/>
                 </div>
                 <div>
                     <input type="file" name="fileImg" @change="onFileselected">
                 </div>
                 <div class="add_back">
-                    <button class="back">Back</button>
-                    <button class="next">Next</button>
+                     <button class="back">
+                        <router-link v-bind:to="'/signin'" > Back</router-link>
+                    </button>
+                     <button class="next">
+                        <router-link @click="createUser" v-bind:to="'/menu'" > Next </router-link>
+                    </button>
                 </div>
             </div>
         </form>
@@ -53,13 +57,13 @@ export default {
             console.log(this.storeImage);
         },
         createUser() {
-            this.$emit("new-user", this.storeName, this.storeGender, this.storePassword, this.storeEmail);
+            this.$emit("new-user", this.storeName, this.storeGender, this.storePassword, this.storeEmail, this.storeImage);
             this.storeName = '';
             this.storeGender = '',
             this.storePassword = '';
             this.storeEmail = '';
-            // console.log("created");
-            // console.log(this.change);
+            console.log("created");
+            console.log(this.storeImage);
         },
     },
 }
