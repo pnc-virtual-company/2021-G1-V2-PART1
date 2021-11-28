@@ -14,7 +14,7 @@ const router = createRouter({
       // { path: '/users', component: UsersList },
       // { path: '/teams/:teamId', component: TeamInformation, props: true }
     ]
-  });
+});
 
 
 // app.component('sign-in', Signin);
