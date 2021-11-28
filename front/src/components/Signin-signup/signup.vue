@@ -9,16 +9,16 @@
             <div class="container">
                 <h3>Register</h3>
                 <div>
-                    <input type="text" placeholder="Full name" autofocus v-model="storeName" required/>
+                    <input class="text" type="text" placeholder="Full name" autofocus v-model="storeName" required/>
                 </div>
                 <div>
-                    <input type="text" placeholder="Sex" v-model="storeGender" required/>
+                    <input  class="text" type="text" placeholder="Sex" v-model="storeGender" required/>
                 </div>
                 <div>
-                    <input type="email" placeholder="Email" v-model="storeEmail" required/>
+                    <input class="email" type="email" placeholder="Email" v-model="storeEmail" required/>
                 </div>
                 <div>
-                    <input type="password" placeholder="Password" v-model="storePassword" required/>
+                    <input class="password" type="password" placeholder="Password" v-model="storePassword" required/>
                 </div>
                 <div>
                     <input type="file" name="fileImg" @change="onFileselected">
@@ -75,24 +75,20 @@ export default {
         background-size: cover;
 
     }
-    /* section{
+    section{
         display: flex;
         justify-content: center;
         align-items: center;
         margin: 0;
         padding: 0;
-        margin-top: 1%;
 
-    } */
+    }
     .register{
         display: flex;
         justify-content: center;
         align-items: spece-between;
         margin-top: 3%;
         width: 100%;
-        
-        
-        
     }
     .logoevent{
         background-color: #9e9e9e;
@@ -110,14 +106,23 @@ export default {
         width:50%;
         background: #ffffff;
     }
-    /* input[type=text], input[type=email], input[type=password]{
+    .text,
+    .password{
         width: 90%;
         height: 5vh;
         margin-bottom: 20px;
         outline: none;
         border:1px solid gray;
         border-radius: 5px;
-    } */
+    }
+    .email{
+        width: 90%;
+        height: 7vh;
+        margin-bottom: 10px;
+        outline: none;
+        border:1px solid gray;
+        border-radius: 5px;
+    }
     .container{
         margin-left: 10%;
     }
@@ -127,11 +132,15 @@ export default {
 
     }
     .add_back{
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
         padding-top: 20px;
     }
     button{
         width: 80px;
-        margin-left: 50px;
+        margin-left: 100px;
         height: 5vh;
         border-radius: 5px;
         background-color: #15910a98;
@@ -143,5 +152,6 @@ export default {
     }
     .back{
         background: gray;
+        margin-left: 10px;
     }
 </style>

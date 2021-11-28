@@ -10,7 +10,7 @@
       
       <div >
         <div>
-            <h2>Sign out</h2>
+            <h2><router-link v-bind:to="'/signin'" >Sign Out</router-link></h2>
         </div>
         <div class="signout">
           <i class="fal fa-sign-out"></i>

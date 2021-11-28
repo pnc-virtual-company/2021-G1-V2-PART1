@@ -8,14 +8,15 @@
             <form @submit.prevent="createUser">
                 <div class="container">
                     <h3>LOG IN</h3>
-                    <div>
+                <div>
                         <input type="text" class="text" placeholder="Email Or Mobile Number" autofocus v-model="storeName"/>
                     </div>
                     <div>
                         <input type="password" class="password" placeholder="Password" v-model="storePassword">
                     </div>
                     <div class="forget-1">
-                        <p>Forgot password ?</p>
+                        <p><router-link v-bind:to="'/signup'" >Forgot password ?</router-link></p>
+        
                     </div>
                     <div class="add">
                         <button><router-link v-bind:to="'/menu'" >LOGN IN</router-link></button>
@@ -23,7 +24,7 @@
                 
                     <div class="signup-1">
                         <p>Have any account?</p>
-                        <h4>Sign Up</h4>
+                        <h4><router-link v-bind:to="'/signup'" >Sign Up</router-link></h4>
                     </div>
                 </div>
             </form>
@@ -64,8 +65,8 @@ export default {
         display: flex;
         justify-content: center;
         align-items: spece-between;
-        margin-top: 3%;
-        width: 100%;
+        margin-top: 4%;
+        width: 900px;
     }
     .logoevent{
         background-color: #9e9e9e;
@@ -89,7 +90,8 @@ export default {
     }
     .container{
         font-family: sans-serif;
-        margin-left: 8%;  
+        height: 70vh;
+        /* margin-left: 8%;   */
     }
     h3{
         font-size: 30px;
@@ -97,7 +99,7 @@ export default {
     }
     .signup-1{
         margin-left: 30%;
-        margin-top: 30%;
+        margin-top: 20%;
     }
     h4{
         margin-left: 15%;
@@ -105,6 +107,7 @@ export default {
     }
     .add{
         margin-top: 15%;
+        margin-left:12%;
     }
     a {
         text-decoration: none;
