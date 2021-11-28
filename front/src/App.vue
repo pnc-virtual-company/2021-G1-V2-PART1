@@ -1,15 +1,16 @@
 <template>
   <section>
-    <the-menu></the-menu>
+    <the-navigation></the-navigation>
     <router-view></router-view>
   </section>
 </template>
+
 <script>
-// import TheNavigation from './components/menu/TheNavigation.vue';
+import TheNavigation from './components/menu/TheNavigation.vue';
 
 export default {
   components: {
-    // TheNavigation,
+    TheNavigation,
   },
   data() {
     return {
@@ -27,8 +28,11 @@ export default {
       ],
     };
   },
-}
+  provide() {
+    return {
+      teams: this.teams,
+      users: this.users,
+    };
+  },
+};
 </script>
-
-
-
