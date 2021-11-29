@@ -4,6 +4,7 @@ import App from './App.vue'
 import TheNavigation from './components/menu/TheNavigation.vue';
 import signup from './components/Signin-signup/signup.vue'
 import signin from './components/Signin-signup/signin.vue'
+// import Myevent from './components/Event/Myevent.vue'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -11,7 +12,7 @@ const router = createRouter({
         { path: '/signin', component: signin },
         { path: '/signup', component: signup },
         { path: '/menu', component: TheNavigation },
-        // { path: '/users', component: UsersList },
+        // { path: '/myevent', component: Myevent },
         // { path: '/teams/:teamId', component: TeamInformation, props: true }
     ]
 });

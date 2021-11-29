@@ -1,11 +1,11 @@
 <template>
   <section>
-    <the-navigation></the-navigation>
     <router-view></router-view>
   </section>
 </template>
 
 <script>
+// import TheNavigation from './components/menu/TheNavigation.vue';
 
 export default {
   components: {
@@ -13,6 +13,7 @@ export default {
   },
   data() {
     return {
+      
       users: [
         { id: 'u1', fullName: 'Ronan OGOR', role: 'The king' },
         { id: 'u2', fullName: 'Him Hey', role: 'The Queen' },

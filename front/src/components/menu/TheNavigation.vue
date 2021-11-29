@@ -37,6 +37,16 @@
     </nav>
   </header>
 </template>
+<script>
+
+
+export default defineComponent({
+  setup() {
+    
+  },
+})
+</script>
+
 
 <style >
 
