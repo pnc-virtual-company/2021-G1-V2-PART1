@@ -24,7 +24,7 @@
       
       <ul>
         <li>
-          <router-link to="/" >My event</router-link>
+          <router-link to="/Findevent" >My event</router-link>
         </li>
         <li>
           <router-link to="/" >Find event</router-link>

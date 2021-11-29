@@ -4,6 +4,8 @@ import App from './App.vue'
 import TheNavigation from './components/menu/TheNavigation.vue';
 import signup from './components/Signin-signup/signup.vue'
 import signin from './components/Signin-signup/signin.vue'
+import myevent from './components/Event/myevent.vue'
+import Findevent from './components/Event/Findevent.vue'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -11,7 +13,8 @@ const router = createRouter({
         { path: '/signin', component: signin },
         { path: '/signup', component: signup },
         { path: '/menu', component: TheNavigation },
-
+        { path: '/myevent', component: myevent },
+        { path: '/Findevent', component: Findevent },
         // =================Event======================
         // { path: '/myevent', component: TheNavigation },
         // { path: '/findevent', component: TheNavigation },
