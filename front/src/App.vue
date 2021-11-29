@@ -1,26 +1,41 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <section>
+    <signup-form
+    @new-user="addNewUser"
+    ></signup-form>
+    <signin></signin>
+
+    <navigation></navigation>
+    <router-view></router-view>
+  </section>
 </template>
 
+
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import signup from './components/Signin-signup/signup.vue'
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
+    // signup,
+  
+  },
+  data() {
+    return{
+      userLists:[],
+    }
+  },
+  methods: {
+    addNewUser(name, gender, email, password){
+      const newUser = {
+        name: name,
+        gender: gender,
+        email: email,
+        password: password,
+      }
+      console.log(newUser);
+      console.log("name: " + name);
+    }
+  },
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
