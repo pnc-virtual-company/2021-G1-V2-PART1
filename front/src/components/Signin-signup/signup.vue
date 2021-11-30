@@ -51,6 +51,7 @@ export default {
             confirmation_password: '',
             storeImage: null,
             errorMessage: "",
+            userLists: [],
         }
     },
     methods: {
@@ -62,11 +63,12 @@ export default {
         },
         createUser() {
            let newUser = {
-            name: this.name ,
-            email: this.email,
-            password: this.password,
+            name: this.storeName ,
+            email: this.storeEmail,
+            password: this.storePassword,
             password_confirmation: this.confirmation_password ,
             }
+            console.log(newUser);
             axios.post(API_URL + "/signup" , newUser).then(res => {
             this.userLists.push(res.data.user);
             this.$router.push('/menu');
