@@ -18,7 +18,7 @@ const router = createRouter({
         { path: '/signin', component: signin },
         { path: '/signup', component: signup },
         { path: '/menu', component: TheNavigation },
-        { path: '/myevent', component: myevent },
+        { path: '/myevent', component: Myevent },
         { path: '/Findevent', component: Findevent },
         // =================Event======================
         // { path: '/findevent', component: TheNavigation },
