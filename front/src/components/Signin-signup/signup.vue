@@ -19,19 +19,15 @@
                 </div>
 
                  <div>
-                    <input  class="text" type="text" placeholder="Sex" v-model="storeGender" required/>
+                    <input  class="password" type="password" placeholder="Confirm password" v-model="confirmation_password" required/>
                 </div>
 
                 <div>
                     <input type="file" name="fileImg" @change="onFileselected">
                 </div>
                 <div class="add_back">
-                     <button class="back">
-                        <router-link v-bind:to="'/signin'" > Back</router-link>
-                    </button>
-                     <button class="next">
-                        <router-link @click="createUser" v-bind:to="'/menu'" > Next </router-link>
-                    </button>
+                     <button @click="back" class="back"> Back</button>
+                     <button @click="createUser" class="next"> Next</button>
                 </div>
             </div>
         </form>
@@ -49,7 +45,7 @@ export default {
             storeName: '',
             storeEmail: '',
             storePassword: '',
-            storeGender: '',
+            confirmation_password: '',
             storeImage: null,
         }
     },
@@ -59,15 +55,15 @@ export default {
             console.log(this.storeImage);
         },
         createUser() {
-            this.$emit("new-user", this.storeName,this.storeEmail, this.storePassword,this.storeGender);
+            this.$emit("new-user", this.storeName,this.storeEmail, this.storePassword,this.confirmation_password);
             this.storeName = '';
-            this.storeGender = '',
+            this.confirmation_password = '',
             this.storePassword = '';
             this.storeEmail = '';
-            console.log("created");
-            // console.log(this.storeImage);
-
         },
+        back() {
+            this.$router.push('/signin')
+        }
     },
 }
 </script>
@@ -136,7 +132,7 @@ export default {
         justify-content: space-around;
         padding-top: 20px;
     }
-    button{
+    .next{
         width: 80px;
         margin-left: 100px;
         height: 5vh;
