@@ -12,14 +12,14 @@ class UserController extends Controller
         return User::latest()->get();
     }
 
-    public function create(Request $request){
-        // $request->validate([
-        //     'name' => 'min:5|max:20',
-        //     'email' => 'required',
-        //     'password' => 'required|confirmed',
-        //     'profileImg' => 'required|image|max:1999',
+    public function createUser(Request $request){
+        $request->validate([
+            'name' => 'min:5|max:20',
+            'email' => 'required',
+            'password' => 'required',
+            // 'profileImg' => 'required|image|max:1999',
             
-        // ]);
+        ]);
         // $request->file('profileImg')->store('public/images');
 
         //create user
@@ -33,12 +33,8 @@ class UserController extends Controller
 
         $user->save();
 
-        //create Token
-        // $token = $user->createToken('mytoken')->plainTextToken;
-
         return response()->json(['message' => 'Created', 'user' => $user],201);
     }
-
 
     public function signin(Request $request){
         
@@ -50,12 +46,8 @@ class UserController extends Controller
             return response()->json(['message' => 'Bad login'],401);
         }
 
-        //create Token
-        $token = $user->createToken('mytoken')->plainTextToken;
-
         return response()->json([
             'user' => $user,
-            'token'=> $token,
         ]);   
     }
     public function show($id)
@@ -67,33 +59,26 @@ class UserController extends Controller
         $request->validate([
             'name' => 'min:5|max:20',
             'email' => 'required',
-            'password' => 'required|confirmed',
-            'profileImg' => 'image|mimes:jpg,jpg,png,gif|max:1999',
+            'password' => 'required',
+        //     'profileImg' => 'image|mimes:jpg,jpg,png,gif|max:1999',
             
         ]);
-        $request->file('profileImg')->store('public/images');
+        // $request->file('profileImg')->store('public/images');
 
         //create user
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = bcrypt($request->password);
+        $user->password = $request->password;
         $user->gender = $request->gender;
-        $user->profileimg = $request->file('profileImg')->hashName();
+        // $user->profileimg = $request->file('profileImg')->hashName();
 
         $user->save();
 
-        //create Token
-
-        $token = $user->createToken('mytoken')->plainTextToken;
-
-        return response()->json([
-            'user' => $user,
-            'token'=> $token,
-        ]);
+        return response()->json(['message' => 'Updated', 'user' => $user],200);
     }
     
-    public function destroy($id)
+    public function deleteUser($id)
     {
         
         $user = User::destroy($id);
@@ -106,5 +91,3 @@ class UserController extends Controller
     
 }
 
-// 6|yzxiWtneiDTZQ6nlCBUUPoHOup5lOrXBHksaEqJU
-// 4|qz4gISOYhTW4prUscrmoNdmzCH3irvrDrCl82mOz
