@@ -29,70 +29,7 @@
                 </div>
                
             </div>
-            <!-- <div class="-card">
-                <div class="main">
-                    <div class="img">
-                        <img class="img-1" src="https://d13kjxnqnhcmn2.cloudfront.net/AcuCustom/Sitename/DAM/052/IoT_-_Main.png" alt="">
-                    </div>
-                    <div class="text">
-                        <p class="ccontainerategory">CATEGORIES NAME</p>
-                        <h1>Stay connected with the Internet of Things</h1>
-                        <p class="member">6 member going with this event</p>
-                    </div>
-                </div>
-                   
-                <div class="button">
-                    <p class="date">Nov,29 2020 6:00 PM</p>
-                    <div class="btn">
-                        <button class="Delete">Delete</button>
-                        <button class="Edit">Edit</button>
-                    </div>
-                </div>
-               
-            </div>
-            <div class="container-card">
-                <div class="main">
-                    <div class="img">
-                        <img class="img-1" src="https://d13kjxnqnhcmn2.cloudfront.net/AcuCustom/Sitename/DAM/052/IoT_-_Main.png" alt="">
-                    </div>
-                    <div class="text">
-                        <span class="blog-category">CATEGORIES NAME</span>
-                        <h1>Stay connected with the Internet of Things</h1>
-                        <p class="member">6 member going with this event</p>
-                    </div>
-                </div>
-                   
-                <div class="button">
-                    <p class="date">Nov,29 2020 6:00 PM</p>
-                    <div class="btn">
-                        <button class="Delete">Delete</button>
-                        <button class="Edit">Edit</button>
-                    </div>
-                </div>
-               
-            </div>
-            <div class="container-card">
-                <div class="main">
-                    <div class="img">
-                        <img class="img-1" src="https://d13kjxnqnhcmn2.cloudfront.net/AcuCustom/Sitename/DAM/052/IoT_-_Main.png" alt="">
-                    </div>
-                    <div class="text">
-                        <p class="blog-category">CATEGORIES NAME</p>
-                        <h1>Stay connected with the Internet of Things</h1>
-                        <p class="member">6 member going with this event</p>
-                    </div>
-                </div>
-                   
-                <div class="button">
-                    <p class="date">Nov,29 2020 6:00 PM</p>
-                    <div class="btn">
-                        <button class="Delete">Delete</button>
-                        <button class="Edit">Edit</button>
-                    </div>
-                </div>
-               
-            </div> -->
-
+            
 
             <!-- //==========End cared event============== -->
 
