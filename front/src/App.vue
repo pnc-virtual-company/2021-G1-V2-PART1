@@ -1,11 +1,13 @@
 <template>
   <section>
+    <view></view>
     <signup-form
     @new-user="addNewUser"
     ></signup-form>
     <signin></signin>
 
     <navigation></navigation>
+    
     <router-view></router-view>
   </section>
 </template>
