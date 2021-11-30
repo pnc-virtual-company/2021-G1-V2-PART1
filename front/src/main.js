@@ -28,6 +28,7 @@ const router = createRouter({
         // { path: '/categories', component: TheNavigation },
         // { path: '/users', component: UsersList },
         // { path: '/teams/:teamId', component: TeamInformation, props: true }
+    ]
 });
 
 
