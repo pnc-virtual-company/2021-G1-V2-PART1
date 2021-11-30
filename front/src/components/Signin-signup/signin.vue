@@ -9,21 +9,22 @@
                 <div class="container">
                     <h3>LOG IN</h3>
                 <div>
-                        <input type="text" class="text" placeholder="Email Or Mobile Number" autofocus v-model="storeName"/>
+                        <input type="email" class="text" placeholder="Email Or Mobile Number" autofocus v-model="storeEmail"/>
                     </div>
                     <div>
                         <input type="password" class="password" placeholder="Password" v-model="storePassword">
                     </div>
                     <div class="forget-1">
-                        <p><router-link v-bind:to="'/signup'" >Forgot password ?</router-link></p>
+                        <p class="forgot" v-if="isInvalid" style="color:red;">{{errorMessage}}</p>
+                        <p v-else style="color:#6A5ACD;"><router-link v-bind:to="'/signup'" >{{errorMessage}}</router-link></p>
                     </div>
                     <div class="add">
-                        <button><router-link  :to="'/menu'">SIGN IN</router-link></button>
+                        <button @click="signinUser">SIGN IN</button>
                     </div>
                 
                     <div class="signup-1">
                         <p>Have any account?</p>
-                        <h4><router-link v-bind:to="'/signup'" >Sign Up</router-link></h4>
+                        <h4 @click="signup">Sign Up</h4>
                     </div>
                 </div>
             </form>
@@ -32,14 +33,51 @@
     </section>
 </template>
 <script>
+import axios from 'axios';
+const API_URL = "http://127.0.0.1:8000/api";
 export default {
     data() {
         return{
-            storeName: '',
+            storeEmail: '',
             storePassword: '',
+            errorMessage: 'Forgot pasword',
+            isInvalid: false,
             users: [],
         }
     },
+
+    methods: {
+        signinUser() {
+            let user = {
+                email: this.storeEmail,
+                password: this.storePassword,
+            };
+
+            axios.post(API_URL + "/signin",user)
+            .then(res => {
+                this.users = res.data.user;
+                this.$router.push('/menu');
+                this.errorMessage = '';
+                console.log(this.users);
+            })
+            .catch(error => {
+                let statusCode = error.response.status;
+                if(statusCode === 401) {
+                this.isInvalid = true
+                this.errorMessage = 'Invalid data, please try again';
+                }
+            })
+        },
+        signup() {
+            this.$router.push('/signup')
+        }
+
+    },
+    mounted() {
+      axios.get(API_URL + "/users").then(res => {
+        this.users = res.data;
+      })
+  },
 }
 </script>
 <style>
@@ -93,7 +131,12 @@ export default {
     }
     h4{
         margin-left: 15%;
-        margin-top: -6%;
+        margin-top: 3%;
+    }
+    h4:hover{
+        color: rgb(85, 85, 243);
+        cursor: pointer;
+        text-decoration: underline;
     }
     .add{
         margin-top: 15%;
@@ -101,6 +144,13 @@ export default {
     }
     a {
         text-decoration: none;
+    }
+    button:hover{
+        background: rgb(99, 136, 82);
+    }
+    p:hover{
+        text-decoration: underline;
+        cursor:pointer
     }
    
 </style>

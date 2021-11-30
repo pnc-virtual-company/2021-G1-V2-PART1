@@ -6,8 +6,8 @@ import signup from './components/Signin-signup/signup.vue'
 import signin from './components/Signin-signup/signin.vue'
 
 // =================Event=============================
-// import My
-import myevent from './components/Event/myevent.vue'
+
+import Myevent from './components/Event/Myevent.vue'
 import Findevent from './components/Event/Findevent.vue'
 const router = createRouter({
     history: createWebHistory(),
@@ -16,13 +16,12 @@ const router = createRouter({
         { path: '/signin', component: signin },
         { path: '/signup', component: signup },
         { path: '/menu', component: TheNavigation },
-        { path: '/myevent', component: myevent },
-        { path: '/Findevent', component: Findevent },
+      
         // =================Event======================
 
-        { path: '/myevent', component: TheNavigation },
-        { path: '/findevent', component: TheNavigation },
-        { path: '/categories', component: TheNavigation },
+        { path: '/myevent', component: Myevent },
+        { path: '/findevent', component: Findevent },
+        // { path: '/categories', component: TheNavigation },
         // { path: '/users', component: UsersList },
         // { path: '/teams/:teamId', component: TeamInformation, props: true }
     ]

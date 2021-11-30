@@ -12,37 +12,31 @@ const API_URL = "http://127.0.0.1:8000/api";
 export default {
   data() {
     return {
-      userLists: [
-        // {name: "Chanthy tha", email: "chanthy@gmail.com", password: "123", gender: "M"},
-        // {name: "Thin", email: "thin@gmail.com", password: "123", gender: "M"},
-        // {name: "Sophanna", email: "sophanna@gmail.com", password: "123", gender: "M"},
-        // {name: "Vun", email: "vun@gmail.com", password: "123", gender: "F"},
-      ],
-     
+      userLists: [],
     };
-   
   },
-  
-
   methods: {
-      createNewuser(name,email,password,gender) {
+      createNewuser(name,email,password,confirmation_password) {
         let newUser = {
           name: name ,
           email: email,
           password: password,
-          gender: gender ,
+          password_confirmation: confirmation_password ,
         }
 
         axios.post(API_URL + "/signup" , newUser).then(res => {
           this.userLists.push(res.data.user);
+          this.$router.push('/menu');
+          console.log("created");
         })
-       
+
       },
   },
     
   mounted() {
       axios.get(API_URL + "/users").then(res => {
         this.userLists = res.data;
+        console.log(this.userLists)
       })
   },
   
