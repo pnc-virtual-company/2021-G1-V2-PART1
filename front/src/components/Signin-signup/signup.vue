@@ -25,6 +25,7 @@
                 <div>
                     <input type="file" name="fileImg" @change="onFileselected">
                 </div>
+                <p style="color:red;">{{errorMessage}}</p>
                 <div class="add_back">
                      <button @click="back" class="back"> Back</button>
                      <button @click="createUser" class="next"> Next</button>
@@ -38,8 +39,10 @@
 </template>
 
 <script>
+import axios from 'axios';
+const API_URL = "http://127.0.0.1:8000/api";
 export default {
-    emits: ["new-user"],
+    // emits: ["new-user"],
     data() {
         return{
             storeName: '',
@@ -47,20 +50,42 @@ export default {
             storePassword: '',
             confirmation_password: '',
             storeImage: null,
+            errorMessage: "",
         }
     },
     methods: {
+        // ===========create image ============
+
         onFileselected(event) {
             this.storeImage = event.target.files[0].name
             console.log(this.storeImage);
         },
         createUser() {
-            this.$emit("new-user", this.storeName,this.storeEmail, this.storePassword,this.confirmation_password);
+           let newUser = {
+            name: this.name ,
+            email: this.email,
+            password: this.password,
+            password_confirmation: this.confirmation_password ,
+            }
+            axios.post(API_URL + "/signup" , newUser).then(res => {
+            this.userLists.push(res.data.user);
+            this.$router.push('/menu');
+            console.log("created");
+            })
+            .catch(error => {
+                let statusCode = error.response.status;
+                if(statusCode === 422) {
+                this.isInvalid = true
+                this.errorMessage = 'Invalid user, please create again';
+                }
+            })
+
             this.storeName = '';
             this.confirmation_password = '',
             this.storePassword = '';
             this.storeEmail = '';
         },
+
         back() {
             this.$router.push('/signin')
         }
@@ -146,6 +171,15 @@ export default {
     }
     .back{
         background: gray;
+        border: none;
+        border-radius: 5px;
         margin-left: 10px;
+        padding: 7px 20px;
+        margin-top: 2%;
+        color:white;
+    }
+    .back:hover{
+        background: rgb(170, 164, 164);
+        cursor: pointer;
     }
 </style>

@@ -16,10 +16,10 @@
                     </div>
                     <div class="forget-1">
                         <p class="forgot" v-if="isInvalid" style="color:red;">{{errorMessage}}</p>
-                        <p v-else style="color:#6A5ACD;"><router-link v-bind:to="'/signup'" >{{errorMessage}}</router-link></p>
+                        <p class="forgot" v-else style="color:#6A5ACD;"><router-link v-bind:to="'/signup'" >{{errorMessage}}</router-link></p>
                     </div>
                     <div class="add">
-                        <button @click="signinUser">SIGN IN</button>
+                        <button class="signin" @click="signinUser">SIGN IN</button>
                     </div>
                 
                     <div class="signup-1">
@@ -36,16 +36,16 @@
 import axios from 'axios';
 const API_URL = "http://127.0.0.1:8000/api";
 export default {
+    // emits: ['user-name'],
     data() {
         return{
             storeEmail: '',
             storePassword: '',
             errorMessage: 'Forgot pasword',
             isInvalid: false,
-            users: [],
+            users: "",
         }
     },
-
     methods: {
         signinUser() {
             let user = {
@@ -53,33 +53,29 @@ export default {
                 password: this.storePassword,
             };
 
-            axios.post(API_URL + "/signin",user)
-            .then(res => {
+            axios.post(API_URL + "/signin",user).then(res => {
                 this.users = res.data.user;
                 this.$router.push('/menu');
                 this.errorMessage = '';
+                // this.$emit('user-name', this.users);
                 console.log(this.users);
             })
             .catch(error => {
                 let statusCode = error.response.status;
                 if(statusCode === 401) {
                 this.isInvalid = true
-                this.errorMessage = 'Invalid data, please try again';
+                this.errorMessage = 'Invalid password, please try again';
                 }
             })
         },
         signup() {
             this.$router.push('/signup')
         }
-
-    },
-    mounted() {
-      axios.get(API_URL + "/users").then(res => {
-        this.users = res.data;
-      })
   },
 }
 </script>
+
+
 <style>
     section {
         display: flex;
@@ -98,6 +94,7 @@ export default {
     }
     .logoevent{
         background-color: #9e9e9e;
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
         color: white;
         text-shadow: 5px 5px #70625c;
         font-size: 100px;
@@ -106,7 +103,8 @@ export default {
         justify-content: center;
     }
     form{
-        background: #ffffff;
+        /* background: #ca1717; */
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     }
     .text, .password{
         width: 90%;
@@ -134,7 +132,6 @@ export default {
         margin-top: 3%;
     }
     h4:hover{
-        color: rgb(85, 85, 243);
         cursor: pointer;
         text-decoration: underline;
     }
@@ -145,10 +142,19 @@ export default {
     a {
         text-decoration: none;
     }
-    button:hover{
-        background: rgb(99, 136, 82);
+    .signin{
+        border: none;
+        border-radius: 5px;
+        margin-left: 29%;
+        padding: 8px 15px;
+        background: rgb(91, 172, 54);
+        color: white;
     }
-    p:hover{
+    .signin:hover{
+        background: rgb(99, 136, 82);
+        cursor: pointer;
+    }
+    .forgot:hover{
         text-decoration: underline;
         cursor:pointer
     }

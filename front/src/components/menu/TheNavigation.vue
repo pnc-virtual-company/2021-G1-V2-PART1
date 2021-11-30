@@ -1,19 +1,19 @@
-<template>    
+<template> 
   <header>
     <nav >
       <div class="container-user">
             <i class="far fa-user-circle"></i>
             <div class="username">
-              <h2 >Username</h2>
+              <h2>{{}} Group 1</h2>
             </div>
       </div>
       
       <div >
         <div>
-            <h2><router-link v-bind:to="'/signin'" >Sign Out</router-link></h2>
+            <h2 class="signOut"><router-link v-bind:to="'/signin'" >Sign Out</router-link></h2>
         </div>
         <div class="signout">
-          <i class="fal fa-sign-out"></i>
+       
         </div>
         
       </div>
@@ -27,17 +27,38 @@
           <router-link to="/myevent" >My event</router-link>
         </li>
         <li>
-          <router-link to="/" >Find event</router-link>
+          <router-link to="/findevent" >Find event</router-link>
         </li>
         <li>
-          <router-link to="/" >Category</router-link>
+          <router-link to="/categories" >Category</router-link>
         </li>
       </ul>
-      
+      <!-- <router-view 
+      @user-name="test"
+      ></router-view> -->
     </nav>
   </header>
 </template>
 
+<script>
+
+
+// export default ({
+//   // injects:['username'],
+//   data() {
+//     return {
+//         user: "",
+//     }
+//   },
+//   methods: {
+//     test(name) {
+//       console.log(name.name);
+//     }
+//   },
+
+// })
+
+</script>
 
 
 
@@ -47,9 +68,10 @@ header {
   margin-top: -10px;
   width: 100%;
   height: 4rem;
-  background-color: rgb(32, 25, 25);
+  background-color:#000;
 }
 .container-user {
+  margin-left: 1%;
   float: left;
 }
 
@@ -65,28 +87,38 @@ header {
 .username {
   color: rgb(255, 255, 255);
   
-  margin-left: 65px;
+  margin-left: 70px;
   align-items: center;
  
 }
 .signout {
+  display: flex;
+  align-items: center;
+  border-left: 2px solid white;
+  height: 1vh;
   color: rgb(255, 255, 255);
   font-size: 25px;
   float: right;
   padding: 10px;
-  margin-top: 10px;
-  
+  margin-top: 20px;
 }
 h2 {
-  color: aliceblue;
+  color:#fff;
   float: right;
   font-size: 15px;
   text-transform: uppercase;
   margin-top: 25px;
-  margin-right: 10px;
+  margin-right: 10px
 }
 
-
+.signOut a{
+  color: rgb(212, 22, 22);
+  margin-left: -15%;
+}
+.signOut a:hover{
+  color: rgb(179, 83, 83);
+  text-decoration: underline;
+}
 
 .search-box {
   display: flex;
@@ -99,6 +131,7 @@ h2 {
   padding: 10px;
   margin-top: 15px;
   margin-right: 20px;
+  margin-right: 10px;
   
 }
 .search-box:hover > .search-txt {
@@ -107,7 +140,7 @@ h2 {
   
 }
 .search-btn {
-  color: #c73916;
+  color: #ffffff;
   height: 15px;
   width: 15px;
   line-height: 15px;
@@ -139,9 +172,11 @@ ul {
   justify-content: center;
   align-items: center;
 }
-
+ul li {
+  margin: 0;
+  padding: 0;
+}
 li a{
-  
   margin: 10px;
   text-decoration: none;
   text-transform: uppercase;
@@ -153,13 +188,13 @@ li a{
   display: inline-block;
 }
 
-
-li a:hover {
+ul li:hover {
   color: rgb(0, 0, 0);
-  background: rgb(180, 178, 178);
-  height: 20px;
-  border: none;
-  border-radius: 50px;
+  background: rgba(101, 194, 78, 0.582);
+  height: 66px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
