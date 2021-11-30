@@ -22,11 +22,7 @@ export default {
     };
    
   },
-  provide() {
-    return {
-      users: this.userLists,
-    };
-  },
+  
 
   methods: {
       createNewuser(name,email,password,gender) {
@@ -40,7 +36,6 @@ export default {
         axios.post(API_URL + "/signup" , newUser).then(res => {
           this.userLists.push(res.data.user);
         })
-        // console.log(this.userLists);
        
       },
   },
@@ -48,9 +43,9 @@ export default {
   mounted() {
       axios.get(API_URL + "/users").then(res => {
         this.userLists = res.data;
-        // console.log(this.userLists);
       })
   },
+  
 };
 </script>
 <style>
