@@ -70,7 +70,7 @@ export default {
             axios.post(API_URL + "/signup" , newUser).then(res => {
             this.userLists.push(res.data.user);
             this.$router.push('/menu');
-            console.log("created");
+            console.log("created successfully !");
             })
             .catch(error => {
                 let statusCode = error.response.status;

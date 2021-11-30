@@ -1,8 +1,4 @@
 <template>
-<<<<<<< HEAD
- 
-</template>
-=======
   <section>
     <router-view 
     ></router-view>
@@ -30,4 +26,3 @@
 
 </style>
 
->>>>>>> develop

@@ -58,7 +58,7 @@ export default {
                 this.$router.push('/menu');
                 this.errorMessage = '';
                 // this.$emit('user-name', this.users);
-                console.log(this.users);
+                console.log("Login successfully !");
             })
             .catch(error => {
                 let statusCode = error.response.status;
