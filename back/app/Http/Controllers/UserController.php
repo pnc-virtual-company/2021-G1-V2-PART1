@@ -9,37 +9,37 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function getAlluser(Request $request){
-        return User::get();
+        return User::latest()->get();
     }
-    public function signup(Request $request){
-        $request->validate([
-            'name' => 'min:5|max:20',
-            'email' => 'required',
-            'password' => 'required|confirmed',
-            'profileImg' => 'required|image|max:1999',
+
+    public function create(Request $request){
+        // $request->validate([
+        //     'name' => 'min:5|max:20',
+        //     'email' => 'required',
+        //     'password' => 'required|confirmed',
+        //     'profileImg' => 'required|image|max:1999',
             
-        ]);
-        $request->file('profileImg')->store('public/images');
+        // ]);
+        // $request->file('profileImg')->store('public/images');
 
         //create user
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = bcrypt($request->password);
+        $user->password = $request->password;
         $user->gender = $request->gender;
-        $user->profileimg = $request->file('profileImg')->hashName();
+        // $user->profileimg = $request->file('profileImg')->hashName();
 
         $user->save();
 
         //create Token
+        // $token = $user->createToken('mytoken')->plainTextToken;
 
-        $token = $user->createToken('mytoken')->plainTextToken;
-
-        return response()->json([
-            'user' => $user,
-            'token'=> $token,
-        ]);
+        return response()->json(['message' => 'Created', 'user' => $user],201);
     }
+
+
     public function signin(Request $request){
         
         // check email

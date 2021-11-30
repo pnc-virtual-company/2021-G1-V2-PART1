@@ -27,36 +27,24 @@
           <router-link to="/myevent" >My event</router-link>
         </li>
         <li>
-          <router-link to="/findevent" >Find event</router-link>
+          <router-link to="/" >Find event</router-link>
         </li>
         <li>
-          <router-link to="/categories" >Category</router-link>
+          <router-link to="/" >Category</router-link>
         </li>
       </ul>
       
     </nav>
   </header>
 </template>
-<script>
 
 
-export default defineComponent({
-  setup() {
-    
-  },
-})
-</script>
 
 
 <style >
 
-
-body {
-  margin:0;
-  padding:0;
-  font-family: sans-serif;
-}
 header {
+  margin-top: -10px;
   width: 100%;
   height: 4rem;
   background-color: rgb(32, 25, 25);
