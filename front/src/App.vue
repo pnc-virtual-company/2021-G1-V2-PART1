@@ -1,4 +1,5 @@
 <template>
+
   <section>
     <router-view
     @new-user="createNewuser"
@@ -9,7 +10,13 @@
 <script>
 import axios from 'axios';
 const API_URL = "http://127.0.0.1:8000/api";
+
+// import TheNavigation from './components/menu/TheNavigation.vue'
 export default {
+  components: {
+    // TheNavigation,
+  },
+
   data() {
     return {
       userLists: [],
@@ -42,12 +49,18 @@ export default {
   
 };
 </script>
+
+
 <style>
    body{
-      background-image: url('https://jooinn.com/images/time-4.jpg');
+      background-image: url('https://jooinn.com/images/time-4.jpg') ;
+      background-position: center;
       background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       margin: 0;
       padding: 0;
+     
     }
 
 

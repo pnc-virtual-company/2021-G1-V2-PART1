@@ -132,7 +132,7 @@ export default {
         justify-content: space-around;
         padding-top: 20px;
     }
-    button{
+    .next{
         width: 80px;
         margin-left: 100px;
         height: 5vh;
