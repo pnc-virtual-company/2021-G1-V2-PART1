@@ -18,7 +18,7 @@
                         <p><router-link v-bind:to="'/signup'" >Forgot password ?</router-link></p>
                     </div>
                     <div class="add">
-                        <button @click="LoginUser"><router-link  :to="'/menu'">SIGN IN</router-link></button>
+                        <button><router-link  :to="'/menu'">SIGN IN</router-link></button>
                     </div>
                 
                     <div class="signup-1">
@@ -32,36 +32,14 @@
     </section>
 </template>
 <script>
-import axios from 'axios';
-const API_URL = "http://127.0.0.1:8000/api";
-
 export default {
-    // inject: ['users'],
     data() {
         return{
             storeName: '',
             storePassword: '',
             users: [],
-            isValid: false,
-
         }
     },
-    methods: {
-        LoginUser(){
-            for(let user of this.users){
-                if(user.name === this.storeName && user.password === this.storePassword){
-                    console.log(user);
-                }   
-                
-            }
-        },
-    },
-     mounted() {
-      axios.get(API_URL + "/users").then(res => {
-        this.users = res.data;
-        // console.log(this.users);
-      })
-  },
 }
 </script>
 <style>
