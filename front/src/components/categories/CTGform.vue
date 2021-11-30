@@ -14,7 +14,7 @@
     </section>
 </template>
 
-<style scoped>
+<style >
     h3{
         margin-left: 9%;
         padding-top: 3%;

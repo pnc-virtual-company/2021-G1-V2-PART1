@@ -35,7 +35,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
     .cateAndBtn{
         margin-top: 5%;
         margin-bottom: -6%;

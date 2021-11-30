@@ -7,6 +7,7 @@ import App from './App.vue'
 // import signin from './components/Signin-signup/signin.vue'
 import CTGform from './components/categories/CTGform.vue'
 import view from './components/categories/view.vue' // categories view
+// import Myevent from './components/Event/Myevent.vue' // categories view
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -14,6 +15,7 @@ const router = createRouter({
         // { path: '/signin', component: signin },
         // { path: '/signup', component: signup },
         // { path: '/menu', component: Themenu },
+        { path: '/', component: view },
         { path: '/categoryview', component: view },
         { path: '/categoryform', component: CTGform },
 
