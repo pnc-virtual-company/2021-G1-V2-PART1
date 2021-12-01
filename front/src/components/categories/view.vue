@@ -3,7 +3,7 @@
         <div class="cateAndBtn">
             <h3>Category</h3>
             <div class="btnCreate">
-                <button class="CtCreate">Create</button>
+                <button @click="createCategory" class="CtCreate">Create</button>
             </div>
         </div>
         <div class="search">
@@ -31,7 +31,16 @@
 </template>
 <script>
 export default {
-    
+    data() {
+        return{
+            users: [],
+        }
+    },
+    methods: {
+        createCategory() {
+            this.$router.push('/categoryform');
+        }
+    }
 }
 </script>
 

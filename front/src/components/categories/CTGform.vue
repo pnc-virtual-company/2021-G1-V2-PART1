@@ -6,13 +6,27 @@
             <input type="text" name="" id="" placeholder="Enter your category title">
         </form>
         <div class="btnCreateCTG">
-            <button class="backToView">Back</button>
+            <button @click="backToview" class="backToView">Back</button>
             <button class="nextToCreate">Next</button>
         </div>
         </div>
         
     </section>
 </template>
+
+<script>
+
+export default ({
+    data() {
+        
+    },
+    methods: {
+        backToview() {
+            this.$router.push('/categoryview')
+        }
+    }
+})
+</script>
 
 <style >
     h3{

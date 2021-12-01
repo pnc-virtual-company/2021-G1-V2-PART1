@@ -11,4 +11,3 @@
 | POST        | /categories             | The route to create a new cqategory |
 | PUT         | /categories/{id}        | The route to update a category by given id |
 | DELETE      | /categories/{id}        | The route to delete a category|
-
