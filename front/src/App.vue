@@ -5,10 +5,6 @@
   </section>
 </template>
 
-
-
-
-
 <style>
    body{
       background:rgba(255, 255, 255, 0.815);
