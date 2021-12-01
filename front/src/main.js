@@ -13,6 +13,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path: '/', component: Findevent },
+        // { path: '/myevent', component: Myevent }
     ]
         // { path: '/signin', component: signin },
         // { path: '/signup', component: signup },
@@ -31,6 +32,7 @@ const router = createRouter({
 
 
 // app.component('sign-in', Signin);
+// app.component("friend-card", Findevent);
 
 const app = createApp(App);
 app.use(router);
