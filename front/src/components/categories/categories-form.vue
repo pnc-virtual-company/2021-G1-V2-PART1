@@ -2,12 +2,12 @@
     <section>
         <div class="formCreate">
             <h3>Category Form</h3>
-        <form>
-            <input type="text" name="" id="" placeholder="Enter your category title">
+        <form @submit.prevent="createCategory">
+            <input type="text" name="" id="" placeholder="Enter your category title" v-model="ctgtitle">
         </form>
         <div class="btnCreateCTG">
             <button @click="backToview" class="backToView">Back</button>
-            <button class="nextToCreate">Next</button>
+            <button @click="createCtg" class="nextToCreate">Next</button>
         </div>
         </div>
         
@@ -17,12 +17,19 @@
 <script>
 
 export default ({
+    emits: ['add-category'],
     data() {
-        
+        return{
+            ctgtitle: '',
+        }
     },
     methods: {
         backToview() {
-            this.$router.push('/categoryview')
+            this.$router.push('/categoryView')
+        },
+        createCtg() {
+            this.$emit('add-category', this.ctgtitle);
+            this.$router.push('/categoryView')
         }
     }
 })
@@ -30,7 +37,7 @@ export default ({
 
 <style >
     h3{
-        margin-left: 9%;
+        margin-left: 10%;
         padding-top: 3%;
         font-size: 30px;
         text-shadow:1px 1px rgb(255, 253, 253);

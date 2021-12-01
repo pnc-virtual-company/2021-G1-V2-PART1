@@ -18,27 +18,22 @@
                 <button class=""><i class="fa fa-pencil" style="font-size:24px"></i></button>
             </div> -->
         </div>
-        <div class="veiwCard">
-            <p class="card-title">Sport</p>
-            <!-- <div class="btn">
-                <button class="delete"><i class="fa fa-remove" style="font-size:24px"></i></button>
-                <button class=""><i class="fa fa-pencil" style="font-size:24px"></i></button>
-            </div> -->
-        </div>
     </div>
     </section>
     
 </template>
 <script>
 export default {
+    props:['category'],
     data() {
         return{
-            users: [],
+            test: ""
         }
     },
     methods: {
         createCategory() {
-            this.$router.push('/categoryform');
+            this.$router.push('/categoriesForm');
+            console.log(this.category);
         }
     }
 }
@@ -98,8 +93,7 @@ input[type=search]{
     background-color: rgb(110, 103, 103);
     cursor: pointer;
 }
-p{
-    font-size:30px; 
-    margin-left: 10px;
+h3{
+    margin-left: 0px;
 }
 </style>

@@ -16,7 +16,7 @@ const router = createRouter({
         // { path: '/signup', component: signup },
         // { path: '/menu', component: Themenu },
         { path: '/', component: categoriesView },
-        { path: '/categoryview', component: categoriesView },
+        { path: '/categoryView', component: categoriesView },
         { path: '/categoriesForm', component: categoriesForm },
 
         // { path: '/teams', component: TeamsList },
@@ -26,7 +26,7 @@ const router = createRouter({
 });
 
 
-// app.component('sign-in', Signin);
+// app.component('categories-view', categoriesView);
 
 const app = createApp(App);
 app.use(router);
