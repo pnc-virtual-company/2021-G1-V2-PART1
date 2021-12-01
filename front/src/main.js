@@ -5,8 +5,8 @@ import App from './App.vue'
 // import signin from './components/Signin_signup/signin.vue'
 // import signup from './components/Signin-signup/signup.vue'
 // import signin from './components/Signin-signup/signin.vue'
-import CTGform from './components/categories/CTGform.vue'
-import view from './components/categories/view.vue' // categories view
+import categoriesForm from './components/categories/categories-form.vue'
+import categoriesView from './components/categories/categories-view.vue' // categories view
 // import Myevent from './components/Event/Myevent.vue' // categories view
 const router = createRouter({
     history: createWebHistory(),
@@ -15,9 +15,9 @@ const router = createRouter({
         // { path: '/signin', component: signin },
         // { path: '/signup', component: signup },
         // { path: '/menu', component: Themenu },
-        { path: '/', component: view },
-        { path: '/categoryview', component: view },
-        { path: '/categoryform', component: CTGform },
+        { path: '/', component: categoriesView },
+        { path: '/categoryview', component: categoriesView },
+        { path: '/categoriesForm', component: categoriesForm },
 
         // { path: '/teams', component: TeamsList },
         // { path: '/users', component: UsersList },
