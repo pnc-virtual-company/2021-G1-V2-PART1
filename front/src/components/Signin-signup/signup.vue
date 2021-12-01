@@ -51,6 +51,7 @@ export default {
             confirmation_password: '',
             storeImage: null,
             errorMessage: "",
+            userLists: [],
         }
     },
     methods: {
@@ -76,7 +77,7 @@ export default {
                 let statusCode = error.response.status;
                 if(statusCode === 422) {
                 this.isInvalid = true
-                this.errorMessage = 'Invalid user, please create again';
+                this.errorMessage = 'Invalid command, please create again';
                 }
             })
 
@@ -90,6 +91,7 @@ export default {
             this.$router.push('/signin')
         }
     },
+    
 }
 </script>
     
