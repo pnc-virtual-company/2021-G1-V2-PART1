@@ -3,7 +3,7 @@
         <router-view></router-view>
         <div class="blog-card">
             <div>       
-                <button class="Create">Create</button>     
+                <button class="Create"> <router-link to="/Cardevent" ><i class="fa fa-plus"></i> CREATE EVENT </router-link></button>     
             </div>
 
             <!-- // ================Card my event view============================= -->
@@ -74,14 +74,14 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 10px;
-    background: #b6b3b3dc;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     margin: auto;
-    
     margin-top: 10px;
     border-radius: 25px;
     width: 700px;
     height: 90px;
-    box-shadow: 0px 10px 50px rgba(255, 255, 255, 0.426);
+    /* box-shadow: 0px 10px 50px rgba(255, 255, 255, 0.426); */
 }
 .main{
     
@@ -177,6 +177,10 @@ h1{
     outline: none;
     border: none;
     background: rgba(112, 120, 242, 0.987);
+}
+a{
+    color: white;
+    text-decoration: none;
 }
 .button{
     width: 25%;
