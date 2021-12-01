@@ -62,10 +62,10 @@ export default {
         },
         createUser() {
            let newUser = {
-            name: this.name ,
-            email: this.email,
-            password: this.password,
-            password_confirmation: this.confirmation_password ,
+            name: this.storeName ,
+            email: this.storeEmail,
+            password: this.storePassword,
+            password_confirmation: this.confirmation_password,
             }
             axios.post(API_URL + "/signup" , newUser).then(res => {
             this.userLists.push(res.data.user);
