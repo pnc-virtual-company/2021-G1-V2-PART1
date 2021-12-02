@@ -1,13 +1,14 @@
 ## ROUTE DOCUMENTATION EXAMPLE
 
 
-### 1. Book Routes
+### 2.  Event Routes UPdate for back end
 ---
 
 | HTTP REQUEST| ROUTES | DESCRIPTION |
 | :---        | :----   |          :--- |
-| GET         | /books       |The route for get all books   |
-| GET         | /books/{id}        |The route to get a book by given id |
-| POST        | /books        |  The route to create a new book |
-| PUT         | /books/{id}        | The route to update a book by given id |
-| DELETE      | /books/{id}        | The route to delete a book|
+| GET         | /events             | The route for gets all events   |
+| GET         | /events/{id}        | The route for get a event by given id   |
+| POST        | /events             | The route to create a new event |
+| PUT         | /events/{id}        | The route to update a event by given id |
+| DELETE      | /events/{id}        | The route to delete a event|
+
