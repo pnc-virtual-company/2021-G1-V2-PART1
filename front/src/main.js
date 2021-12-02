@@ -11,7 +11,6 @@ const router = createRouter({
             { path: '/', component: CardEvent },
             { path: '/Cardevent', component: CardEvent },
             { path: '/eventForm', component: EventForm },
-            { path: '/FormEvent', component: FormEvent },
         ]
 });
 
