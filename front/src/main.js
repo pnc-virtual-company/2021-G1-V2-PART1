@@ -1,13 +1,10 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from "vue-router";
 import App from './App.vue'
-// import Themenu from './components/navigation/Themenu.vue'
-// import signin from './components/Signin_signup/signin.vue'
-// import signup from './components/Signin-signup/signup.vue'
-// import signin from './components/Signin-signup/signin.vue'
+
 import categoriesForm from './components/categories/categories-form.vue'
-import categoriesView from './components/categories/categories-view.vue' // categories view
-// import Myevent from './components/Event/Myevent.vue' // categories view
+import categoriesView from './components/categories/categories-view.vue' 
+
 const router = createRouter({
     history: createWebHistory(),
     routes: [

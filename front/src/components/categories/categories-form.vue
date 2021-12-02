@@ -28,7 +28,7 @@ export default ({
             this.$router.push('/categoryView')
         },
         createCtg() {
-            this.$emit('add-category', this.ctgtitle);
+            // this.$emit('add-category', this.ctgtitle);
             this.$router.push('/categoryView')
         }
     }
