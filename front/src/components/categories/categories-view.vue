@@ -1,40 +1,57 @@
 <template>
     <section>
         <div class="form">
-            <button type="button" id="createBtn" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">+Create categories</button>
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="create">
+                <h2 class="categories">Categories</h2>
+                <button id="createBtn" type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create </button>
+            </div>
+           
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Categories title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">New categories</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <input type="text" placeholder="categories name" v-model="categoryName">
-
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">categories name:</label>
+                            <input type="text" class="form-control" id="recipient-name" v-model="categoryName">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="message-text" v-model="description"></textarea>
+                        </div>
+                       
+                    </form>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button @click="createCategory" type="button" class="btn btn-primary" data-dismiss="modal">Create</button>
+                    <button @click="createCategory" type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
                 </div>
                 </div>
             </div>
+            </div>
+        </div>
+        <p id="exite" style="color:red">{{exiteMessage}}</p>
+        <!-- //================search btn==================== -->
+
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+
+       <!-- ============categories========================== -->
+        <div class="categoryList">
+            <div v-for="categories of categoryLists" :key="categories.title" class="category">
+                <p class="card-title">{{categories.title}}</p>
+                <div class="icon">
+                    <i id="edit" class="fas fa-pencil-alt"></i>
+                    <i id="delete" class="fa fa-trash"></i>
+                </div>
             </div>
         </div>
         
-        <!-- //================search btn==================== -->
-
-        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-
-       <!-- ============categories========================== -->
-
-        <div class="category">
-            <p class="card-title">Sport</p>
-            <p class="card-title">Music</p>
-            <p class="card-title">paino</p>
-            <p class="card-title">Game</p>
-        </div>
 
     </section>
 </template>
@@ -42,50 +59,92 @@
 export default {
     data() {
         return{
-            categoryName: ""
+            categoryLists: [],
+            categoryName: "",
+            description: "",
+            exiteMessage: "The categories is already exists"
         }
     },
     methods: {
         createCategory() {
-            console.log(this.categoryName);
+            const newCategory = {
+                title: this.categoryName,
+                description: this.description
+            }
+            this.categoryLists.push(newCategory)
+            console.log(this.categoryLists);
+
             this.categoryName = "";
+            this.description = "";
         }
     }
 }
 </script>
 
 <style >
-    #createBtn{
-        margin-left: 60%;
-        margin-top: 5%;
-        margin-bottom: 3%;
+    .create{
+        display: flex;
+        width: 40%;
+        justify-content: space-between;
+        margin-left: 32%;
+        margin-top: 3%;
+        align-items: center;
     }
-    .form-control{
+    #edit:hover,
+    #delete:hover{
+        cursor: pointer;
+    }
+    #exite{
+        margin-left: 32%;
+    }
+    .modal-dialog{
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    }
+    #search{
         width: 40%;
         margin-left: 32%;
     }
-   
-    .category{
+    #recipient-name{
+        width: 465px;
+        margin-left: 0%;
+        border-radius: 5px;
+        border: 1px solid rgb(212, 209, 209);
+    }
+    .categoryList{
         width: 40%;
-        background: rgba(122, 185, 161, 0.596);
         margin-left: 32%;
         margin-top: 3%;
         border-radius: 5px;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+    .category{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 3%;
+        border-radius: 5px;
+        background: #fff;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     }
     .card-title{
-        padding: 10px ;
+        padding: 5px 10px ;
+        padding-top: 12px;
     }
-    .card-title:hover{
-        background: rgba(72, 147, 190, 0.527);
+    .category:hover{
+        background: #D4ECDD;
         border-radius: 5px;
     }
     input[type=text] {
         border: 1px solid rgb(82, 79, 79);
         outline: none;
     }
-    h2{
-        
+    .categoriesName{
+        width: 100%;
     }
-
+    .icon{
+        margin-right: 3%;
+        width: 8%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 </style>
