@@ -1,6 +1,7 @@
 <template>
   <section>
     <router-view></router-view>
+<<<<<<< HEAD
   </section>
 </template>
 
@@ -16,4 +17,11 @@ export default {
   },
 }
 </script>
+=======
+
+  </section>
+</template>
+
+
+>>>>>>> Event
 
