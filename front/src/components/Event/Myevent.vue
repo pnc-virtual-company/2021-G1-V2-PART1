@@ -3,7 +3,7 @@
         <router-view></router-view>
         <div class="blog-card">
             <div>       
-                <button class="Create"> <router-link to="/Cardevent" ><i class="fa fa-plus"></i> CREATE EVENT </router-link></button>     
+                <button class="Create"> <router-link to="/FormEvent" ><i class="fa fa-plus"></i> CREATE EVENT </router-link></button>     
             </div>
 
             <!-- // ================Card my event view============================= -->
