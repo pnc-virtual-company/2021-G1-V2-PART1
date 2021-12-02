@@ -27,9 +27,6 @@ const router = createRouter({
     ]
 });
 
-
-// app.component('sign-in', Signin);
-
 const app = createApp(App);
 app.use(router);
 app.mount("#app");

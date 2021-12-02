@@ -6,11 +6,11 @@
 
 | HTTP REQUEST| ROUTES | DESCRIPTION |
 | :---        | :----   |          :--- |
-| GET         | /books       |The route for get all books   |
-| GET         | /books/{id}        |The route to get a book by given id |
-| POST        | /books        |  The route to create a new book |
-| PUT         | /books/{id}        | The route to update a book by given id |
-| DELETE      | /books/{id}        | The route to delete a book|
+| GET         | /users             |The route for get all user   |
+| GET         | /users/{id}        |The route to get a user by given id |
+| POST        | /users             |The route to create a new user |
+| PUT         | /users/{id}        |The route to update a user by given id |
+| DELETE      | /users/{id}        |The route to delete a user|
 ### 2. Route Updated By:
 
 ---
