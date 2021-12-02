@@ -8,7 +8,7 @@ import categoriesView from './components/categories/categories-view.vue'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        // { path: '/', component: signin },
+        // { path: '/', component: signin },/
         // { path: '/signin', component: signin },
         // { path: '/signup', component: signup },
         // { path: '/menu', component: Themenu },
