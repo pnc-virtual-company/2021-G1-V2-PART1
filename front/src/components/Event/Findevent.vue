@@ -1,91 +1,93 @@
 <template>
     <section>
-        <router-view></router-view>
         <div class="blog-card">
             <div class="search">       
                 <h3 class="title-search">Find the event</h3>
-                <input class="input-search" type="text" id="mySearch" onkeyup="myFunction()" placeholder=" Search the event..." title="Type in a category"> 
-                <!-- <i class="far fa-search"></i>    -->
+                <div class="search-box">
+                    <input class="search-txt"  type="text" name="" placeholder="Type to search...">
+                    <i class="fas fa-search search-btn"></i>
+                </div>        
             </div>
 
             <!-- // ================Card my event view============================= -->
             <div class="card">
                 <div class="container-card">
-                <div class="main">
-                    <div class="img">
-                        <img class="img-1" src="https://d13kjxnqnhcmn2.cloudfront.net/AcuCustom/Sitename/DAM/052/IoT_-_Main.png" alt="">
+                    <div class="main">
+                        <div class="img">
+                            <img class="img-1" src="https://d13kjxnqnhcmn2.cloudfront.net/AcuCustom/Sitename/DAM/052/IoT_-_Main.png" alt="">
+                        </div>
+                        <div class="text">
+                            <span class="blog-category">CATEGORIES NAME</span>
+                            <h1>Stay connected with the Internet of Things</h1>
+                            <span class="member">6 member going with this event</span>
+                        </div>
                     </div>
-                    <div class="text">
-                        <span class="blog-category">CATEGORIES NAME</span>
-                        <h1>Stay connected with the Internet of Things</h1>
-                        <span class="member">6 member going with this event</span>
-                    </div>
-                </div>
-                   
-                <div class="button">
-                    <span class="date">Nov,29 2020 6:00 PM</span>
-                    <div class="btn">
-                        
-                        <button class="Join"><i class="fal fa-check"></i>Join</button>
-                        <!-- <button class="Edit">Edit</button> -->
-                    </div>
-                </div>
-               
-            </div>
-            <div class="container-card">
-                <div class="main">
-                    <div class="img">
-                        <img class="img-1" src="https://d13kjxnqnhcmn2.cloudfront.net/AcuCustom/Sitename/DAM/052/IoT_-_Main.png" alt="">
-                    </div>
-                    <div class="text">
-                        <span class="blog-category">CATEGORIES NAME</span>
-                        <h1>Stay connected with the Internet of Things</h1>
-                        <span class="member">6 member going with this event</span>
+                    
+                    <div class="button">
+                        <span class="date">Nov,29 2020 6:00 PM</span>
+                        <div class="btn">
+                            
+                            <button v-if="joinValue" @click="joinEvent" class="Join"><i class="fal fa-check"></i>Join</button>
+                            <button v-else @click="unjoinEvent" class="quit"><i class="fas fa-times-circle"></i>Quit</button>
+                        </div>
                     </div>
                 </div>
-                   
-                <div class="button">
-                    <span class="date">Nov,29 2020 6:00 PM</span>
-                    <div class="btn">
-                        
-                        <button class="Join"><i class="fal fa-check btn-search"></i>Join</button>
-                        <!-- <button class="Edit">Edit</button> -->
+                <div class="container-card">
+                    <div class="main">
+                        <div class="img">
+                            <img class="img-1" src="https://d13kjxnqnhcmn2.cloudfront.net/AcuCustom/Sitename/DAM/052/IoT_-_Main.png" alt="">
+                        </div>
+                        <div class="text">
+                            <span class="blog-category">CATEGORIES NAME</span>
+                            <h1>Stay connected with the Internet of Things</h1>
+                            <span class="member">6 member going with this event</span>
+                        </div>
                     </div>
+                    
+                    <div class="button">
+                        <span class="date">Nov,29 2020 6:00 PM</span>
+                        <div class="btn">
+                            
+                            <button v-if="joinValue" @click="joinEvent" class="Join"><i class="fal fa-check"></i>Join</button>
+                            <button v-else @click="unjoinEvent" class="quit"><i class="fas fa-times-circle"></i>Quit</button>
+                            <!-- <button class="Edit">Edit</button> -->
+                        </div>
+                    </div>
+                
                 </div>
-               
-            </div>
-            <div class="container-card">
-                <div class="main">
-                    <div class="img">
-                        <img class="img-1" src="https://d13kjxnqnhcmn2.cloudfront.net/AcuCustom/Sitename/DAM/052/IoT_-_Main.png" alt="">
-                    </div>
-                    <div class="text">
-                        <span class="blog-category">CATEGORIES NAME</span>
-                        <h1>Stay connected with the Internet of Things</h1>
-                        <span class="member">6 member going with this event</span>
-                    </div>
-                </div>
-                   
-                <div class="button">
-                    <span class="date">Nov,29 2020 6:00 PM</span>
-                    <div class="btn">
-                        
-                        <button class="quit"><i class="fas fa-times-circle"></i>Quit</button>
-                        <!-- <button class="Edit">Edit</button> -->
-                    </div>
-                </div>
-               
-            </div>
             </div>
             
             
 
             <!-- //==========End cared event============== -->
 
-
+            
         </div>
+        
     </section>
+    
 </template>
+
+<script>
+    export default {
+    data() {
+        return {
+            joinValue: true,
+        }
+    },
+    methods: {
+        joinEvent(){
+            this.joinValue = !this.joinValue
+        },
+        unjoinEvent(){
+            console.log("Quited")
+            this.joinValue = !this.joinValue
+        }
+    },
+    };
+</script>
+
+
 
 <style >
     body {
@@ -95,53 +97,49 @@
 .card {
     margin-top: 10%;
 }
-
-
-/* .search-txt {
+.title-search {
+    text-transform: uppercase;
+}
+.search {
+    margin: 65px;
+}
+.search-box {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  float: left;
+  background: #fff;
+  height: 15px;
+  border-radius: 50px;
+  padding: 10px;
+  /* margin-top: 15px; */
+  margin-right: 20px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  
+}
+.search-btn {
+  color: #050505;
+  height: 20px;
+  width: 20px;
+  line-height: 24px;
+  font-size: 30px;
+}
+.search-txt {
   border: none;
   background: none;
   outline: none;
   padding: 0;
-  color: white;
+  color: black;
   font-size: 12px;
   transition: 0.4s;
   line-height: 20px;
-  width: 0px;
-  
-} */
-.search {
-    width: 250px;
-    /* background: rgb(89, 78, 78); */
-    margin-left: 70px;
-    margin-bottom: 50px;
+  width: 200px;
 }
-.input-search {
-   
-    color: #ffffff;
-    height: 25px;
-    width: 150px;
-    line-height: 15px;
-    font-size: 11px;
-    border: none;
-    outline: none;
-    background: rgb(170, 169, 169);
-    border-radius: 10px;
+.fa-search {
+    font-size: 15px;
+    margin-right: 5px;
 }
-.title-search {
-    text-transform: uppercase;
-    font-weight: 900px;
-}
-
-
-
-
-
-
-
-
-
 .blog-card {
-    /* position: absolute; */
     padding: 10px 0;
     height: 90vh;
     width: 200vw;
@@ -150,11 +148,9 @@
     margin: auto;
     margin-top: 10px;
 
-
-    /* background: rgba(72, 69, 69, 0.2); */
-    /* box-shadow: 0px 10px 50px rgba(252, 56, 56, .3); */
 }
 .container-card {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     margin-left: 10px;
     margin-top: 10px;
     position: relative;
@@ -162,17 +158,15 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px;
-    background: #b6b3b3dc;
+    background: #ffff;
     margin: auto;
-    
     margin-top: 10px;
     border-radius: 25px;
     width: 700px;
     height: 85px;
-    box-shadow: 0px 10px 50px rgba(255, 255, 255, 0.426);
+    
 }
 .main{
-    
     width: 75%;
     height: 18vh;
     display: flex;
@@ -182,20 +176,20 @@
 .text{
     width: 79%;
     border: none;
-}
-.member{
-    margin-top: 7%;
+    height: 16vh;
 }
 
+
 h1{
-    font-size: 20px;
-    font-weight: 540;
+    font-size: 15px;
+    font-weight: bold;
     text-transform: uppercase;
-    margin-top: -1px;
+    margin-top: 15px;
+    margin-bottom: 7%;
+
 }
 .blog-category{
     font-size: 12px;
-    margin-top: -5%;
 }
 
 .img{
@@ -218,8 +212,6 @@ h1{
     padding: 10px;
     width: 530px;
 }
-
-
 .Join{
     display: inline-block;
     padding: 10px 20px;
@@ -235,7 +227,6 @@ h1{
     outline: none;
     border: none;
     background: rgb(63, 199, 63);
-    
 }
 .quit {
     display: inline-block;
@@ -257,12 +248,6 @@ h1{
     font-size: 10px;
     margin-right: 5px;
 }
-.fas {
-    
-    font-size: 10px;
-    margin-right: 5px;
-}
-
 .Create {
     margin: 30px;
     margin-right: 70px;
@@ -280,7 +265,6 @@ h1{
     outline: none;
     border: none;
     background: rgba(112, 120, 242, 0.987);
-   
 }
 .button{
     width: 25%;
@@ -289,10 +273,12 @@ h1{
     margin-top: 15%;
 }
 .date{
-   
     margin-left: 12%;
     font-size: 15px;
-    
+}
+.fa-times-circle {
+    font-size: 10px;
+    margin-right: 5px;
 }
 </style>
 
