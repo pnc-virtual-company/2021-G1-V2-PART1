@@ -4,8 +4,9 @@ import App from './App.vue'
 // import TheNavigation from './components/menu/TheNavigation.vue';
 // import signup from './components/Signin-signup/signup.vue'
 // import signin from './components/Signin-signup/signin.vue'
-import Myevent from './components/Event/Myevent.vue'
-import Cardevent from './components/Event/CardEvent.vue'
+import EventForm from './components/Event/EventForm.vue'
+import CardEvent from './components/Event/CardEvent.vue'
+// import Dialog from './components/Event/Dialog.vue'
 // import Findevent from './components/Event/Findevent.vue'
 
 // =================Event=============================
@@ -13,11 +14,12 @@ import Cardevent from './components/Event/CardEvent.vue'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/', component: Findevent },
-        // { path: '/myevent', component: Myevent }
-            { path: '/', component: Myevent },
-            { path: '/Cardevent', component: Cardevent },
-            { path: '/myevent', component: Myevent },
+        // { path: '/', component: Findevent },
+        // { path: '/myevent', component: EventForm }
+            { path: '/', component: CardEvent },
+            { path: '/Cardevent', component: CardEvent },
+            { path: '/eventForm', component: EventForm },
+            // { path: '/dialog', component: Dialog },
         ]
         // { path: '/signin', component: signin },
         // { path: '/signup', component: signup },

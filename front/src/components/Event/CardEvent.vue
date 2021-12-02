@@ -1,168 +1,211 @@
 <template>
-  <form action="#">
-    <div>
-      <input type="text" placeholder="Title" v-model="title" autofocus />
-    </div>
-    <div>
-      <input
-        type="text"
-        placeholder="Event Catigories"
-        v-model="title"
-        autofocus
-      />
-    </div>
-    <textarea name="message" rows="10" cols="30" placeholder="You desciption"></textarea>
-    
-    <div class="row">
-      <div class="column">
-        <div>
-          <input type="date" placeholder="Start Date" required />
+    <section>
+        <div class="blog-card">
+            <!-- <div class="bg"></div> -->
+            <div>       
+                <button class="Create"> <router-link to="/EventForm" ><i class="fa fa-plus"></i> CREATE EVENT </router-link></button>     
+            </div>
+
+            <!-- // ================Card my event view============================= -->
+
+            <div class="container-card">
+                <div class="main">
+                    <div class="img">
+                        <img class="img-1" src="https://d13kjxnqnhcmn2.cloudfront.net/AcuCustom/Sitename/DAM/052/IoT_-_Main.png" alt="">
+                    </div>
+                    <div class="text">
+                        <h1>Stay connected</h1>
+                        <div class="time">
+                            <p class="date">Nov,29 2020 6:00 PM</p>
+                            <p class="member">6 members</p>
+                        </div>
+                    </div>
+                </div>
+                   
+                <div class="rightCard">
+                    <p class="categories">Categories name</p>
+                    <div class="btn">
+                        <button @click="showDialog = true" class="Delete">Delete</button>
+                        <button class="Edit">Edit</button>
+                    </div>
+                </div>
+               
+            </div>
+            <!-- //=============Dialog Btn====================== -->
+
+            <Dialog :show="showDialog" 
+                    :cancel="cancel" 
+                    :confirm="confirm" 
+                    title="You want to Delete this?" 
+                    description="Are you sure?" />
+
+            <!--=======================End cared event========================== -->
+
         </div>
-        <div>
-          <input type="date" placeholder="End Date" required />
-        </div>
-      </div>
-      <div class="column">
-        <div>
-          <input type="text" class="text1" placeholder="At" required />
-        </div>
-        <div>
-          <input type="text" class="text2" placeholder="At" required />
-        </div>
-      </div>
-    </div>
-    <div class="intFile">
-      <input type="file" />
-    </div>
-    <div class="add">
-      <button class="add1">
-        <router-link to="/myevent" class="addevent1"> Back</router-link>
-      </button>
-      <button class="add2">
-        <router-link to="/myevent" class="addevent">Add Event</router-link>
-      </button>
-    </div>
-  </form>
+    </section>
 </template>
-
-
 <script>
+
+
+import Dialog from './Dialog.vue'
+export default {
+  components: { Dialog},
+  data () {
+    return {
+      showDialog: false
+    }
+  },
+
+  methods: {
+    cancel() {
+      console.log('cancel')
+      this.showDialog = false
+    },
+    confirm() {
+      console.log('confirm')
+      this.showDialog = false
+    }
+  },
+}
 </script>
 
+
 <style scoped>
-form {
-  font-family: serif;
-  margin: 1rem auto;
-  margin-top: 4%;
-  max-width: 40%;
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  border-left: 7px solid rgb(94, 161, 105);
-}
 
-form div {
-  margin: 1rem 0;
-}
 
-input[type=text]
-{
-  width: 80%;
-  padding: 10px;
-  margin-left: 7%;
+.blog-card {
+    font-family: sans-serif;
+    padding: 10px 0;
+    height: auto;
+    width: 200vw;
+    max-width: 850px;
+    border-radius: 20px;
+    margin: auto;
+    background-size: cover;
 }
-textarea{
-  width: 83%;
-  margin-left: 7%;
-  height: 10vh;
-
+.container-card {
+    margin-left: 10px;
+    margin-top: 90px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: #fff;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 25px;
+    width: 700px;
+    height: 90px;
 }
-.intFile{
-  margin-left: 0;
-  width: 85%;
-  margin-left: 6%;
-  margin-bottom: 5%;
+.main{
+    width: 75%;
+    height: 18vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-label {
-  font-weight: bold;
-  margin-right: 1rem;
-  width: 7rem;
-  display: inline-block;
-  color: #777;
-  font-size: 15px;
-  padding: 10px 0;
-}
-
-.add {
-  display: flex;
-  justify-content: space-between;
-  text-decoration: none;
-  width: 80%;
-  margin-left: 8%;
-}
-.addevent{
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: bolder;
-  border: none;
-}
-.addevent1{
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: bolder;
-}
-.add1 {
-  background-color: rgb(151, 155, 151);
-  width: 150px;
-  height: 50px;
-  text-decoration: none;
-  border-radius: 5px;
-  border: none;
+.text{
+    width: 80%;
+    border: none;
+    font-size: 10px;
+    font-family: sans-serif;
 
 }
-.add2 {
-  background-color: rgb(62, 117, 60);
-  width: 150px;
-  height: 50px;
-  margin-left: 10px;
-  text-decoration: none;
-  border-radius: 5px;
-  border:none;
-}
-.text1 {
-  width: 97.6%;
-  height: 20px;
-  margin-top: 0;
-}
-.text2 {
-  height: 20px;
-  margin-top: 0;
+
+.member{
+    font-size: 15px;
 }
 
-.column {
-  float: left;
-  width: 40%;
-  padding: 0%;
-  margin-top: -15px;
-  margin-left: 6%;
+h1{
+    font-size: 18px;
+    margin-top: 9%;
+    font-weight: 540;
+    text-transform: uppercase;
+}
+.img{
+    margin-left: 5px;
+    height: 90px;
+    width: 90px;
+  
+}
+.img img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: .6s;
+    border-radius: 10px;
+}
+.content{
+    padding: 10px;
+    width: 530px;
 }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+.Delete, .Edit{
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    float: right;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #ffff;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: rgb(218, 37, 37);
+  
 }
-.row {
-  margin-bottom: -40px;
+.Edit{
+    background: rgb(53, 158, 32);
+    margin-right: 10px;
 }
-input[type=date]{
-  width:90%;
-  padding: 5%;
+
+.Create {
+    margin: 30px;
+    margin-right: 70px;
+    display: inline-block;
+    padding: 15px 20px;
+    border: none;
+    float: right;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #ffff;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: rgba(112, 120, 242, 0.987);
 }
 a{
-  color: white;
+    color: white;
+    text-decoration: none;
 }
-
+.rightCard{
+    width: 25%;
+}
+.time{
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -3%;
+}
+.date{
+    font-size: 15px;
+}
+.categories{
+    margin-top: 5px;
+    margin-left: 22px;
+    font-size: 17px;
+}
+.btn{
+    margin-top: 20%;
+}
 </style>
