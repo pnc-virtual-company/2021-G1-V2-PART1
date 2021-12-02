@@ -4,7 +4,7 @@ import App from './App.vue'
 // import TheNavigation from './components/menu/TheNavigation.vue';
 // import signup from './components/Signin-signup/signup.vue'
 // import signin from './components/Signin-signup/signin.vue'
-import Myevent from './components/Event/Myevent.vue'
+// import Myevent from './components/Event/Myevent.vue'
 import Cardevent from './components/Event/CardEvent.vue'
 // import Findevent from './components/Event/Findevent.vue'
 
@@ -13,11 +13,11 @@ import Cardevent from './components/Event/CardEvent.vue'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/', component: Findevent },
+        { path: '/', component: Cardevent },
         // { path: '/myevent', component: Myevent }
-            { path: '/', component: Myevent },
-            { path: '/Cardevent', component: Cardevent },
-            { path: '/myevent', component: Myevent },
+            // { path: '/', component: Myevent },
+            // { path: '/Cardevent', component: Cardevent },
+            // { path: '/myevent', component: Myevent },
         ]
         // { path: '/signin', component: signin },
         // { path: '/signup', component: signup },
