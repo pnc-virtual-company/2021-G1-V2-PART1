@@ -9,41 +9,58 @@
       </div>
       
       <div >
-        <div>
-            <h2 class="signOut"><router-link v-bind:to="'/signin'" >Sign Out</router-link></h2>
-        </div>
-        <div class="signout">
-       
-        </div>
+      <div id="signout">
+          <button id="btnSignout" @click="signout" ><router-link v-bind:to="'/'" >sign out</router-link></button>
+      </div>
         
       </div>
       <div class="search-box">
           <input class="search-txt"  type="text" name="" placeholder="Type to search...">
           <i class="fas fa-search search-btn"></i>
       </div>
-      
-      <ul>
-        <li>
-          <router-link to="/myevent" >My event</router-link>
+
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><router-link to="/home" >Home</router-link></a>
         </li>
-        <li>
-          <router-link to="/findevent" >Find event</router-link>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-myevent" aria-selected="false"><router-link to="/myevent" >My event</router-link></a>
         </li>
-        <li>
-          <router-link to="/categories" >Category</router-link>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-findevent" aria-selected="false"><router-link to="/findevent" >Find event</router-link></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-categories" aria-selected="false"><router-link to="/categories" >Category</router-link></a>
         </li>
       </ul>
+
     </nav>
   </header>
 </template>
 
 <script>
-
+export default {
+  emits: ["sign-out"],
+  data(){
+    return{
+      signOut: false,
+    }
+  },
+  methods: {
+    signout(){
+      this.$emit("sign-out", this.signOut);
+      let username = localStorage.getItem('username').toString();
+      console.log(username);
+      localStorage.clear();
+    }
+  },
+}
 </script>
 
-<style >
+<style scoped>
 
 header {
+  position: sticky;
   margin-top: -10px;
   width: 100%;
   height: 4rem;
@@ -61,53 +78,44 @@ header {
   color: #ffff;
   float: left;
   align-items: center;
-  margin-top: 8px;
+  margin-top: 5px;
   margin-left: 10px;
  
 }
 .username {
   color: rgb(255, 255, 255);
-  
   margin-left: 70px;
   align-items: center;
- 
 }
-.signout {
+#signout {
   display: flex;
   align-items: center;
   border-left: 2px solid white;
   height: 1vh;
   color: rgb(255, 255, 255);
-  font-size: 25px;
   float: right;
   padding: 10px;
   margin-top: 20px;
+  margin-right: 1%;
 }
 h2 {
   color:#fff;
   float: right;
-  font-size: 15px;
+  font-size: 17px;
   text-transform: uppercase;
-  margin-top: 25px;
+  margin-top: 22px;
   margin-right: 10px
 }
 
-.signOut a{
-  color: rgb(212, 22, 22);
-  margin-left: -15%;
-}
-.signOut a:hover{
-  color: rgb(179, 83, 83);
-  text-decoration: underline;
-}
+
 
 .search-box {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   float: right;
-  background: #2f3640;
-  height: 15px;
+  background: #475161;
+  height: 30px;
   border-radius: 50px;
   padding: 10px;
   margin-top: 15px;
@@ -121,7 +129,7 @@ h2 {
   
 }
 .search-btn {
-  color: #ffffff;
+  color: #fff;
   height: 15px;
   width: 15px;
   line-height: 15px;
@@ -140,43 +148,31 @@ h2 {
   width: 0px;
   
 }
-nav {
-  height: 100%;
-}
+
 
 ul {
   list-style: none;
+  height: 60px;
   margin: 0;
   padding: 0;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-ul li {
-  margin: 0;
-  padding: 0;
+ul li{
+  padding:0px 20px;
 }
-li a{
-  margin: 10px;
+ul li a {
   text-decoration: none;
   text-transform: uppercase;
-  background: transparent;
-  border: 1px solid transparent;
-  cursor: pointer;
-  color: white;
-  padding: 0.5rem 1.5rem;
-  display: inline-block;
+  color: #fff;
 }
 
-ul li:hover {
-  color: rgb(0, 0, 0);
-  background: rgba(101, 194, 78, 0.582);
-  height: 66px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#btnSignout{
+  border: none;
+  background: none;
+  font-size: 18px;
+  text-decoration: none;
 }
-
 
 </style>

@@ -1,13 +1,13 @@
 <template>
        <div class="register">
             <div class="event">
-                <h1>Event me</h1>
+                <h1 id="EventMe">Event me</h1>
             </div>
             
             <form @submit.prevent="LoginUser">
                 <div class="container">
                     <h3>LOG IN</h3>
-                    <div>
+                    <div id="email">
                         <input type="email" class="text" placeholder="Email Or Mobile Number" autofocus v-model="storeEmail"/>
                     </div>
                     <div>
@@ -15,7 +15,7 @@
                     </div>
                     <div class="forget-1">
                         <p class="forgot" v-if="isInvalid" style="color:red;">{{errorMessage}}</p>
-                        <p class="forgot" v-else style="color:#6A5ACD;"><router-link v-bind:to="'/signup'" >{{errorMessage}}</router-link></p>
+                        <p class="forgot" v-else style="color:green;"><router-link v-bind:to="'/signup'" >{{errorMessage}}</router-link></p>
                     </div>
                     <div class="add">
                         <button class="signin" @click="signinUser">SIGN IN</button>
@@ -23,7 +23,7 @@
                 
                     <div class="signup-1">
                         <p>Have any account?</p>
-                        <h4 @click="signup">Sign Up</h4>
+                        <h4 id="signup" @click="signup">Sign Up</h4>
                     </div>
                 </div>
             </form>
@@ -47,7 +47,6 @@ export default {
     },
     methods: {
         signinUser() {
-            this.$emit("signin-user", this.signin);
             let user = {
                 email: this.storeEmail,
                 password: this.storePassword,
@@ -55,9 +54,11 @@ export default {
 
             axios.post(API_URL + "/signin",user).then(res => {
                 this.users = res.data.user;
-                // this.$router.push('/menu');
-                this.errorMessage = '';
+                this.$router.push('/home');
+                this.$emit("signin-user", this.signin);
+                this.errorMessage = 'Login Successfully !';
                 console.log(this.users);
+                localStorage.setItem("username", this.users.name);
             })
             .catch(error => {
                 let statusCode = error.response.status;
@@ -68,7 +69,7 @@ export default {
             })
         },
         signup() {
-            this.$router.push('/signup')
+            this.$router.push('/signup');
         }
   },
 
@@ -76,11 +77,12 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
     .register{
+        font-family: sans-serif;
         display: flex;
         justify-content: space-between;
-        margin-top: 3%;
+        margin-top: 4%;
         width: 70%;
         height: 80vh;
         margin-left: 15%;
@@ -91,13 +93,19 @@ export default {
         background-color: #9e9e9e;
         color: white;
         text-shadow: 5px 5px #70625c;
-        font-size: 80px;
-        display: flex;
+        /* display: flex;
+        align-items: center; */
         text-align: center;
-        justify-content: center;
+    }
+    #email{
+        margin-top: 7%;
+    }
+    #EventMe{
+        font-size: 140px;
+        margin-top: 15%;
     }
     form{
-        width: 50%;
+        width: 55%;
     }
     .text, .password{
         width: 90%;
@@ -111,14 +119,21 @@ export default {
         font-family: sans-serif;
         height: 70vh;
         margin-left: 8%;  
+        margin-top: 10%;
     }
     h3{
         font-size: 30px;
         text-shadow: 1px 1px gray;
     }
     .signup-1{
-        margin-left: 30%;
+        margin-left: 31%;
         margin-top: 20%;
+    }
+    #signup{
+        margin-left: 9%;
+        text-transform: uppercase;
+        font-size: 18px;
+        color: rgb(38, 182, 182);
     }
     h4{
         margin-left: 15%;
@@ -129,27 +144,30 @@ export default {
         text-decoration: underline;
     }
     .add{
-        margin-top: 15%;
+        margin-top: 10%;
         margin-left:12%;
     }
     a {
         text-decoration: none;
     }
     .signin{
+        width: 30%;
         border: none;
+        outline: none;
         border-radius: 5px;
-        margin-left: 29%;
+        margin-left: 22%;
         padding: 8px 15px;
-        background: rgb(91, 172, 54);
         color: white;
+        background: teal;
+        margin-top: 0%;
     }
     .signin:hover{
-        background: rgb(99, 136, 82);
+        background:rgba(13, 133, 133, 0.788);
         cursor: pointer;
     }
     .forgot:hover{
         text-decoration: underline;
-        cursor:pointer
+        cursor:pointer;
     }
    
 </style>

@@ -1,6 +1,6 @@
 <template>
   <section>
-    <the-navigation v-if="isNotMenu"></the-navigation>
+    <the-navigation @sign-out = "signout" v-if="isNotMenu"></the-navigation>
     <router-view @signin-user = "notMenu"></router-view>
   </section>
 </template>
@@ -17,13 +17,17 @@ export default {
     }
   },
   methods: {
-    notMenu(signin) {
-      this.isNotMenu = signin
+    notMenu(action) {
+      this.isNotMenu = action
+      console.log(this.isNotMenu);
+    },
+    signout(actions) {
+      this.isNotMenu = actions
     }
   },
 };
 </script>
-<style>
+<style scoped>
   body{
     margin: 0;
     padding: 0;
