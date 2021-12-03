@@ -10,6 +10,7 @@
             </div>
 
             <!-- // ================Card my event view============================= -->
+            
             <div class="card">
                 <div class="container-card">
                     <div class="main">
@@ -47,25 +48,18 @@
                     <div class="button">
                         <span class="date">Nov,29 2020 6:00 PM</span>
                         <div class="btn">
-                            
                             <button v-if="joinValue" @click="joinEvent" class="Join"><i class="fal fa-check"></i>Join</button>
                             <button v-else @click="unjoinEvent" class="quit"><i class="fas fa-times-circle"></i>Quit</button>
-                            <!-- <button class="Edit">Edit</button> -->
                         </div>
                     </div>
                 
                 </div>
             </div>
-            
-            
 
             <!-- //==========End cared event============== -->
 
-            
         </div>
-        
     </section>
-    
 </template>
 
 <script>
@@ -86,7 +80,6 @@
     },
     };
 </script>
-
 
 
 <style >

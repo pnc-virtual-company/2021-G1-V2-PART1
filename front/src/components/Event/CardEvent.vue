@@ -1,7 +1,6 @@
 <template>
     <section>
         <div class="blog-card">
-            <!-- <div class="bg"></div> -->
             <div>       
                 <button class="Create"> <router-link to="/EventForm" ><i class="fa fa-plus"></i> CREATE EVENT </router-link></button>     
             </div>
@@ -31,6 +30,7 @@
                 </div>
                
             </div>
+
             <!-- //=============Dialog Btn====================== -->
 
             <Dialog :show="showDialog" 
@@ -45,7 +45,6 @@
     </section>
 </template>
 <script>
-
 
 import Dialog from './Dialog.vue'
 export default {
