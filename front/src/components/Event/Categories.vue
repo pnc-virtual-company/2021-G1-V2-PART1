@@ -48,7 +48,7 @@
                     <p class="card-title">{{categories.title}}</p>
                     <div class="icon">
                         <i id="edit" class="fas fa-pencil-alt"></i>
-                        <i id="delete" class="fa fa-trash"></i>
+                        <i @click="removeCategory(categories.id)" id="delete" class="fa fa-trash"></i>
                     </div>
                 </div>
             </div>
@@ -57,19 +57,12 @@
     </section>
 </template>
 <script>
+import axios from 'axios';
+const API_URL = 'http://127.0.0.1:8000/api/categories';
 export default {
     data() {
         return{
-            categoryLists: [
-                {title: "Test1",description: "description1"},
-                {title: "Test1",description: "description1"},
-                {title: "Test1",description: "description1"},
-                {title: "Test1",description: "description1"},
-                {title: "Test1",description: "description1"},
-                {title: "Test1",description: "description1"},
-                {title: "Test1",description: "description1"},
-                {title: "Test1",description: "description1"},
-            ],
+            categoryLists: [],
             categoryName: "",
             description: "",
             exiteMessage: "The categories is already exists"
@@ -81,12 +74,28 @@ export default {
                 title: this.categoryName,
                 description: this.description
             }
-            this.categoryLists.push(newCategory)
-            console.log(this.categoryLists);
+           
+            axios.post(API_URL, newCategory).then(res => {
+                this.categoryLists.push(res.data.category);
+                console.log("Created");
+            })
+
             this.categoryName = "";
             this.description = "";
+        },
+        removeCategory(id) {
+           
+            axios.delete(API_URL + "/" + id).then(res => {
+               console.log(res.data);
+            })
         }
-    }
+    },
+    mounted() {
+        axios.get(API_URL).then(res => {
+            this.categoryLists = res.data;
+            console.log(this.categoryLists);
+        })
+    },
 }
 </script>
 

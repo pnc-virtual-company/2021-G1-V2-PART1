@@ -25,6 +25,12 @@ export default {
       this.isNotMenu = actions
     }
   },
+  mounted() {
+    let username = localStorage.getItem('username').toString();
+    if(username !== "" ){
+      this.isNotMenu = true;
+    }
+  },
 };
 </script>
 <style scoped>

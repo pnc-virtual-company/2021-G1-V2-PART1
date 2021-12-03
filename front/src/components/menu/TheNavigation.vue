@@ -4,7 +4,7 @@
       <div class="container-user">
             <i class="far fa-user-circle"></i>
             <div class="username">
-              <h2>{{}} Group 1</h2>
+              <h2>{{username}}</h2>
             </div>
       </div>
       
@@ -44,15 +44,17 @@ export default {
   data(){
     return{
       signOut: false,
+      username: "",
     }
   },
   methods: {
     signout(){
       this.$emit("sign-out", this.signOut);
-      let username = localStorage.getItem('username').toString();
-      console.log(username);
       localStorage.clear();
     }
+  },
+  mounted() {
+    this.username = localStorage.getItem('username').toString();
   },
 }
 </script>
