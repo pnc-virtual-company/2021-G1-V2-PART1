@@ -33,34 +33,13 @@
           <router-link to="/categories" >Category</router-link>
         </li>
       </ul>
-      <!-- <router-view 
-      @user-name="test"
-      ></router-view> -->
     </nav>
   </header>
 </template>
 
 <script>
 
-
-// export default ({
-//   // injects:['username'],
-//   data() {
-//     return {
-//         user: "",
-//     }
-//   },
-//   methods: {
-//     test(name) {
-//       console.log(name.name);
-//     }
-//   },
-
-// })
-
 </script>
-
-
 
 <style >
 
@@ -69,6 +48,8 @@ header {
   width: 100%;
   height: 4rem;
   background-color:#000;
+  margin: 0;
+  padding: 0;
 }
 .container-user {
   margin-left: 1%;

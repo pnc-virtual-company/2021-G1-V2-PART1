@@ -1,7 +1,7 @@
 <template>
     <section>
        <div class="register">
-        <div class="logoevent">
+        <div class="event">
             <h1>Event me</h1>
         </div>
         
@@ -96,37 +96,7 @@ export default {
 </script>
     
 <style>
-    section{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-        padding: 0;
 
-    }
-    .register{
-        display: flex;
-        justify-content: center;
-        align-items: spece-between;
-        margin-top: 4%;
-        width: 100%;
-    }
-    .logoevent{
-        background-color: #9e9e9e;
-        width: 50%;
-        height: 85vh;
-        color: white;
-        text-shadow: 5px 5px #70625c;
-        font-size: 100px;
-        display: flex;
-        text-align: center;
-        justify-content: center;
-    }
-    form{
-        padding-top: 30px;
-        width:50%;
-        background: #ffffff;
-    }
     .text,
     .password{
         width: 90%;

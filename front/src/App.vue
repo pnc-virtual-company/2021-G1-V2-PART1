@@ -1,24 +1,33 @@
 <template>
   <section>
-    <router-view 
-    ></router-view>
+    <the-navigation v-if="isNotMenu"></the-navigation>
+    <router-view @signin-user = "notMenu"></router-view>
   </section>
 </template>
 
-<style>
-   body{
-      background:rgba(255, 255, 255, 0.815);
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      margin: 0;
-      padding: 0;
-     
+<script>
+import TheNavigation from './components/menu/TheNavigation.vue';
+export default {
+  components: {
+    TheNavigation,
+  },
+  data() {
+    return{
+      isNotMenu: false,
     }
-  html {
+  },
+  methods: {
+    notMenu(signin) {
+      this.isNotMenu = signin
+    }
+  },
+};
+</script>
+<style>
+  body{
+    margin: 0;
+    padding: 0;
     font-family: sans-serif;
   }
-
 </style>
 
