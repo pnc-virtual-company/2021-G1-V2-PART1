@@ -7,7 +7,6 @@ import Categories from './components/Event/Categories.vue'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-      // { path: '/', component: TheNavigation },
       { path: '/myevent', component: Myevent },
       { path: '/findevent', component: Findevent },
       { path: '/categories', component: Categories },
