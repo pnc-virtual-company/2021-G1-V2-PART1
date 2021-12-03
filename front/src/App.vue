@@ -1,11 +1,17 @@
 <template>
   <section>
-    <router-view 
-    ></router-view>
+    <!-- <menu-bar></menu-bar> -->
+    <router-view ></router-view>
   </section>
 </template>
 
 
+<script>
+// import TheNavigation from './components/menu/TheNavigation.vue';
+export default ({
+  // components:{ TheNavigation }
+});
+</script>
 
 
 

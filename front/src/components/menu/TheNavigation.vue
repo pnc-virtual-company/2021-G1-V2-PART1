@@ -33,30 +33,12 @@
           <router-link to="/categories" >Category</router-link>
         </li>
       </ul>
-      <!-- <router-view 
-      @user-name="test"
-      ></router-view> -->
     </nav>
   </header>
 </template>
 
 <script>
 
-
-// export default ({
-//   // injects:['username'],
-//   data() {
-//     return {
-//         user: "",
-//     }
-//   },
-//   methods: {
-//     test(name) {
-//       console.log(name.name);
-//     }
-//   },
-
-// })
 
 </script>
 
