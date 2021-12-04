@@ -14,7 +14,7 @@ class EventController extends Controller
      */
     public function getEvent()
     {
-        return Event::latest()->get();
+       
     }
 
     /**
@@ -80,6 +80,6 @@ class EventController extends Controller
      */
     public function delete($id)
     {
-        return Event::destroy($id);
+        
     }
 }
