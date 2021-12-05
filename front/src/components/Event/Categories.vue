@@ -76,17 +76,16 @@ export default {
             }
            
             axios.post(API_URL, newCategory).then(res => {
-                this.categoryLists.push(res.data.category);
                 console.log("Created");
+                return res.data;
             })
 
             this.categoryName = "";
             this.description = "";
         },
         removeCategory(id) {
-           
             axios.delete(API_URL + "/" + id).then(res => {
-               console.log(res.data);
+                console.log(res.data);
             })
         }
     },
@@ -131,7 +130,7 @@ export default {
     .cardName{
         margin-top: 1%;
         /* background: green; */
-        height: 63vh;
+        height: 62vh;
         overflow-y: scroll;
         border: none;
     }

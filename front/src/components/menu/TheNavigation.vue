@@ -19,18 +19,18 @@
           <i class="fas fa-search search-btn"></i>
       </div>
 
-      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><router-link to="/home" >Home</router-link></a>
+      <ul>
+        <li>
+          <router-link to="/home" >Home</router-link>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-myevent" aria-selected="false"><router-link to="/myevent" >My event</router-link></a>
+        <li>
+          <router-link to="/myevent" >My event</router-link>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-findevent" aria-selected="false"><router-link to="/findevent" >Find event</router-link></a>
+        <li>
+          <router-link to="/findevent" >Find event</router-link>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-categories" aria-selected="false"><router-link to="/categories" >Category</router-link></a>
+        <li>
+          <router-link to="/categories" >Category</router-link>
         </li>
       </ul>
 
@@ -60,15 +60,13 @@ export default {
 </script>
 
 <style scoped>
-
+body{
+  font-family: sans-serif;
+}
 header {
   position: sticky;
-  margin-top: -10px;
   width: 100%;
-  height: 4rem;
   background-color:#000;
-  margin: 0;
-  padding: 0;
 }
 .container-user {
   margin-left: 1%;
@@ -99,6 +97,7 @@ header {
   padding: 10px;
   margin-top: 20px;
   margin-right: 1%;
+  /* background: teal; */
 }
 h2 {
   color:#fff;
@@ -150,31 +149,40 @@ h2 {
   width: 0px;
   
 }
-
-
+nav {
+  background: #000;
+}
 ul {
-  list-style: none;
-  height: 60px;
-  margin: 0;
-  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 10vh;
 }
 ul li{
-  padding:0px 20px;
+  list-style: none;
 }
-ul li a {
-  text-decoration: none;
-  text-transform: uppercase;
+nav a {
   color: #fff;
+  margin-left: 10px;
+  text-decoration: none;
+  padding: 1rem;
+  text-transform: uppercase;
+}
+.router-link-active {
+  background: teal;
+  border-radius: 2px;
 }
 
 #btnSignout{
   border: none;
   background: none;
-  font-size: 18px;
+  font-size: 15px;
+  /* background: red; */
   text-decoration: none;
+}
+#btnSignout:hover{
+  color: rgb(50, 50, 207);
+  text-decoration: underline;
 }
 
 </style>

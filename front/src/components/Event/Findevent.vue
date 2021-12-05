@@ -68,7 +68,7 @@
     .card {
         border: none;
         overflow-y: scroll;
-        height: 67vh;
+        height: 66vh;
         margin-top: 2%;
         /* background: teal; */
     }

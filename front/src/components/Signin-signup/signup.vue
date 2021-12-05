@@ -1,6 +1,5 @@
 <template>
-    <section>
-       <div class="register">
+    <div class="register">
         <div class="event">
             <h1>Event me</h1>
         </div>
@@ -33,9 +32,6 @@
             </div>
         </form>
     </div>
-      
-    </section>
-   
 </template>
 
 <script scoped>
@@ -95,7 +91,7 @@ export default {
 }
 </script>
     
-<style>
+<style scoped>
 
     .text,
     .password{

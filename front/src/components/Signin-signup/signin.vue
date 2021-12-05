@@ -15,7 +15,7 @@
                     </div>
                     <div class="forget-1">
                         <p class="forgot" v-if="isInvalid" style="color:red;">{{errorMessage}}</p>
-                        <p class="forgot" v-else style="color:green;"><router-link v-bind:to="'/signup'" >{{errorMessage}}</router-link></p>
+                        <p class="forgot" v-else style="color:blue;"><router-link v-bind:to="'/signup'" >{{errorMessage}}</router-link></p>
                     </div>
                     <div class="add">
                         <button class="signin" @click="signinUser">SIGN IN</button>
@@ -72,10 +72,8 @@ export default {
             this.$router.push('/signup');
         }
   },
-
 }
 </script>
-
 
 <style scoped>
     .register{
@@ -93,8 +91,6 @@ export default {
         background-color: #9e9e9e;
         color: white;
         text-shadow: 5px 5px #70625c;
-        /* display: flex;
-        align-items: center; */
         text-align: center;
     }
     #email{
