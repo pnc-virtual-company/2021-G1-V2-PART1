@@ -123,7 +123,7 @@ export default {
     }
     .signup-1{
         margin-left: 31%;
-        margin-top: 20%;
+        margin-top: 15%;
     }
     #signup{
         margin-left: 9%;

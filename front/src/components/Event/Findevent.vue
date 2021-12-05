@@ -70,7 +70,6 @@
         overflow-y: scroll;
         height: 66vh;
         margin-top: 2%;
-        /* background: teal; */
     }
     .title-search {
         text-transform: uppercase;
