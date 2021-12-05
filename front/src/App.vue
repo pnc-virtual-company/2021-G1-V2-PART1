@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import TheNavigation from './components/menu/TheNavigation.vue';
+// import TheNavigation from './components/menu/TheNavigation.vue';
 
 export default {
-  components: {
-    TheNavigation,
-  },
+  // components: {
+  //   TheNavigation,
+  // },
   data() {
     return {
       users: [
