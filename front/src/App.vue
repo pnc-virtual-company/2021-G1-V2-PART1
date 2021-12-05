@@ -29,6 +29,7 @@ export default {
     let username = localStorage.getItem('username').toString();
     if(username !== "" ){
       this.isNotMenu = true;
+      this.$router.push('/home');
     }
   },
 };
