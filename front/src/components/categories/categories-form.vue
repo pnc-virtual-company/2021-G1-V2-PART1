@@ -18,9 +18,11 @@
 
 export default ({
     emits: ['add-category'],
+    
     data() {
         return{
             ctgtitle: '',
+            showDialog: false
         }
     },
     methods: {

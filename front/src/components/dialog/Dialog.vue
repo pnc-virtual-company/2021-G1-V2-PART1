@@ -8,7 +8,7 @@
         <p class="dialog__description" v-text="description"></p>
       </div>
 
-      <hr />
+      <hr>
 
       <div class="dialog__footer">
         <button @click="cancel" class="dialog__cancel">NO</button>
@@ -38,7 +38,7 @@ export default {
     }
     .overlay {
         
-        height: 30%;
+        height: 40%;
         position: fixed;
         background: #fff;
         box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
@@ -60,6 +60,7 @@ export default {
 .dialog__footer {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   
   /* padding-top: 1rem; */
   /* padding-bottom: 1rem; */

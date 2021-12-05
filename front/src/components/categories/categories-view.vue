@@ -47,18 +47,27 @@
                 <p class="card-title">{{categories.title}}</p>
                 <div class="icon">
                     <i id="edit" class="fas fa-pencil-alt"></i>
-                    <i id="delete" class="fa fa-trash"></i>
+                    <i @click="showDialog = true" id="delete" class="fa fa-trash"></i>
                 </div>
             </div>
+
+            <Dialog :show="showDialog" 
+                    :cancel="cancel" 
+                    :confirm="confirm" 
+                    title="You want to Delete this categories?" 
+                    description="Are you sure?" />
         </div>
         
 
     </section>
 </template>
 <script>
+import Dialog from '../dialog/Dialog.vue'
 export default {
+    components: { Dialog},
     data() {
         return{
+            showDialog: false,
             categoryLists: [],
             categoryName: "",
             description: "",
@@ -76,6 +85,14 @@ export default {
 
             this.categoryName = "";
             this.description = "";
+        },
+        cancel() {
+            console.log('cancel')
+            this.showDialog = false
+        },
+        confirm() {
+            console.log('confirm')
+            this.showDialog = false
         }
     }
 }

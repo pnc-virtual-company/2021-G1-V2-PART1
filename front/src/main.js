@@ -4,14 +4,13 @@ import App from './App.vue'
 
 import categoriesForm from './components/categories/categories-form.vue'
 import categoriesView from './components/categories/categories-view.vue' 
-import Findevent from './components/Event/Findevent-view.vue' 
+
 
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/', component: Findevent },
-        // { path: '/', component: categoriesView },
+        { path: '/', component: categoriesView },
         { path: '/categoryView', component: categoriesView },
         { path: '/categoriesForm', component: categoriesForm },
 
