@@ -66,7 +66,7 @@ export default {
             categoryName: "",
             description: "",
             exiteMessage: "The categories is already exists",
-            searchcategory:null,
+            searchcategory:"",
         }
     },
     methods: {
@@ -104,7 +104,6 @@ export default {
                 })
             }else{
                 this.getCategory();
-             
             }
             
             
