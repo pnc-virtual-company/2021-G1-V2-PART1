@@ -154,7 +154,8 @@
         this.showDialog = false
       },
       deleteEvent(id) {
-        axios.delete(API_URL + "/" + id).then(res => {
+        console.log(id);
+        axios.delete(API_URL + "events/" + id).then(res => {
           console.log(res);
           this.getEvent();
           console.log("Deleted");
