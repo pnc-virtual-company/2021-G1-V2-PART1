@@ -69,7 +69,12 @@ class CategoryController extends Controller
      */
     public function delete($id)
     {
-        return Category::destroy($id);
+        $isDeleted = Category::destroy($id);
+        if($isDeleted == 1) {
+            return response()->json(['message' => 'deleted'], 200);
+        }else{
+            return response()->json(['message' => 'ID NOT FOUND'], 404);
+        }
     }
 
     public function search($title) {
