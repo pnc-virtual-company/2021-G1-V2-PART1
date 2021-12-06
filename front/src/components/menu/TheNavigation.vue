@@ -4,25 +4,25 @@
       <div class="container-user">
             <i class="far fa-user-circle"></i>
             <div class="username">
-              <h2>{{}} Group 1</h2>
+              <h2>{{username}}</h2>
             </div>
       </div>
       
       <div >
-        <div>
-            <h2 class="signOut"><router-link v-bind:to="'/signin'" >Sign Out</router-link></h2>
-        </div>
-        <div class="signout">
-       
-        </div>
+      <div id="signout">
+          <button id="btnSignout" @click="signout" ><router-link v-bind:to="'/'" >sign out</router-link></button>
+      </div>
         
       </div>
       <div class="search-box">
           <input class="search-txt"  type="text" name="" placeholder="Type to search...">
           <i class="fas fa-search search-btn"></i>
       </div>
-      
+
       <ul>
+        <li>
+          <router-link to="/home" >Home</router-link>
+        </li>
         <li>
           <router-link to="/myevent" >My event</router-link>
         </li>
@@ -39,17 +39,47 @@
 
 <script>
 
-
+import axios from 'axios';
+const API_URL = 'http://127.0.0.1:8000/api/users';
+export default {
+  emits: ["sign-out"],
+  data(){
+    return{
+      signOut: false,
+      username: "",
+    }
+  },
+  methods: {
+    signout(){
+      this.$emit("sign-out", this.signOut);
+      localStorage.clear();
+    }
+  },
+  mounted() {
+    let userid = localStorage.getItem('userID');
+    axios.get(API_URL).then(res => {
+        let users = res.data;
+        for(let user of users){
+          if(user.id == userid){
+            this.username = user.name;
+            console.log(user.name);
+          }
+        }
+      })
+  },
+}
 </script>
 
-
-
-<style >
-
+<style scoped>
+body{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
 header {
-  margin-top: -10px;
+  position: sticky;
+  top: 0;
   width: 100%;
-  height: 4rem;
   background-color:#000;
 }
 .container-user {
@@ -62,53 +92,44 @@ header {
   color: #ffff;
   float: left;
   align-items: center;
-  margin-top: 8px;
+  margin-top: 5px;
   margin-left: 10px;
  
 }
 .username {
   color: rgb(255, 255, 255);
-  
   margin-left: 70px;
   align-items: center;
- 
 }
-.signout {
+#signout {
   display: flex;
   align-items: center;
   border-left: 2px solid white;
   height: 1vh;
   color: rgb(255, 255, 255);
-  font-size: 25px;
   float: right;
   padding: 10px;
   margin-top: 20px;
+  margin-right: 1%;
 }
 h2 {
   color:#fff;
   float: right;
-  font-size: 15px;
+  font-size: 17px;
   text-transform: uppercase;
-  margin-top: 25px;
+  margin-top: 22px;
   margin-right: 10px
 }
 
-.signOut a{
-  color: rgb(212, 22, 22);
-  margin-left: -15%;
-}
-.signOut a:hover{
-  color: rgb(179, 83, 83);
-  text-decoration: underline;
-}
+
 
 .search-box {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   float: right;
-  background: #2f3640;
-  height: 15px;
+  background: #475161;
+  height: 30px;
   border-radius: 50px;
   padding: 10px;
   margin-top: 15px;
@@ -122,7 +143,7 @@ h2 {
   
 }
 .search-btn {
-  color: #ffffff;
+  color: #fff;
   height: 15px;
   width: 15px;
   line-height: 15px;
@@ -142,42 +163,39 @@ h2 {
   
 }
 nav {
-  height: 100%;
+  background: #000;
 }
-
 ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+}
+ul li{
   list-style: none;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
-ul li {
-  margin: 0;
-  padding: 0;
-}
-li a{
-  margin: 10px;
+nav a {
+  color: #fff;
+  margin-left: 10px;
   text-decoration: none;
+  padding: 1rem;
   text-transform: uppercase;
-  background: transparent;
-  border: 1px solid transparent;
-  cursor: pointer;
-  color: white;
-  padding: 0.5rem 1.5rem;
-  display: inline-block;
+}
+.router-link-active {
+  background: teal;
+  border-radius: 2px;
 }
 
-ul li:hover {
-  color: rgb(0, 0, 0);
-  background: rgba(101, 194, 78, 0.582);
-  height: 66px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#btnSignout{
+  border: none;
+  background: none;
+  font-size: 15px;
+  /* background: red; */
+  text-decoration: none;
 }
-
+#btnSignout:hover{
+  color: rgb(50, 50, 207);
+  text-decoration: underline;
+}
 
 </style>

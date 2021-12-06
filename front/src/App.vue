@@ -1,34 +1,44 @@
 <template>
   <section>
-    <!-- <menu-bar></menu-bar> -->
-    <router-view ></router-view>
+    <the-navigation @sign-out = "signout" v-if="isNotMenu"></the-navigation>
+    <router-view @signin-user = "notMenu"></router-view>
   </section>
 </template>
 
-
 <script>
-// import TheNavigation from './components/menu/TheNavigation.vue';
-export default ({
-  // components:{ TheNavigation }
-});
-</script>
-
-
-
-<style>
-   body{
-      background:rgba(255, 255, 255, 0.815);
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      margin: 0;
-      padding: 0;
-     
+import TheNavigation from './components/menu/TheNavigation.vue';
+export default {
+  components: {
+    TheNavigation,
+  },
+  data() {
+    return{
+      isNotMenu: false,
     }
-  html {
+  },
+  methods: {
+    notMenu(action) {
+      this.isNotMenu = action
+      console.log(this.isNotMenu);
+    },
+    signout(actions) {
+      this.isNotMenu = actions
+    }
+  },
+  mounted() {
+    let username = localStorage.getItem('userID');
+    if(username !== null ){
+      this.isNotMenu = true;
+      this.$router.push('/home');
+    }
+  },
+};
+</script>
+<style scoped>
+  body{
+    margin: 0;
+    padding: 0;
     font-family: sans-serif;
   }
-
 </style>
 

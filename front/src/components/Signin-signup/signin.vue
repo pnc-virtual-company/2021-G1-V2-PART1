@@ -1,14 +1,13 @@
 <template>
-    <section>
        <div class="register">
-            <div class="logoevent">
-                <h1>Event me</h1>
+            <div class="event">
+                <h1 id="EventMe">Event me</h1>
             </div>
             
             <form @submit.prevent="LoginUser">
                 <div class="container">
                     <h3>LOG IN</h3>
-                <div>
+                    <div id="email">
                         <input type="email" class="text" placeholder="Email Or Mobile Number" autofocus v-model="storeEmail"/>
                     </div>
                     <div>
@@ -16,7 +15,7 @@
                     </div>
                     <div class="forget-1">
                         <p class="forgot" v-if="isInvalid" style="color:red;">{{errorMessage}}</p>
-                        <p class="forgot" v-else style="color:#6A5ACD;"><router-link v-bind:to="'/signup'" >{{errorMessage}}</router-link></p>
+                        <p class="forgot" v-else style="color:blue;"><router-link v-bind:to="'/signup'" >{{errorMessage}}</router-link></p>
                     </div>
                     <div class="add">
                         <button class="signin" @click="signinUser">SIGN IN</button>
@@ -24,19 +23,18 @@
                 
                     <div class="signup-1">
                         <p>Have any account?</p>
-                        <h4 @click="signup">Sign Up</h4>
+                        <h4 id="signup" @click="signup">Sign Up</h4>
                     </div>
                 </div>
             </form>
 
         </div>
-    </section>
 </template>
 <script>
 import axios from 'axios';
 const API_URL = "http://127.0.0.1:8000/api";
 export default {
-    // emits: ['user-name'],
+    emits: ["signin-user"],
     data() {
         return{
             storeEmail: '',
@@ -44,6 +42,7 @@ export default {
             errorMessage: 'Forgot pasword',
             isInvalid: false,
             users: "",
+            signin: true,
         }
     },
     methods: {
@@ -55,10 +54,10 @@ export default {
 
             axios.post(API_URL + "/signin",user).then(res => {
                 this.users = res.data.user;
-                this.$router.push('/menu');
-                this.errorMessage = '';
-                // this.$emit('user-name', this.users);
-                console.log("Login successfully !");
+                this.$router.push('/home');
+                this.$emit("signin-user", this.signin);
+                this.errorMessage = 'Login Successfully !';
+                localStorage.setItem("userID", res.data.user.id);
             })
             .catch(error => {
                 let statusCode = error.response.status;
@@ -69,42 +68,39 @@ export default {
             })
         },
         signup() {
-            this.$router.push('/signup')
+            this.$router.push('/signup');
         }
   },
 }
 </script>
 
-
-<style>
-    section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: auto;
-        padding: 0;
-        margin-top: 10px;
-    }
+<style scoped>
     .register{
+        font-family: sans-serif;
         display: flex;
-        justify-content: center;
-        align-items: spece-between;
+        justify-content: space-between;
         margin-top: 4%;
-        width: 900px;
-    }
-    .logoevent{
-        background-color: #9e9e9e;
+        width: 70%;
+        height: 80vh;
+        margin-left: 15%;
         box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    }
+    .event{
+        width: 50%;
+        background-color: #9e9e9e;
         color: white;
         text-shadow: 5px 5px #70625c;
-        font-size: 100px;
-        display: flex;
         text-align: center;
-        justify-content: center;
+    }
+    #email{
+        margin-top: 7%;
+    }
+    #EventMe{
+        font-size: 140px;
+        margin-top: 15%;
     }
     form{
-        /* background: #ca1717; */
-        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        width: 55%;
     }
     .text, .password{
         width: 90%;
@@ -117,15 +113,22 @@ export default {
     .container{
         font-family: sans-serif;
         height: 70vh;
-        /* margin-left: 8%;   */
+        margin-left: 8%;  
+        margin-top: 10%;
     }
     h3{
         font-size: 30px;
         text-shadow: 1px 1px gray;
     }
     .signup-1{
-        margin-left: 30%;
-        margin-top: 20%;
+        margin-left: 31%;
+        margin-top: 15%;
+    }
+    #signup{
+        margin-left: 9%;
+        text-transform: uppercase;
+        font-size: 18px;
+        color: rgb(38, 182, 182);
     }
     h4{
         margin-left: 15%;
@@ -136,27 +139,30 @@ export default {
         text-decoration: underline;
     }
     .add{
-        margin-top: 15%;
+        margin-top: 10%;
         margin-left:12%;
     }
     a {
         text-decoration: none;
     }
     .signin{
+        width: 30%;
         border: none;
+        outline: none;
         border-radius: 5px;
-        margin-left: 29%;
+        margin-left: 22%;
         padding: 8px 15px;
-        background: rgb(91, 172, 54);
         color: white;
+        background: teal;
+        margin-top: 0%;
     }
     .signin:hover{
-        background: rgb(99, 136, 82);
+        background:rgba(13, 133, 133, 0.788);
         cursor: pointer;
     }
     .forgot:hover{
         text-decoration: underline;
-        cursor:pointer
+        cursor:pointer;
     }
    
 </style>
