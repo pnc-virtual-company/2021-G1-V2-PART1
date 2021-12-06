@@ -34,14 +34,14 @@ class EventController extends Controller
             'photo'=>'nullable|image|mimes:jpg,jpeg,png|max:1999',
         ]);
 
-        $request->file('photo')->store('public/image');
+        // $request->file('photo')->store('public/image');
         $event = new Event();
         $event->title = $request->title;
         $event->city = $request->city;
         $event->startdate = $request->startdate;
         $event->enddate = $request->enddate;
         $event->description = $request->description;
-        $event->photo = $request->file('photo')->hashName();
+        // $event->photo = $request->file('photo')->hashName();
 
         $event->save();
        

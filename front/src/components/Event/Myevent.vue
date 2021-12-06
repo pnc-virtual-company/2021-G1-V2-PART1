@@ -107,15 +107,14 @@
         startdate: "",
         enddate: "",
         description: "",
-        photo: null,
-        image: "",
+        image: null,
         showDialog: false,
         eventLists: []
       }
     },
     methods: {
       onFileSelected(event){
-        this.imagge = event.target.files[0];
+        this.image = event.target.files[0].name;
         console.log(this.image);
       },
 
@@ -126,8 +125,9 @@
           startdate: this.startdate,
           enddate: this.enddate,
           description: this.description,
-          photo: this.photo,
+          photo: this.image,
         }
+        console.log(newEvent);
         axios.post(API_URL, newEvent).then(res => {
           this.eventLists.push(res.data.event);
           console.log("created")
