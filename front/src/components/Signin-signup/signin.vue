@@ -57,8 +57,7 @@ export default {
                 this.$router.push('/home');
                 this.$emit("signin-user", this.signin);
                 this.errorMessage = 'Login Successfully !';
-                console.log(this.users);
-                localStorage.setItem("username", this.users.name);
+                localStorage.setItem("userID", res.data.user.id);
             })
             .catch(error => {
                 let statusCode = error.response.status;

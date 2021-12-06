@@ -39,7 +39,7 @@
         <p id="exite" style="color:red">{{exiteMessage}}</p>
         <!-- //================search btn==================== -->
 
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+        <input v-on:keyup = "search" v-on:keydown = 'search' id="search" class="form-control" type="search" placeholder="Search" aria-label="Search" v-model="searchcategory">
 
        <!-- ============categories========================== -->
        <div class="cardName">
@@ -76,7 +76,8 @@ export default {
             categoryLists: [],
             categoryName: "",
             description: "",
-            exiteMessage: "The categories is already exists"
+            exiteMessage: "The categories is already exists",
+            searchcategory:"",
         }
     },
     methods: {
@@ -98,25 +99,26 @@ export default {
         removeCategory(id,isFalse) {
             axios.delete(API_URL + "/" + id).then(res => {
                 console.log(res.data);
-                console.log(id);
+                this.getCategory();
             })
-            this.showDialog = isFalse;
-            // this.getCategory();
         },
-        cancel(cancel) {
-            console.log('cancel')
-            this.showDialog = cancel;
+        getCategory(){
+             axios.get(API_URL).then(res => {
+                this.categoryLists = res.data;
+                console.log(this.categoryLists);
+            })
         },
-
-
-        // getCategory(){
-        //     axios.get(API_URL).then((res) => {
-        //         console.log(res);
-        //         this.categoryLists = res.data;
-        //         console.log(this.categoryLists);
-        //     })
-        // },
-
+        search(){
+            if(this.searchcategory !== ""){
+                axios.get(API_URL + "/search/" + this.searchcategory).then(res => {
+                this.categoryLists = res.data;
+                })
+            }else{
+                this.getCategory();
+            }
+            
+            
+        }
     },
     mounted() {
         // this.getCategory();

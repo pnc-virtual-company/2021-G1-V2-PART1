@@ -34,11 +34,17 @@ Route::get('/categories/{id}', [CategoryController::class, 'show']);
 Route::post('/categories', [CategoryController::class, 'Addcategory']);
 Route::put('/categories/{id}', [CategoryController::class, 'update']);
 Route::delete('/categories/{id}', [CategoryController::class, 'delete']);
+Route::get('/categories/search/{title}', [CategoryController::class, 'search']);
 
 // public ====================Create Event==============================
 
 Route::get('/events', [EventController::class, 'getEvents']);
 Route::post('/events', [EventController::class, 'store']);
-Route::put('/events', [EventController::class, 'update']);
-Route::delete('/events', [EventController::class, 'delete']);
+Route::put('/events/{id}', [EventController::class, 'update']);
+Route::delete('/events/{id}', [EventController::class, 'delete']);
 
+
+// ==================== Route Search events
+
+
+Route::get('/events/search/{title}', [EventController::class, 'search']);

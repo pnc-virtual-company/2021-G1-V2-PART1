@@ -18,30 +18,35 @@
                 <div class="modal-body">
                   <form>
                     <div class="form-group">
-                      <input type="text" class="form-control" id="recipient-name" placeholder="title">
+                      <input type="text" class="form-control" id="recipient-name" placeholder="title" v-model = "title">
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control" id="recipient-name" placeholder="city">
+                      <input type="text" class="form-control" id="recipient-name" placeholder="city" v-model = "city">
                     </div>
                     <div class="form-group">
                        <label for="">Start date</label>
-                      <input type="date" class="form-control" id="recipient-name" placeholder="start date">
+                      <input type="date" class="form-control" id="recipient-name" placeholder="start date" v-model = "startdate">
                     </div>
                     <div class="form-group">
                       <label for="">End date</label>
-                      <input type="date" class="form-control" id="recipient-name" placeholder="End date">
+                      <input type="date" class="form-control" id="recipient-name" placeholder="End date" v-model = "enddate">
                     </div>
                     <div class="form-group">
-                      <textarea class="form-control" id="message-text" placeholder="description"></textarea>
+                      <textarea class="form-control" id="message-text" placeholder="description" v-model = "description"></textarea>
                     </div>
                     <div class="form-group">
-                      <input type="file" class="form-control" id="recipient-name" placeholder="End date">
+                      <select class="form-control" id="select">
+                        <option v-for="category of categories " :key="category.title" value = {{category.title}}>{{category.title}}</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <input type="file" class="form-control" id="recipient-name" placeholder="End date" @change = "onFileSelected">
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Discard</button>
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Save Event</button>
+                  <button @click="Addevent" type="button" class="btn btn-primary" data-dismiss="modal">Save Event</button>
                 </div>
               </div>
             </div>
@@ -53,15 +58,18 @@
         <!-- // ================Card my event view============================= -->
 
         <div class="cards">
-            <div class="container-card">
+            <div class="container-card" v-for="event of eventLists" :key="event.id">
               <div class="main">
                   <div class="img">
-                      <img class="img-1" src="https://d13kjxnqnhcmn2.cloudfront.net/AcuCustom/Sitename/DAM/052/IoT_-_Main.png" alt="">
+                    
+                      <!-- ===================Display Image====================== -->
+                      <img class="img-1" :src="url+event.photo" alt="">
+
                   </div>
                   <div class="text">
-                      <h1 id="title">Stay connected</h1>
-                      <div class="time">
-                          <p class="date">Nov,29 2020 6:00 PM</p>
+                      <h1 id="title">{{event.title}}</h1>
+                      <div id="time">
+                          <p class="date">{{event.startdate}}</p>
                           <p class="member">6 members</p>
                       </div>
                   </div>
@@ -71,7 +79,7 @@
                   <p class="categories">Categories name</p>
                   <div class="button">
                       <button class="Edit">Edit</button>
-                      <button @click="showDialog = true" class="Delete" id="">Delete</button>
+                      <button @click = "deleteEvent(event.id)" class="Delete">Delete</button>
                   </div>
               </div>
           </div>
@@ -93,15 +101,50 @@
     </section>
 </template>
 <script>
+
   import Dialog from './Dialog.vue'
+  import axios from 'axios';
+  const API_URL = 'http://127.0.0.1:8000/api/';
+
   export default {
     components: { Dialog},
     data () {
       return {
-        showDialog: false
+        title: "",
+        city: "",
+        startdate: "",
+        enddate: "",
+        description: "",
+        photo: null,
+        showDialog: false,
+        eventLists: [],
+        categories: [],
+        url : 'http://127.0.0.1:8000/storage/image/'
       }
     },
     methods: {
+      onFileSelected(event){
+        this.photo = event.target.files[0];
+        console.log(this.photo);
+      },
+      Addevent() {
+
+        const newEvent = new FormData();
+        newEvent.append('title',this.title);
+        newEvent.append('city',this.city);
+        newEvent.append('startdate',this.startdate);
+        newEvent.append('enddate',this.enddate);
+        newEvent.append('description',this.description);
+        newEvent.append('photo',this.photo);
+       
+        axios.post(API_URL, newEvent).then(res => {
+          this.eventLists.push(res.data.event);
+          this.getEvent();
+          console.log("created")
+        })
+
+      },
+
       cancel() {
         console.log('cancel')
         this.showDialog = false
@@ -109,7 +152,32 @@
       confirm() {
         console.log('confirm')
         this.showDialog = false
+      },
+      deleteEvent(id) {
+        console.log(id);
+        axios.delete(API_URL + "events/" + id).then(res => {
+          console.log(res);
+          this.getEvent();
+          console.log("Deleted");
+        })
+      },
+      getEvent() {
+        axios.get(API_URL + "events").then(res => {
+          this.eventLists = res.data;
+          console.log(res.data);
+        })
+      },
+      getCategories(){
+        axios.get(API_URL + "categories").then(res => {
+          console.log(res.data);
+          this.categories = res.data;
+        })
       }
+    },
+
+    mounted() {
+      this.getEvent();
+      this.getCategories()
     },
   }
 </script>
@@ -117,7 +185,6 @@
 
 <style scoped>
   .cards{
-    /* background: red; */
     overflow-y: scroll;
     height: 69vh;
     border: none;
@@ -160,12 +227,14 @@
       font-family: sans-serif;
       margin-top: 2%;
       margin-left: 7%;
+      /* background: teal; */
   }
   .member{
       font-size: 15px;
+      margin-right: 15%;
   }
   #title{
-      margin-top: 7%;
+      margin-top:2%;
       font-size: 18px;
       font-weight: 540;
       text-transform: uppercase;
@@ -225,12 +294,13 @@
   .rightCard{
     height: 15vh;
   }
-  .time{
-      width: 70%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 5%;
+  #time{
+    width: 90%;
+    margin-top: 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background: red; */
   }
    .date{
       font-size: 15px;
