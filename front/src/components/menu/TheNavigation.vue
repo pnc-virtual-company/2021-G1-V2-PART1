@@ -54,7 +54,7 @@ export default {
     }
   },
   mounted() {
-    this.username = localStorage.getItem('username').toString();
+    this.username = localStorage.getItem('username');
   },
 }
 </script>

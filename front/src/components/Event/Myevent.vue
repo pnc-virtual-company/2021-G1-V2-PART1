@@ -114,11 +114,7 @@
       }
     },
     methods: {
-      onFileSelected(event){
-        this.imagge = event.target.files[0];
-        console.log(this.image);
-      },
-
+      
       Addevent() {
         let newEvent = {
           title: this.title,

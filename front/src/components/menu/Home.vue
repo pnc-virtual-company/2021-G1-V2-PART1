@@ -3,13 +3,8 @@
         <div class="content">
             <h3 id="event">EVENT ME</h3>
             <span> Event & Join Event </span>
-<<<<<<< HEAD
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae laborum ut minus corrupti dolorum dolore assumenda iste voluptate dolorem pariatur.</p>
-            <h1 class="h1para">Welcome to event me App!!</h1>
-=======
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br> Beatae laborum ut minus corrupti dolorum dolore assu<br>menda iste voluptate dolorem pariatur.</p>
             <h1 class="h1para">welcome to event me App!!</h1>
->>>>>>> 8c97df66b775a508877fdbe059dee8f9f9ba591f
         </div>
     </section>
 </template>
