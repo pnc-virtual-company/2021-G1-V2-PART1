@@ -71,7 +71,7 @@
                   <p class="categories">Categories name</p>
                   <div class="button">
                       <button class="Edit">Edit</button>
-                      <button @click="showDialog = true" class="Delete">Delete</button>
+                      <button @click="showDialog = true" class="Delete" id="">Delete</button>
                   </div>
               </div>
           </div>
@@ -83,7 +83,7 @@
           <Dialog :show="showDialog" 
                   :cancel="cancel" 
                   :confirm="confirm" 
-                  title="You want to Delete this?" 
+                  title="Delete this event?" 
                   description="Are you sure?" />
 
           <!-- ===============End dialog================== -->
