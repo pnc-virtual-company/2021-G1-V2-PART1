@@ -71,4 +71,10 @@ class CategoryController extends Controller
     {
         return Category::destroy($id);
     }
+
+    public function search($title) {
+        return Category::where('title', 'like', '%'.$title.'%')->get();
+    }
+
+
 }

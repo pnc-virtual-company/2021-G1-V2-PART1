@@ -3,7 +3,7 @@
         <div class="content">
             <h3 id="event">EVNET ME</h3>
             <span> Event & Join Event </span>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae laborum ut minus corrupti dolorum dolore assumenda iste voluptate dolorem pariatur.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br> Beatae laborum ut minus corrupti dolorum dolore assu<br>menda iste voluptate dolorem pariatur.</p>
             <h1 class="h1para">welcome to event me App!!</h1>
         </div>
     </section>

@@ -39,7 +39,7 @@
         <p id="exite" style="color:red">{{exiteMessage}}</p>
         <!-- //================search btn==================== -->
 
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+        <input v-on:keyup = "search" v-on:keydown = 'search' id="search" class="form-control" type="search" placeholder="Search" aria-label="Search" v-model="searchcategory">
 
        <!-- ============categories========================== -->
        <div class="cardName">
@@ -65,7 +65,8 @@ export default {
             categoryLists: [],
             categoryName: "",
             description: "",
-            exiteMessage: "The categories is already exists"
+            exiteMessage: "The categories is already exists",
+            searchcategory:null,
         }
     },
     methods: {
@@ -87,6 +88,20 @@ export default {
             axios.delete(API_URL + "/" + id).then(res => {
                 console.log(res.data);
             })
+        },
+        search(){
+            if(this.searchcategory !== null){
+                axios.get(API_URL + "/search/" + this.searchcategory).then(res => {
+                this.categoryLists = res.data;
+                })
+            }else{
+                axios.get(API_URL).then(res => {
+                    this.categoryLists = res.data;
+                    console.log('Delete search!')
+                })
+            }
+            
+            
         }
     },
     mounted() {
