@@ -56,11 +56,14 @@
             <div class="container-card" v-for="event of eventLists" :key="event.id">
               <div class="main">
                   <div class="img">
-                      <img class="img-1" src="https://d13kjxnqnhcmn2.cloudfront.net/AcuCustom/Sitename/DAM/052/IoT_-_Main.png" alt="">
+                    
+                      <!-- ===================Display Image====================== -->
+                      <img class="img-1" :src="url+event.photo" alt="">
+                      
                   </div>
                   <div class="text">
                       <h1 id="title">{{event.title}}</h1>
-                      <div class="time">
+                      <div id="time">
                           <p class="date">{{event.created_at}}</p>
                           <p class="member">6 members</p>
                       </div>
@@ -107,27 +110,27 @@
         startdate: "",
         enddate: "",
         description: "",
-        image: null,
+        photo: null,
         showDialog: false,
-        eventLists: []
+        eventLists: [],
+        url : 'http://127.0.0.1:8000/storage/image/'
       }
     },
     methods: {
       onFileSelected(event){
-        this.image = event.target.files[0].name;
-        console.log(this.image);
+        this.photo = event.target.files[0];
+        console.log(this.photo);
       },
-
       Addevent() {
-        let newEvent = {
-          title: this.title,
-          city: this.city,
-          startdate: this.startdate,
-          enddate: this.enddate,
-          description: this.description,
-          photo: this.image,
-        }
-        console.log(newEvent);
+
+        const newEvent = new FormData();
+        newEvent.append('title',this.title);
+        newEvent.append('city',this.city);
+        newEvent.append('startdate',this.startdate);
+        newEvent.append('enddate',this.enddate);
+        newEvent.append('description',this.description);
+        newEvent.append('photo',this.photo);
+       
         axios.post(API_URL, newEvent).then(res => {
           this.eventLists.push(res.data.event);
           console.log("created")
@@ -145,8 +148,15 @@
       },
       deleteEvent(id) {
         axios.delete(API_URL + "/" + id).then(res => {
-          console.log(res.data);
+          console.log(res);
+          this.getEvent();
           console.log("Deleted");
+        })
+      },
+      getEvent() {
+        axios.get(API_URL).then(res => {
+          this.eventLists = res.data;
+          console.log(res.data);
         })
       }
     },
@@ -205,12 +215,13 @@
       font-family: sans-serif;
       margin-top: 2%;
       margin-left: 7%;
+      /* background: teal; */
   }
   .member{
       font-size: 15px;
   }
   #title{
-      margin-top: 7%;
+      margin-top:2%;
       font-size: 18px;
       font-weight: 540;
       text-transform: uppercase;
@@ -270,12 +281,13 @@
   .rightCard{
     height: 15vh;
   }
-  .time{
-      width: 70%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 5%;
+  #time{
+    width: 90%;
+    margin-top: 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background: red; */
   }
    .date{
       font-size: 15px;

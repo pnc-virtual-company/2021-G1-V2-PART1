@@ -65,9 +65,9 @@ export default {
             password_confirmation: this.confirmation_password,
             }
             axios.post(API_URL + "/signup" , newUser).then(res => {
-            this.userLists.push(res.data.user);
-            this.$router.push('/menu');
-            console.log("created");
+                this.userLists.push(res.data.user);
+                localStorage.setItem('userID', res.data.user.id);
+                console.log("created");
             })
             .catch(error => {
                 let statusCode = error.response.status;

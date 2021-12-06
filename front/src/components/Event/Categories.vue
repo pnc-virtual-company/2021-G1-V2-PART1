@@ -88,18 +88,23 @@ export default {
         removeCategory(id) {
             axios.delete(API_URL + "/" + id).then(res => {
                 console.log(res.data);
+                this.getCategory();
+            })
+        },
+        getCategory(){
+             axios.get(API_URL).then(res => {
+                this.categoryLists = res.data;
+                console.log(this.categoryLists);
             })
         },
         search(){
-            if(this.searchcategory !== null){
+            if(this.searchcategory !== ""){
                 axios.get(API_URL + "/search/" + this.searchcategory).then(res => {
                 this.categoryLists = res.data;
                 })
             }else{
-                axios.get(API_URL).then(res => {
-                    this.categoryLists = res.data;
-                    console.log('Delete search!')
-                })
+                this.getCategory();
+             
             }
             
             
