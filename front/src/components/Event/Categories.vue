@@ -77,6 +77,7 @@ export default {
            
             axios.post(API_URL, newCategory).then(res => {
                 console.log("Created");
+                this.categoryLists.push(res.data.category)
                 return res.data;
             })
 

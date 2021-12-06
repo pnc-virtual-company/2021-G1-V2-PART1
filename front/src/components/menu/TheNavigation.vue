@@ -67,6 +67,7 @@ body{
 }
 header {
   position: sticky;
+  top: 0;
   width: 100%;
   background-color:#000;
 }
@@ -99,7 +100,6 @@ header {
   padding: 10px;
   margin-top: 20px;
   margin-right: 1%;
-  /* background: teal; */
 }
 h2 {
   color:#fff;
