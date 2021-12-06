@@ -91,4 +91,9 @@ class EventController extends Controller
     {
         return Event::destroy($id);
     }
+
+    public function search($title)
+    {
+        return Event::where('title','like','%'.$title.'%')->get();
+    }
 }
