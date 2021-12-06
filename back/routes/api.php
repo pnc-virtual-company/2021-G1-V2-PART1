@@ -42,3 +42,8 @@ Route::post('/events', [EventController::class, 'store']);
 Route::put('/events', [EventController::class, 'update']);
 Route::delete('/events', [EventController::class, 'delete']);
 
+
+// ==================== Route Search events
+
+
+Route::get('/events/search/{title}', [EventController::class, 'search']);
