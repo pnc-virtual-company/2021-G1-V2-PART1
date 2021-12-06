@@ -48,9 +48,8 @@
         line-height: 1.5;
     }
     .h1para {
-        width: 33%;
-        display: flex;
-        align-items: center;
+        width: 70%;
+        text-align: center;
         border-radius: 5rem;
         background: rgb(13, 83, 68);
         color: #fff;

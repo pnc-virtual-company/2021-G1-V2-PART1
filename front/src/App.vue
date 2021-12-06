@@ -26,8 +26,8 @@ export default {
     }
   },
   mounted() {
-    let username = localStorage.getItem('username').toString();
-    if(username !== "" ){
+    let username = localStorage.getItem('userID');
+    if(username !== null ){
       this.isNotMenu = true;
       this.$router.push('/home');
     }

@@ -39,6 +39,9 @@
 </template>
 
 <script>
+
+import axios from 'axios';
+const API_URL = 'http://127.0.0.1:8000/api/users';
 export default {
   emits: ["sign-out"],
   data(){
@@ -54,7 +57,16 @@ export default {
     }
   },
   mounted() {
-    this.username = localStorage.getItem('username');
+    let userid = localStorage.getItem('userID');
+    axios.get(API_URL).then(res => {
+        let users = res.data;
+        for(let user of users){
+          if(user.id == userid){
+            this.username = user.name;
+            console.log(user.name);
+          }
+        }
+      })
   },
 }
 </script>
