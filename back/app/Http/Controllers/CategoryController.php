@@ -76,4 +76,10 @@ class CategoryController extends Controller
             return response()->json(['message' => 'ID NOT FOUND'], 404);
         }
     }
+
+    public function search($title) {
+        return Category::where('title', 'like', '%'.$title.'%')->get();
+    }
+
+
 }
