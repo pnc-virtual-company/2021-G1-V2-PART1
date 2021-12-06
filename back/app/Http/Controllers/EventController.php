@@ -35,7 +35,7 @@ class EventController extends Controller
         ]);
 
         $request->file('photo')->store('public/image');
-        
+
         $event = new Event();
         $event->title = $request->title;
         $event->city = $request->city;

@@ -35,6 +35,11 @@
                       <textarea class="form-control" id="message-text" placeholder="description" v-model = "description"></textarea>
                     </div>
                     <div class="form-group">
+                      <select class="form-control" id="select">
+                        <option v-for="category of categories " :key="category.title" value = {{category.title}}>{{category.title}}</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
                       <input type="file" class="form-control" id="recipient-name" placeholder="End date" @change = "onFileSelected">
                     </div>
                   </form>
@@ -59,12 +64,12 @@
                     
                       <!-- ===================Display Image====================== -->
                       <img class="img-1" :src="url+event.photo" alt="">
-                      
+
                   </div>
                   <div class="text">
                       <h1 id="title">{{event.title}}</h1>
                       <div id="time">
-                          <p class="date">{{event.created_at}}</p>
+                          <p class="date">{{event.startdate}}</p>
                           <p class="member">6 members</p>
                       </div>
                   </div>
@@ -99,7 +104,7 @@
 
   import Dialog from './Dialog.vue'
   import axios from 'axios';
-  const API_URL = 'http://127.0.0.1:8000/api/events';
+  const API_URL = 'http://127.0.0.1:8000/api/';
 
   export default {
     components: { Dialog},
@@ -113,6 +118,7 @@
         photo: null,
         showDialog: false,
         eventLists: [],
+        categories: [],
         url : 'http://127.0.0.1:8000/storage/image/'
       }
     },
@@ -133,6 +139,7 @@
        
         axios.post(API_URL, newEvent).then(res => {
           this.eventLists.push(res.data.event);
+          this.getEvent();
           console.log("created")
         })
 
@@ -154,18 +161,22 @@
         })
       },
       getEvent() {
-        axios.get(API_URL).then(res => {
+        axios.get(API_URL + "events").then(res => {
           this.eventLists = res.data;
           console.log(res.data);
+        })
+      },
+      getCategories(){
+        axios.get(API_URL + "categories").then(res => {
+          console.log(res.data);
+          this.categories = res.data;
         })
       }
     },
 
     mounted() {
-      axios.get(API_URL).then(res => {
-        this.eventLists = res.data;
-        console.log(res.data);
-      })
+      this.getEvent();
+      this.getCategories()
     },
   }
 </script>
@@ -219,6 +230,7 @@
   }
   .member{
       font-size: 15px;
+      margin-right: 15%;
   }
   #title{
       margin-top:2%;

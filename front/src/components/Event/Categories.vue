@@ -66,7 +66,7 @@ export default {
             categoryName: "",
             description: "",
             exiteMessage: "The categories is already exists",
-            searchcategory:null,
+            searchcategory:"",
         }
     },
     methods: {
@@ -98,15 +98,12 @@ export default {
             })
         },
         search(){
-            if(this.searchcategory !== null){
+            if(this.searchcategory !== ""){
                 axios.get(API_URL + "/search/" + this.searchcategory).then(res => {
                 this.categoryLists = res.data;
                 })
             }else{
-                axios.get(API_URL).then(res => {
-                    this.categoryLists = res.data;
-                    console.log('Delete search!')
-                })
+                this.getCategory();
             }
             
             
