@@ -12,9 +12,9 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getEvent()
+    public function getEvents()
     {
-       
+        return Event::latest()->get();
     }
 
     /**
@@ -23,30 +23,29 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
-            'title' =>'required',
-            'city' =>'required',
-            'startdate' =>'required',
-            'enddate' =>'required',
-            'description' => 'required',
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:1999',
+            'title'=>'required',
+            'city'=>'required',
+            'startdate'=>'required',
+            'enddate'=>'required',
+            'description'=>'required',
+            'photo'=>'nullable|image|mimes:jpg,jpeg,png|max:1999',
         ]);
 
-        $request->file('photo')->images('');
-
+        // $request->file('photo')->store('public/image');
         $event = new Event();
         $event->title = $request->title;
         $event->city = $request->city;
         $event->startdate = $request->startdate;
         $event->enddate = $request->enddate;
         $event->description = $request->description;
-        $event->photo = $request->file('photo')->hashName();
+        // $event->photo = $request->file('photo')->hashName();
 
-        $event->save(); // Create post 
-
-        return response()->json(["message" => "Creteted","event" => $event],201);
+        $event->save();
+       
+        return response()->json(['message' => "created successfully!" , "event" => $event],201);
     }
 
     /**
@@ -69,7 +68,17 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $event = Event::findOrFail($id);
+        $event->title = $request->title;
+        $event->city = $request->city;
+        $event->startdate = $request->startdate;
+        $event->enddate = $request->enddate;
+        $event->description = $request->description;
+        $event->photo = $request->file('photo')->hashName();
+
+        $event->save();
+       
+        return response()->json(['message' => "updated successfully!" , "event" => $event],200);
     }
 
     /**
@@ -78,8 +87,8 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function destroy($id)
     {
-        
+        return Event::destroy($id);
     }
 }

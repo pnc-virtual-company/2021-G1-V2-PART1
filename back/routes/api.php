@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
-// use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -36,3 +36,9 @@ Route::put('/categories/{id}', [CategoryController::class, 'update']);
 Route::delete('/categories/{id}', [CategoryController::class, 'delete']);
 
 // public ====================Create Event==============================
+
+Route::get('/events', [EventController::class, 'getEvents']);
+Route::post('/events', [EventController::class, 'store']);
+Route::put('/events', [EventController::class, 'update']);
+Route::delete('/events', [EventController::class, 'delete']);
+
