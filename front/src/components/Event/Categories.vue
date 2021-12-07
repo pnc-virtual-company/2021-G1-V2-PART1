@@ -101,6 +101,10 @@ export default {
                 console.log(res.data);
                 this.getCategory();
             })
+            this.showDialog = isFalse;
+        },
+        cancel(isFalse) {
+            this.showDialog = isFalse;
         },
         getCategory(){
              axios.get(API_URL).then(res => {
@@ -108,6 +112,7 @@ export default {
                 console.log(this.categoryLists);
             })
         },
+
         search(){
             if(this.searchcategory !== ""){
                 axios.get(API_URL + "/search/" + this.searchcategory).then(res => {
@@ -116,7 +121,6 @@ export default {
             }else{
                 this.getCategory();
             }
-            
             
         }
     },

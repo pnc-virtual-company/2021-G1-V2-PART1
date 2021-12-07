@@ -32,6 +32,7 @@ export default {
       confirm(){
         // console.log(123);
         this.$emit('delete', this.data.id, false);
+        console.log(this.data.id);
       },
       cancel(){
         // console.log(321);
