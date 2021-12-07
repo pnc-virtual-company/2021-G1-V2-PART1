@@ -35,6 +35,7 @@ class EventController extends Controller
         ]);
 
         $request->file('photo')->store('public/image');
+
         $event = new Event();
         $event->title = $request->title;
         $event->city = $request->city;
@@ -87,7 +88,7 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         return Event::destroy($id);
     }

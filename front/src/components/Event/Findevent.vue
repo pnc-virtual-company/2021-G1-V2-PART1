@@ -12,21 +12,20 @@
             <!-- // ================Card my event view============================= -->
             
             <div class="card">
-                <div class="container-card">
+                <div class="container-card" v-for="event of allEvents" :key="event.id">
                     <div class="main">
                         <div class="img">
                             <img class="img-1" src="https://d13kjxnqnhcmn2.cloudfront.net/AcuCustom/Sitename/DAM/052/IoT_-_Main.png" alt="">
                         </div>
                         <div class="text">
-                            <h1 id="title">Stay connected</h1>
+                            <h1 id="title">{{event.title}}</h1>
                             <button id="show"> more detail ...</button>
                         </div>
                     </div>
                     
                     <div class="button">
-                        <span class="date">Nov,29 2020 6:00 PM</span>
+                        <span class="date">{{event.created_at}}</span>
                         <div id="btn">
-                            
                             <button v-if="joinValue" @click="joinEvent" class="Join"><i class="fal fa-check"></i>Join</button>
                             <button v-else @click="unjoinEvent" class="quit"><i class="fas fa-times-circle"></i>Quit</button>
                         </div>
@@ -42,10 +41,13 @@
 </template>
 
 <script>
+    import axios from 'axios';
+    const API_URL = 'http://127.0.0.1:8000/api/events';
     export default {
     data() {
         return {
             joinValue: true,
+            allEvents: [],
         }
     },
     methods: {
@@ -56,6 +58,12 @@
             console.log("Quited")
             this.joinValue = !this.joinValue
         }
+    },
+    mounted() {
+        axios.get(API_URL).then(res => {
+            this.allEvents = res.data;
+            console.log(this.allEvents);
+        })
     },
     };
 </script>
@@ -124,8 +132,6 @@
     }
     .container-card {
         margin-left: 10px;
-        margin-top: 10px;
-        position: relative;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -133,9 +139,10 @@
         background: #ffff;
         margin: auto;
         margin-top: 10px;
-        border-radius: 5px;
+        border-radius: 10px;
         width: 700px;
-        height: 100px;
+        height: 95px;
+        margin-bottom: 2%;
         box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     }
     .main{
@@ -148,17 +155,16 @@
     .text{
         width: 79%;
         border: none;
-        height: 16vh;
+        height: 15vh;
     }
     #title{
         font-size: 18px;
         text-transform: uppercase;
-        margin-top: 11%;
+        margin-top: 9%;
     }
     #show{
         margin-left: 52%;
         color: rgb(0, 58, 250);
-        margin-top: 3%;
         border: none;
         background: none;
         outline: none;
@@ -245,10 +251,9 @@
     }
     .button{
         width: 25%;
-        margin-right: 1%;
     }
     #btn{
-        margin-top: 15%;
+        margin-top: 3%;
     }
     .date{
         margin-left: 12%;

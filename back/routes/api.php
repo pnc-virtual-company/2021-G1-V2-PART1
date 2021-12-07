@@ -40,8 +40,8 @@ Route::get('/categories/search/{title}', [CategoryController::class, 'search']);
 
 Route::get('/events', [EventController::class, 'getEvents']);
 Route::post('/events', [EventController::class, 'store']);
-Route::put('/events', [EventController::class, 'update']);
-Route::delete('/events', [EventController::class, 'delete']);
+Route::put('/events/{id}', [EventController::class, 'update']);
+Route::delete('/events/{id}', [EventController::class, 'delete']);
 
 
 // ==================== Route Search events

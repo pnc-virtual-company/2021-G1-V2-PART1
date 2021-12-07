@@ -1,7 +1,7 @@
 <template>
     <section class="home" id="home">
         <div class="content">
-            <h3 id="event">EVNET ME</h3>
+            <h3 id="event">EVENT ME</h3>
             <span> Event & Join Event </span>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br> Beatae laborum ut minus corrupti dolorum dolore assu<br>menda iste voluptate dolorem pariatur.</p>
             <h1 class="h1para">welcome to event me App!!</h1>
@@ -48,12 +48,14 @@
         line-height: 1.5;
     }
     .h1para {
-        display: inline-block;
+        width: 70%;
+        text-align: center;
         border-radius: 5rem;
         background: rgb(13, 83, 68);
         color: #fff;
-        padding: .9rem 3.5rem;
+        padding:10px 20px ;
         cursor: pointer;
         font-size: 1.7rem;
     }
+
 </style>

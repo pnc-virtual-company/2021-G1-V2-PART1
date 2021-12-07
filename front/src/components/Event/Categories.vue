@@ -44,29 +44,40 @@
        <!-- ============categories========================== -->
        <div class="cardName">
             <div class="categoryList">
-                <div v-for="categories of categoryLists" :key="categories.title" class="category">
+                <div v-for="categories of categoryLists" :key="categories.id" class="category">
                     <p class="card-title">{{categories.title}}</p>
                     <div class="icon">
                         <i id="edit" class="fas fa-pencil-alt"></i>
-                        <i @click="removeCategory(categories.id)" id="delete" class="fa fa-trash"></i>
+                        <i  @click="showDialog = true"  id="delete" class="fa fa-trash"></i>
                     </div>
+                    <Dialog v-show="showDialog" 
+                        :data="categories"
+                        @cancel="cancel" 
+                        @delete="removeCategory"
+                        title="Delete this categories?"
+                        description="Are you sure?"
+                   />
                 </div>
             </div>
+            
        </div>
         
     </section>
 </template>
 <script>
 import axios from 'axios';
+import Dialog from './Dialog.vue'
 const API_URL = 'http://127.0.0.1:8000/api/categories';
 export default {
+     components: { Dialog},
     data() {
         return{
+            showDialog: false,
             categoryLists: [],
             categoryName: "",
             description: "",
             exiteMessage: "The categories is already exists",
-            searchcategory:null,
+            searchcategory:"",
         }
     },
     methods: {
@@ -78,36 +89,41 @@ export default {
            
             axios.post(API_URL, newCategory).then(res => {
                 console.log("Created");
+                this.categoryLists.push(res.data.category)
                 return res.data;
             })
-
+            this.getCategory();
             this.categoryName = "";
             this.description = "";
         },
-        removeCategory(id) {
+        removeCategory(id,isFalse) {
             axios.delete(API_URL + "/" + id).then(res => {
                 console.log(res.data);
+                this.getCategory();
+            })
+        },
+        getCategory(){
+             axios.get(API_URL).then(res => {
+                this.categoryLists = res.data;
+                console.log(this.categoryLists);
             })
         },
         search(){
-            if(this.searchcategory !== null){
+            if(this.searchcategory !== ""){
                 axios.get(API_URL + "/search/" + this.searchcategory).then(res => {
                 this.categoryLists = res.data;
                 })
             }else{
-                axios.get(API_URL).then(res => {
-                    this.categoryLists = res.data;
-                    console.log('Delete search!')
-                })
+                this.getCategory();
             }
             
             
         }
     },
     mounted() {
+        // this.getCategory();
         axios.get(API_URL).then(res => {
             this.categoryLists = res.data;
-            console.log(this.categoryLists);
         })
     },
 }
