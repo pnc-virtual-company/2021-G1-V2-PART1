@@ -2,6 +2,7 @@
   <section>
     <the-navigation @sign-out = "signout" v-if="isNotMenu"></the-navigation>
     <router-view @signin-user = "notMenu"></router-view>
+    <user-profile v-if = "profile"></user-profile>
   </section>
 </template>
 
@@ -14,6 +15,7 @@ export default {
   data() {
     return{
       isNotMenu: false,
+      profile: false,
     }
   },
   methods: {

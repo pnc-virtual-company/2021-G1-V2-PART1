@@ -2,7 +2,7 @@
   <header>
     <nav >
       <div class="container-user">
-            <i class="far fa-user-circle"></i>
+            <button id="profile" @click = "profile"><i class="far fa-user-circle"></i></button>
             <div class="username">
               <h2>{{username}}</h2>
             </div>
@@ -37,8 +37,8 @@
   </header>
 </template>
 
-<script>
 
+<script>
 import axios from 'axios';
 const API_URL = 'http://127.0.0.1:8000/api/users';
 export default {
@@ -53,6 +53,9 @@ export default {
     signout(){
       this.$emit("sign-out", this.signOut);
       localStorage.clear();
+    },
+    profile() {
+      this.$router.push('/profile');
     }
   },
   mounted() {
@@ -83,6 +86,7 @@ header {
   background-color:#000;
 }
 .container-user {
+  display: flex;
   margin-left: 1%;
   float: left;
 }
@@ -94,11 +98,16 @@ header {
   align-items: center;
   margin-top: 5px;
   margin-left: 10px;
- 
+}
+#profile{
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
 }
 .username {
   color: rgb(255, 255, 255);
-  margin-left: 70px;
+  margin-left: 10px;
   align-items: center;
 }
 #signout {
