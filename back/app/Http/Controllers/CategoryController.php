@@ -71,7 +71,7 @@ class CategoryController extends Controller
     {
         $isDeleted = Category::destroy($id);
         if($isDeleted == 1) {
-            return response()->json(['message' => 'deleted'], 200);
+            return response()->json(['message' => 'deleted','id' => $id ], 200);
         }else{
             return response()->json(['message' => 'ID NOT FOUND'], 404);
         }

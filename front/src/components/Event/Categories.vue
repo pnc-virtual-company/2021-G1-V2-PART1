@@ -48,16 +48,17 @@
                     <p class="card-title">{{categories.title}}</p>
                     <div class="icon">
                         <i id="edit" class="fas fa-pencil-alt"></i>
-                        <i  @click="showDialog = true"  id="delete" class="fa fa-trash"></i>
+                        <i  @click = "ShowDialog(categories)"  id="delete" class="fa fa-trash"></i>
+                        <Dialog v-show = "showDialog" 
+                            :user = "userInfo"
+                            @cancel = "cancel" 
+                            @delete = "removeCategory"
+                            title="Delete this categories?"
+                            description="Are you sure?"
+                        />
                     </div>
-                    <Dialog v-show="showDialog" 
-                        :data="categories"
-                        @cancel="cancel" 
-                        @delete="removeCategory"
-                        title="Delete this categories?"
-                        description="Are you sure?"
-                   />
                 </div>
+
             </div>
             
        </div>
@@ -78,9 +79,14 @@ export default {
             description: "",
             exiteMessage: "The categories is already exists",
             searchcategory:"",
+            userInfo: "",
         }
     },
     methods: {
+        ShowDialog(userData) {
+            this.showDialog = true
+            this.userInfo = userData;
+        },
         createCategory() {
             const newCategory = {
                 title: this.categoryName,
@@ -98,10 +104,18 @@ export default {
         },
         removeCategory(id,isFalse) {
             axios.delete(API_URL + "/" + id).then(res => {
-                console.log(res.data);
+                console.log(res.data.id);
                 this.getCategory();
             })
+            console.log(id);
+            this.showDialog = isFalse;
+            
         },
+
+        cancel(isFalse){
+            this.showDialog = isFalse
+        },
+
         getCategory(){
              axios.get(API_URL).then(res => {
                 this.categoryLists = res.data;
