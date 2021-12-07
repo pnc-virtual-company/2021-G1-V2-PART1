@@ -18,10 +18,11 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'firstname',
-        'lastname',
+        'name',
         'email',
         'password',
+        'profile'
+
     ];
 
     /**
@@ -43,4 +44,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function join(){
+        return $this->hasMany(Join::class);
+    }
 }

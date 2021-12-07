@@ -14,7 +14,7 @@ class EventController extends Controller
      */
     public function getEvents()
     {
-        return Event::latest()->get();
+        return Event::with('category')->get();
     }
 
     /**
@@ -34,7 +34,7 @@ class EventController extends Controller
             'photo'=>'nullable|image|mimes:jpg,jpeg,png|max:1999',
         ]);
 
-        $request->file('photo')->store('public/image');
+        $request->file('photo')->store('public/imageEvent');
 
         $event = new Event();
         $event->title = $request->title;
@@ -43,6 +43,7 @@ class EventController extends Controller
         $event->enddate = $request->enddate;
         $event->description = $request->description;
         $event->photo = $request->file('photo')->hashName();
+        $event->category_id = $request->category_id;
 
         $event->save();
        

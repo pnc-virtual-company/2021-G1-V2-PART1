@@ -16,4 +16,10 @@ class Event extends Model
         'description',
         'photo',
     ];
+    public function join(){
+        return $this->hasMany(Join::class);
+    }
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
 }

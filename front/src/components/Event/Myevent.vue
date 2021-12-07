@@ -76,10 +76,10 @@
               </div>
                   
               <div class="rightCard">
-                  <p class="categories">Categories name</p>
+                  <p class="categories">{{event.category.title}}</p>
                   <div class="button">
                       <button class="Edit">Edit</button>
-                      <button @click = "deleteEvent(event.id)" class="Delete">Delete</button>
+                      <button class="Delete">Delete</button>
                   </div>
               </div>
           </div>
@@ -88,11 +88,11 @@
       
           <!-- //=============Dialog Btn====================== -->
 
-          <Dialog :show="showDialog" 
+          <!-- <Dialog :show="showDialog" 
                   :cancel="cancel" 
                   :confirm="confirm" 
                   title="Delete this event?" 
-                  description="Are you sure?" />
+                  description="Are you sure?" /> -->
 
           <!-- ===============End dialog================== -->
         
@@ -102,12 +102,12 @@
 </template>
 <script>
 
-  import Dialog from './Dialog.vue'
+  // import Dialog from './Dialog.vue'
   import axios from 'axios';
   const API_URL = 'http://127.0.0.1:8000/api/';
 
   export default {
-    components: { Dialog},
+    // components: { Dialog},
     data () {
       return {
         title: "",
@@ -119,7 +119,7 @@
         showDialog: false,
         eventLists: [],
         categories: [],
-        url : 'http://127.0.0.1:8000/storage/image/'
+        url : 'http://127.0.0.1:8000/storage/imageEvent/'
       }
     },
     methods: {
@@ -149,10 +149,7 @@
         console.log('cancel')
         this.showDialog = false
       },
-      confirm() {
-        console.log('confirm')
-        this.showDialog = false
-      },
+     
       deleteEvent(id) {
         console.log(id);
         axios.delete(API_URL + "events/" + id).then(res => {
@@ -172,12 +169,19 @@
           console.log(res.data);
           this.categories = res.data;
         })
+      },
+
+      getUserJoined(){
+        axios.get(API_URL + "joins").then(res => {
+          console.log(res.data);
+        })
       }
     },
 
     mounted() {
       this.getEvent();
-      this.getCategories()
+      this.getCategories();
+      this.getUserJoined();
     },
   }
 </script>

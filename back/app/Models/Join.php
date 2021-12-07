@@ -5,14 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Join extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title',
-        'description'
+        'user_id',
+        'event_id'
     ];
+    public function user(){
+        return $this->belongsTo(User::class,"user_id");
+    }
     public function event(){
-        return $this->hasMany(Event::class);
+        return $this->belongsTo(Event::class);
     }
 }

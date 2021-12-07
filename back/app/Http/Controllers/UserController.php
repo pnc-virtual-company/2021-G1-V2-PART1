@@ -16,12 +16,16 @@ class UserController extends Controller
         $request->validate([
             'name' =>  'required|max:50|regex:/^[a-zA-Z]/',
             'email' => 'required|email',
-            'password' => 'required|min:8|confirmed'
+            'password' => 'required|min:8|confirmed',
+            'profile'=>'nullable|image|mimes:jpg,jpeg,png|max:1999',
         ]);
+        $request->file('profile')->store('public/imageUser');
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->profile = $request->file('profile')->hashName();
         $user->save();
 
         return response()->json(['message' => 'Created', 'user' => $user],201);

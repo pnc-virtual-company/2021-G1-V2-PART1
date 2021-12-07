@@ -48,12 +48,12 @@
                     <p class="card-title">{{categories.title}}</p>
                     <div class="icon">
                         <i id="edit" class="fas fa-pencil-alt"></i>
-                        <i  @click = "ShowDialog(categories)"  id="delete" class="fa fa-trash"></i>
-                        <Dialog v-show = "showDialog" 
+                        <i id="delete" class="fa fa-trash"></i>
+                        <!-- <Dialog v-show = "showDialog" 
                             :data = "userInfo"
                             @cancel = "cancel" 
                             @delete = "removeCategory"
-                        />
+                        /> -->
                     </div>
                 </div>
 
@@ -65,10 +65,10 @@
 </template>
 <script>
 import axios from 'axios';
-import Dialog from './Dialog.vue'
+// import Dialog from './Dialog.vue'
 const API_URL = 'http://127.0.0.1:8000/api/categories';
 export default {
-     components: { Dialog},
+    //  components: { Dialog},
     data() {
         return{
             showDialog: false,
@@ -81,10 +81,10 @@ export default {
         }
     },
     methods: {
-        ShowDialog(categories) {
-            this.showDialog = true
-            this.userInfo = categories;
-        },
+        // ShowDialog(categories) {
+        //     this.showDialog = true
+        //     this.userInfo = categories;
+        // },
         createCategory() {
             const newCategory = {
                 title: this.categoryName,
