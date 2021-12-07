@@ -4,7 +4,7 @@
             <div class="search">       
                 <h3 class="title-search">Find the event</h3>
                 <div class="search-box">
-                    <input class="search-txt"  type="text" name="" placeholder="Type to search...">
+                    <input v-on:keyup = "search" v-on:keydown = "search" class="search-txt"  type="text" name="" placeholder="Type to search..." v-model = "searchevent">
                     <i class="fas fa-search search-btn"></i>
                 </div>        
             </div>
