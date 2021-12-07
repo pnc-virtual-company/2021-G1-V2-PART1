@@ -58,7 +58,7 @@
         <!-- // ================Card my event view============================= -->
 
         <div class="cards">
-            <div class="container-card" v-for="event of eventLists" :key="event.id">
+            <div class="container-card" v-for = "event of eventLists" :key="event.id ">
               <div class="main">
                   <div class="img">
                     
@@ -79,7 +79,7 @@
                   <p class="categories">Categories name</p>
                   <div class="button">
                       <button class="Edit">Edit</button>
-                      <button @click = "deleteEvent(event.id)" class="Delete">Delete</button>
+                      <button @click="Show(event)" class="Delete">Delete</button>
                   </div>
               </div>
           </div>
@@ -88,11 +88,11 @@
       
           <!-- //=============Dialog Btn====================== -->
 
-          <Dialog :show="showDialog" 
-                  :cancel="cancel" 
-                  :confirm="confirm" 
-                  title="Delete this event?" 
-                  description="Are you sure?" />
+          <Dialog v-if="displayDialog" 
+                  :data = "eventInfo"
+                  @cancel = "cancel" 
+                  @delete = "removeEvent" 
+          />
 
           <!-- ===============End dialog================== -->
         
@@ -100,6 +100,8 @@
       </div>
     </section>
 </template>
+
+
 <script>
 
   import Dialog from './Dialog.vue'
@@ -119,16 +121,16 @@
         showDialog: false,
         eventLists: [],
         categories: [],
+        eventInfo: "",
+        displayDialog:false,
         url : 'http://127.0.0.1:8000/storage/image/'
       }
     },
     methods: {
       onFileSelected(event){
         this.photo = event.target.files[0];
-        console.log(this.photo);
       },
       Addevent() {
-
         const newEvent = new FormData();
         newEvent.append('title',this.title);
         newEvent.append('city',this.city);
@@ -146,20 +148,20 @@
       },
 
       cancel() {
-        console.log('cancel')
-        this.showDialog = false
+        this.displayDialog = false
       },
-      confirm() {
-        console.log('confirm')
-        this.showDialog = false
+
+      Show(event) {
+          this.displayDialog = true;
+          this.eventInfo = event;
       },
-      deleteEvent(id) {
-        console.log(id);
-        axios.delete(API_URL + "events/" + id).then(res => {
-          console.log(res);
-          this.getEvent();
-          console.log("Deleted");
-        })
+      removeEvent(id,isFalse) {
+            axios.delete(API_URL + "events/" + id).then(res => {
+                console.log(res.data.id);
+                this.getEvent();
+            })
+            this.displayDialog = isFalse;
+            
       },
       getEvent() {
         axios.get(API_URL + "events").then(res => {

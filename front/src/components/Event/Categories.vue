@@ -39,7 +39,7 @@
         <p id="exite" style="color:red">{{exiteMessage}}</p>
         <!-- //================search btn==================== -->
 
-        <input v-on:keyup = "search" v-on:keydown = 'search' id="search" class="form-control" type="search" placeholder="Search" aria-label="Search" v-model="searchcategory">
+        <input v-on:keyup = "search" id="search" class="form-control" type="search" placeholder="Search" aria-label="Search" v-model="searchcategory">
 
        <!-- ============categories========================== -->
        <div class="cardName">
@@ -47,45 +47,61 @@
                 <div v-for="categories of categoryLists" :key="categories.id" class="category">
                     <p class="card-title">{{categories.title}}</p>
                     <div class="icon">
-                        <i id="edit" class="fas fa-pencil-alt"></i>
+                        <i @click = "ShowDilogEdit(categories)" id="edit" class="fas fa-pencil-alt"></i>
                         <i  @click = "ShowDialog(categories)"  id="delete" class="fa fa-trash"></i>
+
+                        <!-- =============Delete Dialog========== -->
                         <Dialog v-show = "showDialog" 
-                            :user = "userInfo"
+                            :data = "categoryInfo"
                             @cancel = "cancel" 
                             @delete = "removeCategory"
-                            title="Delete this categories?"
-                            description="Are you sure?"
+                        />
+
+                        <!-- ===========Edid Dialog============= -->
+                        <DialogEdit v-if="showEdit"
+                            :data = "categoryInfo"
+                            @cancel = "cancel" 
+                            @edit = "updateCategory"
                         />
                     </div>
                 </div>
-
             </div>
-            
        </div>
-        
     </section>
 </template>
+
+
 <script>
 import axios from 'axios';
 import Dialog from './Dialog.vue'
+import DialogEdit from './DialogEdit.vue'
 const API_URL = 'http://127.0.0.1:8000/api/categories';
 export default {
-     components: { Dialog},
+     components: {
+        Dialog,
+        DialogEdit,
+    },
+
     data() {
         return{
             showDialog: false,
+            showEdit: false,
             categoryLists: [],
             categoryName: "",
             description: "",
             exiteMessage: "The categories is already exists",
             searchcategory:"",
-            userInfo: "",
+            categoryInfo: "",
         }
     },
     methods: {
-        ShowDialog(userData) {
+        ShowDialog(categories) {
             this.showDialog = true
-            this.userInfo = userData;
+            this.categoryInfo = categories;
+        },
+        ShowDilogEdit(categories){
+            this.showEdit = true;
+            this.categoryInfo = categories;
         },
         createCategory() {
             const newCategory = {
@@ -109,11 +125,19 @@ export default {
             })
             console.log(id);
             this.showDialog = isFalse;
-            
+        },
+        updateCategory(id,categories, isFalse) {
+            axios.put(API_URL + "/" + id , categories ).then(res => {
+                console.log(res.data);
+                this.getCategory();
+            })
+            this.showEdit = isFalse
+            console.log(categories);
         },
 
         cancel(isFalse){
-            this.showDialog = isFalse
+            this.showDialog = isFalse;
+            this.showEdit = false;
         },
 
         getCategory(){
@@ -122,6 +146,7 @@ export default {
                 console.log(this.categoryLists);
             })
         },
+
         search(){
             if(this.searchcategory !== ""){
                 axios.get(API_URL + "/search/" + this.searchcategory).then(res => {
@@ -130,7 +155,6 @@ export default {
             }else{
                 this.getCategory();
             }
-            
             
         }
     },

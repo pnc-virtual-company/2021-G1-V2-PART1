@@ -3,7 +3,6 @@ import App from "./App.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "./components/menu/Home.vue";
-import TheNavigation from "./components/menu/TheNavigation.vue";
 import signin from "./components/Signin-signup/signin.vue";
 import signup from "./components/Signin-signup/signup.vue";
 import Myevent from "./components/Event/Myevent.vue";
@@ -19,7 +18,6 @@ const router = createRouter({
             { path: '/signin', component: signin },
             { path: '/home', component: Home },
             { path: '/profile', component: Profile },
-            { path: '/menu', component: TheNavigation },
             { path: '/signup', component: signup },
             { path: '/myevent', component: Myevent },
             { path: '/eventform', component: EventForm },
@@ -30,8 +28,6 @@ const router = createRouter({
 
 const app = createApp(App);
 
-app.component("menu-bar", TheNavigation);
-app.component("the-navigation", signin);
 app.component("user-profile", Profile);
 app.use(router);
 app.mount("#app");
