@@ -48,6 +48,9 @@
         return {
             joinValue: true,
             allEvents: [],
+            eventLists: [],
+            eventName: "",
+            searchevent:"",
         }
     },
     methods: {
@@ -57,6 +60,24 @@
         unjoinEvent(){
             console.log("Quited")
             this.joinValue = !this.joinValue
+        },
+         getEvent(){
+             axios.get(API_URL).then(res => {
+                this.eventLists = res.data;
+                console.log(this.eventLists);
+            })
+        },
+        search(){
+            if(this.searchevent !== ""){
+                axios.get(API_URL + "/search/" + this.searchevent).then(res => {
+                this.eventLists = res.data;
+                console.log('pong der!');
+                })
+            }else{
+                this.getEvent();
+            }
+            
+            
         }
     },
     mounted() {

@@ -101,12 +101,16 @@ export default {
                 console.log(res.data);
                 this.getCategory();
             })
+            this.showDialog = isFalse
         },
         getCategory(){
              axios.get(API_URL).then(res => {
                 this.categoryLists = res.data;
                 console.log(this.categoryLists);
             })
+        },
+        cencel(isFalse){
+            this.showDialog = isFalse;
         },
         search(){
             if(this.searchcategory !== ""){
