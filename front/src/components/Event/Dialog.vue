@@ -1,5 +1,5 @@
 <template> 
-    <div v-show="show" class="overlay">
+    <div class="overlay">
 
     <div class="dialog">
 
@@ -23,7 +23,21 @@
 
 <script>
 export default {
-    props: ['show', 'title', 'description','cancel', 'confirm']
+    props: ['data','title','description'],
+    emits:['delete', 'cancel'],
+    data(){
+
+    },
+    methods:{
+      confirm(){
+        // console.log(123);
+        this.$emit('delete', this.data.id, false);
+      },
+      cancel(){
+        // console.log(321);
+        this.$emit('cancel', false);
+      }
+    }
 }
 </script>
 

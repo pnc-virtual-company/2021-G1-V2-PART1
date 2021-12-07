@@ -91,7 +91,7 @@
           <Dialog :show="showDialog" 
                   :cancel="cancel" 
                   :confirm="confirm" 
-                  title="You want to Delete this?" 
+                  title="Delete this event?" 
                   description="Are you sure?" />
 
           <!-- ===============End dialog================== -->
