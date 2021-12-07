@@ -137,7 +137,7 @@
         newEvent.append('description',this.description);
         newEvent.append('photo',this.photo);
        
-        axios.post(API_URL, newEvent).then(res => {
+        axios.post(API_URL + "events", newEvent).then(res => {
           this.eventLists.push(res.data.event);
           this.getEvent();
           console.log("created")

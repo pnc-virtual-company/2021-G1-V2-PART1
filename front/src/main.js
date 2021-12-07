@@ -10,6 +10,7 @@ import Myevent from "./components/Event/Myevent.vue";
 import EventForm from "./components/Event/EventForm.vue";
 import Findevent from "./components/Event/Findevent.vue";
 import Categories from "./components/Event/Categories.vue";
+import Profile from "./components/menu/Profile.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -17,6 +18,7 @@ const router = createRouter({
             { path: '/', component: signin },
             { path: '/signin', component: signin },
             { path: '/home', component: Home },
+            { path: '/profile', component: Profile },
             { path: '/menu', component: TheNavigation },
             { path: '/signup', component: signup },
             { path: '/myevent', component: Myevent },
@@ -30,5 +32,6 @@ const app = createApp(App);
 
 app.component("menu-bar", TheNavigation);
 app.component("the-navigation", signin);
+app.component("user-profile", Profile);
 app.use(router);
 app.mount("#app");
