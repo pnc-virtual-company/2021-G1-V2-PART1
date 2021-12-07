@@ -4,8 +4,8 @@
     <div class="dialog">
 
       <div class="dialog__content">
-        <h2 class="dialog__title" v-text="title"></h2>
-        <p class="dialog__description" v-text="description"></p>
+        <h2 class="dialog__title">{{data.title}}</h2>
+        <p class="dialog__description">{{data.description}}</p>
       </div>
 
       <hr />
@@ -23,19 +23,17 @@
 
 <script>
 export default {
-    props: ['data','title','description'],
+    props: ['data'],
     emits:['delete', 'cancel'],
     data(){
 
     },
     methods:{
       confirm(){
-        // console.log(123);
         this.$emit('delete', this.data.id, false);
-        console.log(this.data.id);
+        
       },
       cancel(){
-        // console.log(321);
         this.$emit('cancel', false);
       }
     }

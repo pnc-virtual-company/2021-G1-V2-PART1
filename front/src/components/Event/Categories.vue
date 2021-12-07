@@ -48,16 +48,15 @@
                     <p class="card-title">{{categories.title}}</p>
                     <div class="icon">
                         <i id="edit" class="fas fa-pencil-alt"></i>
-                        <i  @click="showDialog = true"  id="delete" class="fa fa-trash"></i>
+                        <i  @click = "ShowDialog(categories)"  id="delete" class="fa fa-trash"></i>
+                        <Dialog v-show = "showDialog" 
+                            :data = "userInfo"
+                            @cancel = "cancel" 
+                            @delete = "removeCategory"
+                        />
                     </div>
-                    <Dialog v-show="showDialog" 
-                        :data="categories"
-                        @cancel="cancel" 
-                        @delete="removeCategory"
-                        title="Delete this categories?"
-                        description="Are you sure?"
-                   />
                 </div>
+
             </div>
             
        </div>
@@ -78,9 +77,14 @@ export default {
             description: "",
             exiteMessage: "The categories is already exists",
             searchcategory:"",
+            userInfo: "",
         }
     },
     methods: {
+        ShowDialog(categories) {
+            this.showDialog = true
+            this.userInfo = categories;
+        },
         createCategory() {
             const newCategory = {
                 title: this.categoryName,
@@ -98,14 +102,17 @@ export default {
         },
         removeCategory(id,isFalse) {
             axios.delete(API_URL + "/" + id).then(res => {
-                console.log(res.data);
+                console.log(res.data.id);
                 this.getCategory();
             })
             this.showDialog = isFalse;
+            
         },
-        cancel(isFalse) {
-            this.showDialog = isFalse;
+
+        cancel(isFalse){
+            this.showDialog = isFalse
         },
+
         getCategory(){
              axios.get(API_URL).then(res => {
                 this.categoryLists = res.data;
@@ -164,13 +171,11 @@ export default {
     }
     .cardName{
         margin-top: 1%;
-        /* background: green; */
         height: 62vh;
         overflow-y: scroll;
         border: none;
     }
     .categoryList{
-        /* background: teal; */
         width: 41%;
         margin-left: 32%;
         margin-top: 1%;
