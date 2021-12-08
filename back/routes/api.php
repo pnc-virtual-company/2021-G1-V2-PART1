@@ -5,6 +5,7 @@ use App\Http\Controllers\EventController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\JoinController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -43,6 +44,12 @@ Route::post('/events', [EventController::class, 'store']);
 Route::put('/events/{id}', [EventController::class, 'update']);
 Route::delete('/events/{id}', [EventController::class, 'delete']);
 
+// public ====================Create Join==============================
+
+Route::get('/joins', [JoinController::class, 'getJoins']);
+Route::post('/joins', [JoinController::class, 'store']);
+Route::put('/joins/{id}', [JoinController::class, 'update']);
+Route::delete('/joins/{id}', [JoinController::class, 'delete']);
 
 // ==================== Route Search events
 

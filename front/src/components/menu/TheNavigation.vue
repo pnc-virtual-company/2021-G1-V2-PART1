@@ -2,9 +2,12 @@
   <header>
     <nav >
       <div class="container-user">
-            <i class="far fa-user-circle"></i>
+            <div class="img">
+              <img @click = "profile"  class="img-1" :src="url + username.profile" alt="">
+            </div>
+            <!-- <button id="profile" @click = "profile"><i class="far fa-user-circle"></i></button> -->
             <div class="username">
-              <h2>{{username}}</h2>
+              <h2>{{username.name}}</h2>
             </div>
       </div>
       
@@ -33,13 +36,12 @@
           <router-link to="/categories" >Category</router-link>
         </li>
       </ul>
-
     </nav>
   </header>
 </template>
 
-<script>
 
+<script>
 import axios from 'axios';
 const API_URL = 'http://127.0.0.1:8000/api/users';
 export default {
@@ -48,12 +50,16 @@ export default {
     return{
       signOut: false,
       username: "",
+      url : 'http://127.0.0.1:8000/storage/imageUser/'
     }
   },
   methods: {
     signout(){
       this.$emit("sign-out", this.signOut);
       localStorage.clear();
+    },
+    profile() {
+      this.$router.push('/profile');
     }
   },
   mounted() {
@@ -62,8 +68,8 @@ export default {
         let users = res.data;
         for(let user of users){
           if(user.id == userid){
-            this.username = user.name;
-            console.log(user.name);
+            this.username = user;
+            console.log(user);
           }
         }
       })
@@ -77,6 +83,12 @@ body{
   padding: 0;
   font-family: sans-serif;
 }
+img{
+  margin-top: 15%;
+  width: 50px;
+  height: 50px;
+  border-radius: 360px;
+}
 header {
   position: sticky;
   top: 0;
@@ -84,6 +96,7 @@ header {
   background-color:#000;
 }
 .container-user {
+  display: flex;
   margin-left: 1%;
   float: left;
 }
@@ -95,11 +108,16 @@ header {
   align-items: center;
   margin-top: 5px;
   margin-left: 10px;
- 
+}
+#profile{
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
 }
 .username {
   color: rgb(255, 255, 255);
-  margin-left: 70px;
+  margin-left: 10px;
   align-items: center;
 }
 #signout {

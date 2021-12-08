@@ -21,6 +21,7 @@ class CreateEventsTable extends Migration
             $table->string('enddate');
             $table->text('description');
             $table->string('photo')->nullable();
+            $table->foreignId('category_id')->constrained()->onDelete('CASCADE');
             $table->timestamps();
         });
     }

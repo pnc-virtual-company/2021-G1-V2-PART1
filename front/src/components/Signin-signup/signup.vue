@@ -64,6 +64,7 @@ export default {
             password: this.storePassword,
             password_confirmation: this.confirmation_password,
             }
+            console.log(newUser);
             axios.post(API_URL + "/signup" , newUser).then(res => {
                 this.userLists.push(res.data.user);
                 localStorage.setItem('userID', res.data.user.id);
