@@ -5,7 +5,7 @@
             <div class="img">
               <img id="image" @click = "Profile"  class="img-1" :src="url + username.profile" alt="">
             </div>
-            <!-- <button id="profile" @click = "profile"><i class="far fa-user-circle"></i></button> -->
+    
             <div class="username">
               <h2>{{username.name}}</h2>
             </div>
@@ -24,16 +24,16 @@
 
       <ul>
         <li>
-          <router-link to="/home" >Home</router-link>
+          <router-link @click="notFindevent" to="/home" >Home</router-link>
         </li>
         <li>
-          <router-link to="/myevent" >My event</router-link>
+          <router-link @click="notFindevent" to="/myevent" >My event</router-link>
         </li>
         <li>
-          <router-link to="/findevent" >Find event</router-link>
+          <router-link @click="Findevent" to="/findevent" >Find event</router-link>
         </li>
         <li>
-          <router-link to="/categories" >Category</router-link>
+          <router-link @click="notFindevent" to="/categories" >Category</router-link>
         </li>
       </ul>
     </nav>
@@ -45,12 +45,14 @@
 import axios from 'axios';
 const API_URL = 'http://127.0.0.1:8000/api/users';
 export default {
-  emits: ['user-profile','sign-out'],
+  emits: ['user-profile','sign-out','find-event'],
   data(){
     return{
       signOut: false,
       username: "",
       displayprofile: false,
+      isFindevent: false,
+      findevent: true,
       url : 'http://127.0.0.1:8000/storage/imageUser/',
     }
   },
@@ -62,6 +64,12 @@ export default {
     Profile() {
       this.displayprofile = !this.displayprofile;
       this.$emit('user-profile',this.displayprofile);
+    },
+    Findevent(){
+      this.$emit('find-event',this.isFindevent);
+    },
+    notFindevent(){
+      this.$emit('find-event',this.findevent);
     }
   },
   mounted() {
@@ -71,7 +79,6 @@ export default {
         for(let user of users){
           if(user.id == userid){
             this.username = user;
-            console.log(user);
           }
         }
       })

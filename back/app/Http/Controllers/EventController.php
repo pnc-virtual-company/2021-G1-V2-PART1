@@ -71,14 +71,7 @@ class EventController extends Controller
     public function update(Request $request, $id)
     {
         $event = Event::findOrFail($id);
-        $event->title = $request->title;
-        $event->city = $request->city;
-        $event->startdate = $request->startdate;
-        $event->enddate = $request->enddate;
-        $event->description = $request->description;
-        $event->photo = $request->file('photo')->hashName();
-
-        $event->save();
+        $event->update($request->all());
        
         return response()->json(['message' => "updated successfully!" , "event" => $event],200);
     }

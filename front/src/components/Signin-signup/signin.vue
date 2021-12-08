@@ -60,11 +60,12 @@ export default {
                 localStorage.setItem("userID", res.data.user.id);
             })
             .catch(error => {
-                let statusCode = error.response.status;
-                if(statusCode === 401) {
+                // let statusCode = error.response.status;
+                // if(statusCode === 401) {
                 this.isInvalid = true
+                console.log(error);
                 this.errorMessage = 'Invalid password, please try again';
-                }
+                // }
             })
         },
         signup() {

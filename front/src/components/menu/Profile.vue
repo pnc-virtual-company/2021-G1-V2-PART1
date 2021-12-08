@@ -48,7 +48,7 @@
         position: relative;
         height: 90vh;
         border: none;
-        margin-top: -15px;
+        margin-top: -200px;
         width: 20%;
         background: rgba(28, 31, 31, 0.904);
     }

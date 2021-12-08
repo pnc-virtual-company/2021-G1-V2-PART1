@@ -1,293 +1,106 @@
 <template>
-    <section>
-        <div class="blog-card">
-            <div class="search">       
-                <h3 class="title-search">Find the event</h3>
-                <div class="search-box">
-                    
-                    <input v-on:keyup = "search" v-on:keydown = "search" class="search-txt"  type="text" name="" placeholder="Type to search..." v-model = "searchevent">
-                    
-                    <i class="fas fa-search search-btn"></i>
-                    <!-- <button @click="search">Search</button> -->
-                </div>        
+    <div class="card">
+        <img src="../../assets/ZiClJf-1920w.jpg" alt="">
+        <div class="main">
+            <h2 id="title">{{Event.title}}</h2>
+            <button id="showDetail" @click = "ShowDetail">Show more</button>
+
+            <div class="body">
+                <button id="join" @click="toJoin" v-if="joinEventisVisible" >Join</button>
+                <button id="quit" @click ="toJoin" v-else  >Quit</button>
             </div>
-
-            <!-- // ================Card my event view============================= -->
-            
-            <div class="card">
-                <div class="container-card" v-for="event of allEvents" :key="event.id">
-                    <div class="main">
-                        <div class="img">
-                            <img class="img-1" :src="url+event.photo" alt="">
-                        </div>
-                        <div class="text">
-                            <h1 id="title">{{event.title}}</h1>
-                            <button id="show"> more detail ...</button>
-                        </div>
-                    </div>
-                    
-                    <div class="button">
-                        <span class="date">{{event.created_at}}</span>
-                        <div id="btn">
-                            <button v-if="joinValue" @click="joinEvent" class="Join"><i class="fal fa-check"></i>Join</button>
-                            <button v-else @click="unjoinEvent" class="quit"><i class="fas fa-times-circle"></i>Quit</button>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-
-            <!-- //==========End cared event============== -->
-
         </div>
-    </section>
+        <dialog-findevent v-if="showDialog"
+                :data="Event"
+                @cancel="cancel"
+        />
+    </div>
 </template>
 
 <script>
-    import axios from 'axios';
-    const API_URL = 'http://127.0.0.1:8000/api/events';
-    export default {
+import DialogFindevent from './DialogFindevent.vue';
+import axios from 'axios';
+const API_URL = 'http://127.0.0.1:8000/api/';
+export default {
+    components: { DialogFindevent },
+    props: ["Event"],
     data() {
         return {
-            joinValue: true,
-            allEvents: [],
-            searchevent: '',
-
-            url : 'http://127.0.0.1:8000/storage/imageEvent/'
-        }
+            joinEventisVisible: true,
+            showDialog: false,
+            eventLists: [],
+        };
+  },
+  methods: {
+    toJoin() {
+      this.joinEventisVisible = !this.joinEventisVisible;
     },
-    methods: {
-        joinEvent(){
-            this.joinValue = !this.joinValue
-        },
-        unjoinEvent(){
-            console.log("Quited")
-            this.joinValue = !this.joinValue
-        },
-         getEvent(){
-             axios.get(API_URL).then(res => {
-                this.eventLists = res.data;
-                console.log(this.eventLists);
-            })
-        },
-        search(){
-            if(this.searchevent !== ""){
-                axios.get(API_URL + "/search/" + this.searchevent).then(res => {
-                this.allEvents = res.data;
-                console.log(this.searchevent);
-                })
-            }else{
-                this.getEvent();
-            }
-            
-            
-        }
+    ShowDetail(){
+        this.showDialog = true;
     },
-    mounted() {
-        axios.get(API_URL).then(res => {
-            this.allEvents = res.data;
-            console.log(this.allEvents);
-        })
+    cancel(){
+        this.showDialog = false;
     },
-    };
+    getEvent(){
+        axios.get(API_URL + "events").then(res => {
+        console.log(res.data);
+        this.eventLists = res.data;
+    })
+},
+  },
+};
 </script>
 
-
 <style scoped>
-    body {
-    font-family: sans-serif;
-    }
-    section{
-        width: 100%;
-    }
-    .card {
-        border: none;
-        overflow-y: scroll;
-        height: 64vh;
-        margin-top: 2%;
-    }
-    .title-search {
-        text-transform: uppercase;
-    }
-    .search {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-left: 24%;
-        margin-top: 2%;
-        width: 51%;
-        height: 10vh;
-    }
-    .search-box {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    float: left;
-    background: #fff;
-    height: 30px;
-    border-radius: 50px;
-    padding: 10px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-    
-    }
-    .search-btn {
-    color: #050505;
-    height: 20px;
-    width: 20px;
-    line-height: 24px;
-    font-size: 30px;
-    }
-    .search-txt {
-    border: none;
-    background: none;
-    outline: none;
-    padding: 0;
-    color: black;
-    font-size: 12px;
-    transition: 0.4s;
-    line-height: 20px;
-    width: 200px;
-    }
-    .fa-search {
-        font-size: 15px;
-        margin-right: 5px;
-    }
-    .blog-card {
-        margin-top: 4%;
-        height: 75vh;
-        width: 100%;
-    }
-    .container-card {
-        margin-left: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px;
-        background: #ffff;
-        margin: auto;
-        margin-top: 10px;
-        border-radius: 10px;
-        width: 700px;
-        height: 95px;
+    .card{
+        background:#fff;
+        width: 30%;
         margin-bottom: 2%;
-        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+        height: 55vh;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: rgba(60, 64, 67, 0.315) 0px 1px 2px 0px, rgba(60, 64, 67, 0.377) 0px 2px 6px 2px;
     }
-    .main{
-        width: 75%;
-        height: 18vh;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .text{
-        width: 79%;
+    
+    button{
+        cursor: pointer;
         border: none;
-        height: 15vh;
+        outline: none;
+    }
+    #join,
+    #quit{
+        padding: 5px 25px;
+        border: none;
+        outline: none;
+        border-radius: 15px;
+        color: #fff;
+        font-size: 13px;
+    }
+    #join{
+        background: rgb(40, 163, 40);
+    }
+    #quit{
+        background: orange;
+    }
+    #showDetail{
+        font-size: 18px;
+        margin-top: 10%;
+        color: rgb(30, 30, 139);
+        margin-left: 35%;
+    }
+    
+    img{
+        width: 100%;
+        height: 187px;
+    }
+    .body{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
     }
     #title{
-        font-size: 18px;
-        text-transform: uppercase;
-        margin-top: 9%;
+        padding: 5px;
     }
-    #show{
-        margin-left: 52%;
-        color: rgb(0, 58, 250);
-        border: none;
-        background: none;
-        outline: none;
-    }
-    #show:hover{
-        text-decoration: underline;
-        cursor: pointer;
-    }
-    .blog-category{
-        font-size: 12px;
-    }
-    .img{
-        margin-left: 0px;
-        height: 85px;
-        width: 120px;
-        margin-right: 15px;
-    
-    }
-    .img img{
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-        cursor: pointer;
-        transition: .6s;
-        border-radius: 5px;
-    }
-    .content{
-        padding: 10px;
-        width: 530px;
-    }
-    .Join{
-        display: inline-block;
-        padding: 10px 20px;
-        border: none;
-        float: right;
-        font-size: 10px;
-        font-weight: 500;
-        text-transform: uppercase;
-        color: #ffff;
-        letter-spacing: 1px;
-        border-radius: 50px;
-        cursor: pointer;
-        outline: none;
-        border: none;
-        background: rgb(63, 199, 63);
-    }
-    .quit {
-        display: inline-block;
-        padding: 10px 20px;
-        border: none;
-        float: right;
-        font-size: 10px;
-        font-weight: 500;
-        text-transform: uppercase;
-        color: #ffff;
-        letter-spacing: 1px;
-        border-radius: 50px;
-        cursor: pointer;
-        outline: none;
-        border: none;
-        background: rgb(243, 130, 24);
-    }
-    .fal {
-        font-size: 10px;
-        margin-right: 5px;
-    }
-    .Create {
-        margin: 30px;
-        margin-right: 70px;
-        display: inline-block;
-        padding: 15px 20px;
-        border: none;
-        float: right;
-        font-size: 10px;
-        font-weight: 600;
-        text-transform: uppercase;
-        color: #ffff;
-        letter-spacing: 1px;
-        border-radius: 50px;
-        cursor: pointer;
-        outline: none;
-        border: none;
-        background: rgba(112, 120, 242, 0.987);
-    }
-    .button{
-        width: 25%;
-    }
-    #btn{
-        margin-top: 3%;
-    }
-    .date{
-        margin-left: 12%;
-        font-size: 15px;
-    }
-    .fa-times-circle {
-        font-size: 10px;
-        margin-right: 5px;
-    }
+  
+
 </style>

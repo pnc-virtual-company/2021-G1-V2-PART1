@@ -186,13 +186,14 @@
             this.displayDialog = isFalse;
             
       },
-      UpdateEvent(id,eventUpdated,isFalse) {
-            axios.put(API_URL + "events/" + id , eventUpdated).then(res => {
-                console.log(res.data.id);
-                this.getEvent();
-                this.displayEdit = isFalse;
-                this.messageError = "";
-            }) 
+      UpdateEvent(id,updateEvent,isFalse) {
+          console.log(updateEvent);
+          axios.put(API_URL + "events/" + id , updateEvent).then(res => {
+              console.log(res.data);
+              this.getEvent();
+              this.displayEdit = isFalse;
+              this.messageError = "";
+          }) 
             .catch(error => {
               let status = error.response.status;
               if(status === 500) {
