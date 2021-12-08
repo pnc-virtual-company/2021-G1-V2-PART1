@@ -4,8 +4,11 @@
             <div class="search">       
                 <h3 class="title-search">Find the event</h3>
                 <div class="search-box">
+                    
                     <input v-on:keyup = "search" v-on:keydown = "search" class="search-txt"  type="text" name="" placeholder="Type to search..." v-model = "searchevent">
+                    
                     <i class="fas fa-search search-btn"></i>
+                    <!-- <button @click="search">Search</button> -->
                 </div>        
             </div>
 
@@ -48,6 +51,8 @@
         return {
             joinValue: true,
             allEvents: [],
+            searchevent: '',
+
             url : 'http://127.0.0.1:8000/storage/imageEvent/'
         }
     },
@@ -68,8 +73,8 @@
         search(){
             if(this.searchevent !== ""){
                 axios.get(API_URL + "/search/" + this.searchevent).then(res => {
-                this.eventLists = res.data;
-                console.log('pong der!');
+                this.allEvents = res.data;
+                console.log(this.searchevent);
                 })
             }else{
                 this.getEvent();
