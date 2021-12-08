@@ -3,7 +3,7 @@
     <nav >
       <div class="container-user">
             <div class="img">
-              <img @click = "profile"  class="img-1" :src="url + username.profile" alt="">
+              <img id="image" @click = "Profile"  class="img-1" :src="url + username.profile" alt="">
             </div>
             <!-- <button id="profile" @click = "profile"><i class="far fa-user-circle"></i></button> -->
             <div class="username">
@@ -45,12 +45,13 @@
 import axios from 'axios';
 const API_URL = 'http://127.0.0.1:8000/api/users';
 export default {
-  emits: ["sign-out"],
+  emits: ['user-profile','sign-out'],
   data(){
     return{
       signOut: false,
       username: "",
-      url : 'http://127.0.0.1:8000/storage/imageUser/'
+      displayprofile: false,
+      url : 'http://127.0.0.1:8000/storage/imageUser/',
     }
   },
   methods: {
@@ -58,8 +59,9 @@ export default {
       this.$emit("sign-out", this.signOut);
       localStorage.clear();
     },
-    profile() {
-      this.$router.push('/profile');
+    Profile() {
+      this.displayprofile = !this.displayprofile;
+      this.$emit('user-profile',this.displayprofile);
     }
   },
   mounted() {
@@ -83,11 +85,14 @@ body{
   padding: 0;
   font-family: sans-serif;
 }
+
+
 img{
-  margin-top: 15%;
+  margin-top: 12%;
   width: 50px;
   height: 50px;
   border-radius: 360px;
+  cursor: pointer;
 }
 header {
   position: sticky;

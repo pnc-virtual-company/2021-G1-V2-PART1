@@ -92,10 +92,13 @@
     body {
     font-family: sans-serif;
     }
+    section{
+        width: 100%;
+    }
     .card {
         border: none;
         overflow-y: scroll;
-        height: 66vh;
+        height: 64vh;
         margin-top: 2%;
     }
     .title-search {

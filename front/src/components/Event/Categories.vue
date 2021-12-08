@@ -39,7 +39,7 @@
         <p id="exite" style="color:red">{{exiteMessage}}</p>
         <!-- //================search btn==================== -->
 
-        <input v-on:keyup = "search" v-on:keydown = 'search' id="search" class="form-control" type="search" placeholder="Search" aria-label="Search" v-model="searchcategory">
+        <input v-on:keyup = "search" id="search" class="form-control" type="search" placeholder="Search" aria-label="Search" v-model="searchcategory">
 
        <!-- ============categories========================== -->
        <div class="cardName">
@@ -47,44 +47,63 @@
                 <div v-for="categories of categoryLists" :key="categories.id" class="category">
                     <p class="card-title">{{categories.title}}</p>
                     <div class="icon">
-                        <i id="edit" class="fas fa-pencil-alt"></i>
-                        <i id="delete" class="fa fa-trash"></i>
-                        <!-- <Dialog v-show = "showDialog" 
-                            :data = "userInfo"
+                        <i @click = "ShowDilogEdit(categories)" id="edit" class="fas fa-pencil-alt"></i>
+                        <i  @click = "ShowDialog(categories)"  id="delete" class="fa fa-trash"></i>
+
+                        <!-- =============Delete Dialog========== -->
+                        <Dialog v-show = "showDialog" 
+                            :data = "categoryInfo"
                             @cancel = "cancel" 
                             @delete = "removeCategory"
-                        /> -->
+                        />
+
+                        <!-- ===========Edid Dialog============= -->
+                        <DialogEdit v-if="showEdit"
+                            :data = "categoryInfo"
+                            @cancel = "cancel" 
+                            @edit = "updateCategory"
+                        />
                     </div>
                 </div>
 
             </div>
-            
        </div>
-        
     </section>
 </template>
+
+
 <script>
 import axios from 'axios';
-// import Dialog from './Dialog.vue'
+import Dialog from './Dialog.vue'
+import DialogEdit from './DialogEdit.vue'
 const API_URL = 'http://127.0.0.1:8000/api/categories';
 export default {
-    //  components: { Dialog},
+     components: {
+        Dialog,
+        DialogEdit,
+    },
+
     data() {
         return{
             showDialog: false,
+            showEdit: false,
             categoryLists: [],
             categoryName: "",
             description: "",
             exiteMessage: "The categories is already exists",
             searchcategory:"",
-            userInfo: "",
+            categoryInfo: "",
         }
     },
     methods: {
-        // ShowDialog(categories) {
-        //     this.showDialog = true
-        //     this.userInfo = categories;
-        // },
+        ShowDialog(categories) {
+            this.showDialog = true
+            this.categoryInfo = categories;
+        },
+        ShowDilogEdit(categories){
+            this.showEdit = true;
+            this.categoryInfo = categories;
+        },
         createCategory() {
             const newCategory = {
                 title: this.categoryName,
@@ -92,25 +111,34 @@ export default {
             }
            
             axios.post(API_URL, newCategory).then(res => {
-                console.log("Created");
-                this.categoryLists.push(res.data.category)
-                return res.data;
+                console.log(res.data);
+                this.getCategory();
+                this.categoryName = "";
+                this.description = "";
             })
-            this.getCategory();
-            this.categoryName = "";
-            this.description = "";
+           
         },
         removeCategory(id,isFalse) {
             axios.delete(API_URL + "/" + id).then(res => {
                 console.log(res.data.id);
                 this.getCategory();
+                this.showDialog = isFalse;
             })
-            this.showDialog = isFalse;
+           
             
+        },
+        updateCategory(id,categories, isFalse) {
+            axios.put(API_URL + "/" + id , categories ).then(res => {
+                console.log(res.data);
+                this.getCategory();
+                this.showEdit = isFalse
+            })
+           
         },
 
         cancel(isFalse){
-            this.showDialog = isFalse
+            this.showDialog = isFalse;
+            this.showEdit = false;
         },
 
         getCategory(){
@@ -131,15 +159,15 @@ export default {
         }
     },
     mounted() {
-        // this.getCategory();
-        axios.get(API_URL).then(res => {
-            this.categoryLists = res.data;
-        })
+        this.getCategory();
     },
 }
 </script>
 
 <style scroped>
+    section{
+        width: 100%;
+    }
     .create{
         display: flex;
         width: 40%;
@@ -170,7 +198,7 @@ export default {
     }
     .cardName{
         margin-top: 1%;
-        height: 62vh;
+        height: 60vh;
         overflow-y: scroll;
         border: none;
     }

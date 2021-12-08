@@ -17,13 +17,10 @@
         text-align: center;
     
     }
-    section {
-        padding: 2rem 9%;
-    }
     .home {
         display: flex;
         align-items: center;
-        min-height: 100vh;
+        height: 575px;
         background: url('https://img3.goodfon.com/wallpaper/nbig/7/26/chasy-budilnik-vremya-4010.jpg') no-repeat;
         background-size: cover;
         background-position: center;
@@ -56,6 +53,9 @@
         padding:10px 20px ;
         cursor: pointer;
         font-size: 1.7rem;
+    }
+    .content{
+        margin-left: 5%;
     }
 
 </style>
