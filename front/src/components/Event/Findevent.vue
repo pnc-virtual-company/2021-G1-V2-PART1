@@ -15,7 +15,7 @@
                 <div class="container-card" v-for="event of allEvents" :key="event.id">
                     <div class="main">
                         <div class="img">
-                            <img class="img-1" src="https://d13kjxnqnhcmn2.cloudfront.net/AcuCustom/Sitename/DAM/052/IoT_-_Main.png" alt="">
+                            <img class="img-1" :src="url+event.photo" alt="">
                         </div>
                         <div class="text">
                             <h1 id="title">{{event.title}}</h1>
@@ -48,6 +48,7 @@
         return {
             joinValue: true,
             allEvents: [],
+            url : 'http://127.0.0.1:8000/storage/imageEvent/'
         }
     },
     methods: {
@@ -73,10 +74,13 @@
     body {
     font-family: sans-serif;
     }
+    section{
+        width: 100%;
+    }
     .card {
         border: none;
         overflow-y: scroll;
-        height: 66vh;
+        height: 64vh;
         margin-top: 2%;
     }
     .title-search {

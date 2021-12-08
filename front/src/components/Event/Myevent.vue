@@ -35,8 +35,8 @@
                       <textarea class="form-control" id="message-text" placeholder="description" v-model = "description"></textarea>
                     </div>
                     <div class="form-group">
-                      <select class="form-control" id="select">
-                        <option v-for="category of categories " :key="category.title" value = {{category.title}}>{{category.title}}</option>
+                      <select class="form-control" id="select" v-model="category">
+                        <option v-for="category of categories " :key="category.title" :value = category.id>{{category.title}}</option>
                       </select>
                     </div>
                     <div class="form-group">
@@ -76,9 +76,9 @@
               </div>
                   
               <div class="rightCard">
-                  <p class="categories">Categories name</p>
+                  <p class="categories">{{event.category.title}}</p>
                   <div class="button">
-                      <button class="Edit">Edit</button>
+                      <button @click="Display(event)" class="Edit">Edit</button>
                       <button @click="Show(event)" class="Delete">Delete</button>
                   </div>
               </div>
@@ -93,7 +93,13 @@
                   @cancel = "cancel" 
                   @delete = "removeEvent" 
           />
-
+          <!-- ==================Dialog Edid Event================= -->
+          <DialogEditEvent v-if="displayEdit"
+                  :data = "eventInfo"
+                  :sms = "messageError"
+                  @cancel = "cancel"
+                  @update = "UpdateEvent"
+           />
           <!-- ===============End dialog================== -->
         
         </div>
@@ -105,11 +111,12 @@
 <script>
 
   import Dialog from './Dialog.vue'
+  import DialogEditEvent from './DialogEditEvent.vue'
   import axios from 'axios';
   const API_URL = 'http://127.0.0.1:8000/api/';
 
   export default {
-    components: { Dialog},
+    components: { Dialog , DialogEditEvent},
     data () {
       return {
         title: "",
@@ -118,12 +125,15 @@
         enddate: "",
         description: "",
         photo: null,
+        category: "",
         showDialog: false,
+        displayEdit: false,
         eventLists: [],
         categories: [],
         eventInfo: "",
         displayDialog:false,
-        url : 'http://127.0.0.1:8000/storage/image/'
+        url : 'http://127.0.0.1:8000/storage/imageEvent/',
+        messageError: '',
       }
     },
     methods: {
@@ -138,21 +148,34 @@
         newEvent.append('enddate',this.enddate);
         newEvent.append('description',this.description);
         newEvent.append('photo',this.photo);
-       
+        newEvent.append('category_id',this.category);
+      
         axios.post(API_URL + "events", newEvent).then(res => {
           this.eventLists.push(res.data.event);
           this.getEvent();
           console.log("created")
         })
+        .catch(error => {
+              let status = error.response.status;
+              if(status === 422) {
+              this.isInvalid = true
+              this.errorMessage = 'Invalid command, please create again';
+              }
+          })
 
       },
 
       cancel() {
         this.displayDialog = false
+        this.displayEdit = false
       },
 
       Show(event) {
           this.displayDialog = true;
+          this.eventInfo = event;
+      },
+      Display(event) {
+          this.displayEdit = true;
           this.eventInfo = event;
       },
       removeEvent(id,isFalse) {
@@ -162,6 +185,21 @@
             })
             this.displayDialog = isFalse;
             
+      },
+      UpdateEvent(id,eventUpdated,isFalse) {
+            axios.put(API_URL + "events/" + id , eventUpdated).then(res => {
+                console.log(res.data.id);
+                this.getEvent();
+                this.displayEdit = isFalse;
+                this.messageError = "";
+            }) 
+            .catch(error => {
+              let status = error.response.status;
+              if(status === 500) {
+              this.isInvalid = true
+              this.messageError = 'update fail, please check again!';
+              }
+          })
       },
       getEvent() {
         axios.get(API_URL + "events").then(res => {
@@ -174,18 +212,31 @@
           console.log(res.data);
           this.categories = res.data;
         })
+      },
+
+      getUserJoined(){
+        axios.get(API_URL + "joins").then(res => {
+          console.log(res.data);
+        })
       }
     },
 
     mounted() {
       this.getEvent();
-      this.getCategories()
+      this.getCategories();
+      this.getUserJoined();
     },
   }
 </script>
 
 
 <style scoped>
+  section{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+ 
   .cards{
     overflow-y: scroll;
     height: 69vh;
@@ -223,19 +274,21 @@
   }
   .text{
       width: 80%;
+      flex-wrap: wrap;
       height: 14vh;
       border: none;
       font-size: 10px;
       font-family: sans-serif;
       margin-top: 2%;
       margin-left: 7%;
-      /* background: teal; */
   }
   .member{
       font-size: 15px;
       margin-right: 15%;
   }
   #title{
+      box-sizing: border-box;
+      width: 50%;
       margin-top:2%;
       font-size: 18px;
       font-weight: 540;
@@ -295,6 +348,7 @@
   }
   .rightCard{
     height: 15vh;
+    width: 23%;
   }
   #time{
     width: 90%;
@@ -302,14 +356,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* background: red; */
   }
    .date{
       font-size: 15px;
   }
   .categories{
       margin-top: 5px;
-      margin-left: 22px;
       font-size: 17px;
   }
   .button{

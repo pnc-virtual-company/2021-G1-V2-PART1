@@ -65,6 +65,7 @@
                         />
                     </div>
                 </div>
+
             </div>
        </div>
     </section>
@@ -110,29 +111,29 @@ export default {
             }
            
             axios.post(API_URL, newCategory).then(res => {
-                console.log("Created");
-                this.categoryLists.push(res.data.category)
-                return res.data;
+                console.log(res.data);
+                this.getCategory();
+                this.categoryName = "";
+                this.description = "";
             })
-            this.getCategory();
-            this.categoryName = "";
-            this.description = "";
+           
         },
         removeCategory(id,isFalse) {
             axios.delete(API_URL + "/" + id).then(res => {
                 console.log(res.data.id);
                 this.getCategory();
+                this.showDialog = isFalse;
             })
-            console.log(id);
-            this.showDialog = isFalse;
+           
+            
         },
         updateCategory(id,categories, isFalse) {
             axios.put(API_URL + "/" + id , categories ).then(res => {
                 console.log(res.data);
                 this.getCategory();
+                this.showEdit = isFalse
             })
-            this.showEdit = isFalse
-            console.log(categories);
+           
         },
 
         cancel(isFalse){
@@ -159,15 +160,15 @@ export default {
         }
     },
     mounted() {
-        // this.getCategory();
-        axios.get(API_URL).then(res => {
-            this.categoryLists = res.data;
-        })
+        this.getCategory();
     },
 }
 </script>
 
 <style scroped>
+    section{
+        width: 100%;
+    }
     .create{
         display: flex;
         width: 40%;
@@ -198,13 +199,11 @@ export default {
     }
     .cardName{
         margin-top: 1%;
-        /* background: green; */
-        height: 62vh;
+        height: 60vh;
         overflow-y: scroll;
         border: none;
     }
     .categoryList{
-        /* background: teal; */
         width: 41%;
         margin-left: 32%;
         margin-top: 1%;

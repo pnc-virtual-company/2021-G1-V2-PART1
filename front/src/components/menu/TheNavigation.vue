@@ -2,9 +2,12 @@
   <header>
     <nav >
       <div class="container-user">
-            <button id="profile" @click = "profile"><i class="far fa-user-circle"></i></button>
+            <div class="img">
+              <img id="image" @click = "Profile"  class="img-1" :src="url + username.profile" alt="">
+            </div>
+            <!-- <button id="profile" @click = "profile"><i class="far fa-user-circle"></i></button> -->
             <div class="username">
-              <h2>{{username}}</h2>
+              <h2>{{username.name}}</h2>
             </div>
       </div>
       
@@ -42,11 +45,13 @@
 import axios from 'axios';
 const API_URL = 'http://127.0.0.1:8000/api/users';
 export default {
-  emits: ["sign-out"],
+  emits: ['user-profile','sign-out'],
   data(){
     return{
       signOut: false,
       username: "",
+      displayprofile: false,
+      url : 'http://127.0.0.1:8000/storage/imageUser/',
     }
   },
   methods: {
@@ -54,8 +59,9 @@ export default {
       this.$emit("sign-out", this.signOut);
       localStorage.clear();
     },
-    profile() {
-      this.$router.push('/profile');
+    Profile() {
+      this.displayprofile = !this.displayprofile;
+      this.$emit('user-profile',this.displayprofile);
     }
   },
   mounted() {
@@ -64,8 +70,8 @@ export default {
         let users = res.data;
         for(let user of users){
           if(user.id == userid){
-            this.username = user.name;
-            console.log(user.name);
+            this.username = user;
+            console.log(user);
           }
         }
       })
@@ -78,6 +84,15 @@ body{
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+
+img{
+  margin-top: 12%;
+  width: 50px;
+  height: 50px;
+  border-radius: 360px;
+  cursor: pointer;
 }
 header {
   position: sticky;

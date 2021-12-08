@@ -8,13 +8,13 @@
             <div class="container">
                 <h3 id="signup">Register</h3>
                 <div>
-                    <input class="text" type="text" placeholder="Full name" autofocus v-model="storeName" required/>
+                    <input class="text" type="text" placeholder="Full name" autofocus v-model="username" required/>
                 </div>
                 <div>
-                    <input class="email" type="email" placeholder="Email" v-model="storeEmail" required/>
+                    <input class="email" type="email" placeholder="Email" v-model="email" required/>
                 </div>
                 <div>
-                    <input class="password" type="password" placeholder="Password" v-model="storePassword" required/>
+                    <input class="password" type="password" placeholder="Password" v-model="password" required/>
                 </div>
 
                  <div>
@@ -24,7 +24,9 @@
                 <div>
                     <input type="file" name="fileImg" @change="onFileselected">
                 </div>
+
                 <p style="color:red;">{{errorMessage}}</p>
+
                 <div class="add_back">
                      <button @click="back" class="back"> Back</button>
                      <button @click="createUser" class="next"> Next</button>
@@ -36,17 +38,18 @@
 
 <script>
 import axios from 'axios';
-const API_URL = "http://127.0.0.1:8000/api";
+const API_URL = "http://127.0.0.1:8000/api/";
 export default {
-    // emits: ["new-user"],
+    emits: ['new-user'],
     data() {
         return{
-            storeName: '',
-            storeEmail: '',
-            storePassword: '',
+            username: '',
+            email: '',
+            password: '',
             confirmation_password: '',
-            storeImage: null,
+            image: '',
             errorMessage: "",
+            userSignup: true,
             userLists: [],
         }
     },
@@ -54,34 +57,37 @@ export default {
         // ===========create image ============
 
         onFileselected(event) {
-            this.storeImage = event.target.files[0].name
-            console.log(this.storeImage);
+            this.image = event.target.files[0]
         },
         createUser() {
-           let newUser = {
-            name: this.storeName ,
-            email: this.storeEmail,
-            password: this.storePassword,
-            password_confirmation: this.confirmation_password,
-            }
+            const newUser = new FormData();
+            newUser.append('name',this.username);
+            newUser.append('email',this.email);
+            newUser.append('password',this.password);
+            newUser.append('password_confirmation',this.confirmation_password);
+            newUser.append('profile',this.image);
             console.log(newUser);
-            axios.post(API_URL + "/signup" , newUser).then(res => {
-                this.userLists.push(res.data.user);
+
+            axios.post(API_URL + "signup" , newUser).then(res => {
+                console.log(res.data);
                 localStorage.setItem('userID', res.data.user.id);
+                this.$emit('new-user', this.userSignup);
+                this.$router.push('/home');
                 console.log("created");
             })
             .catch(error => {
-                let statusCode = error.response.status;
-                if(statusCode === 422) {
+                let status = error.response.status;
+                if(status === 422) {
                 this.isInvalid = true
                 this.errorMessage = 'Invalid command, please create again';
                 }
             })
 
-            this.storeName = '';
+            this.username = '';
+            this.email = '';
+            this.password = '';
             this.confirmation_password = '',
-            this.storePassword = '';
-            this.storeEmail = '';
+            this.image = '';
         },
 
         back() {

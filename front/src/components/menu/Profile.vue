@@ -7,8 +7,12 @@
                 <ul>
                     <li><a href="#"><i class="fal fa-user-circle"></i>
                         Profile</a></li>
-                    <li><a href="#"><i class="fa fa-toggle-off"></i>
-                        Dark mode</a></li>
+                    <li>
+                        <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                        </label>
+                    Dark mode</li>
                     <li><a href="#"><i class="fal fa-bell"></i>
                         Notification</a></li>
                     <li><a href="#"><i class="fas fa-calendar-week"></i>
@@ -45,8 +49,8 @@
         height: 90vh;
         border: none;
         margin-top: -15px;
-        width: 15%;
-        background: rgb(28, 29, 29);
+        width: 20%;
+        background: rgba(28, 31, 31, 0.904);
     }
     .main_box .sidebar_menu {
         box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
@@ -62,7 +66,7 @@
         font-size: 25px;
         font-weight: 500;
         position: absolute;
-        left: 50px;
+        /* left: 50px; */
         line-height: 60px;
         text-decoration: none;
     }
@@ -130,7 +134,7 @@
         font-size: 25px;
         line-height: 60px;
         position: absolute;
-        left: 240px;
+        /* left: 240px; */
         cursor: pointer;
         opacity: 0;
         transition: all 0.3s linear;
@@ -150,7 +154,69 @@
     #check:checked ~.sidebar_menu  .btn_two i {
         opacity: 1;
     }
+    li{
+        color: #fff;
+    }
+    ul li{
+        list-style: none;
+    }
+    /* =============Dark mode style ================= */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 25px;
+        }
+
+    .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgb(100, 93, 93);
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 4px;
+        bottom: 2.5px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked + .slider {
+        background-color: #5397ce;
+    }
 
 
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(20px);
+        -ms-transform: translateX(18px);
+        transform: translateX(14px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
     
 </style>
