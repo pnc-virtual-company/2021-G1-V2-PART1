@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <img src="../../assets/ZiClJf-1920w.jpg" alt="">
+        <img :src="url+ Event.photo" alt="">
         <div class="main">
             <h2 id="title">{{Event.title}}</h2>
             <button id="showDetail" @click = "ShowDetail">Show more</button>
@@ -29,6 +29,7 @@ export default {
             joinEventisVisible: true,
             showDialog: false,
             eventLists: [],
+            url: "http://127.0.0.1:8000/storage/imageEvent/"
         };
   },
   methods: {
@@ -43,21 +44,23 @@ export default {
     },
     getEvent(){
         axios.get(API_URL + "events").then(res => {
-        console.log(res.data);
-        this.eventLists = res.data;
-    })
-},
+            this.eventLists = res.data;
+        })
+    }
   },
-};
+  mounted() {
+      this.getEvent();
+  },
+}
+
 </script>
 
+
 <style scoped>
+
     .card{
-        background:#fff;
-        width: 30%;
         margin-bottom: 2%;
         height: 55vh;
-        padding: 10px;
         border-radius: 10px;
         box-shadow: rgba(60, 64, 67, 0.315) 0px 1px 2px 0px, rgba(60, 64, 67, 0.377) 0px 2px 6px 2px;
     }
@@ -83,10 +86,9 @@ export default {
         background: orange;
     }
     #showDetail{
-        font-size: 18px;
-        margin-top: 10%;
+        font-size: 15px;
         color: rgb(30, 30, 139);
-        margin-left: 35%;
+        margin-left: 34%;
     }
     
     img{
@@ -101,6 +103,9 @@ export default {
     #title{
         padding: 5px;
     }
-  
+    .main{
+
+        height: 16vh;
+    }
 
 </style>
