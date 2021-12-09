@@ -141,6 +141,8 @@
         this.photo = event.target.files[0];
       },
       Addevent() {
+        let userid = localStorage.getItem('userID');
+        console.log(userid);
         const newEvent = new FormData();
         newEvent.append('title',this.title);
         newEvent.append('city',this.city);
@@ -149,6 +151,7 @@
         newEvent.append('description',this.description);
         newEvent.append('photo',this.photo);
         newEvent.append('category_id',this.category);
+        newEvent.append('user_id',userid);
       
         axios.post(API_URL + "events", newEvent).then(res => {
           this.eventLists.push(res.data.event);

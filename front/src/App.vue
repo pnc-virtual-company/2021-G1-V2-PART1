@@ -59,10 +59,18 @@ export default {
       })
     },
     search(){
+            let myID = localStorage.getItem('userID');
             if(this.searchevent !== ""){
                 axios.get(API_URL + "/search/" + this.searchevent).then(res => {
-                this.eventLists = res.data;
-                })
+                  let allevents = res.data;
+                  this.eventLists = [];
+                  console.log(allevents);
+                  for(let event of allevents){
+                    if(event.user_id !== myID){
+                      this.eventLists.push(event);
+                  }
+                }
+            })
             }else{
                 this.getEvent();
             }

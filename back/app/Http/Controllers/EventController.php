@@ -44,6 +44,7 @@ class EventController extends Controller
         $event->description = $request->description;
         $event->photo = $request->file('photo')->hashName();
         $event->category_id = $request->category_id;
+        $event->user_id = $request->user_id;
 
         $event->save();
        
