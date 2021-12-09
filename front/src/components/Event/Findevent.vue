@@ -44,21 +44,23 @@ export default {
     },
     getEvent(){
         axios.get(API_URL + "events").then(res => {
-        console.log(res.data);
-        this.eventLists = res.data;
-    })
-},
+            this.eventLists = res.data;
+        })
+    }
   },
-};
+  mounted() {
+      this.getEvent();
+  },
+}
+
 </script>
 
+
 <style scoped>
+
     .card{
-        background:#fff;
-        width: 30%;
         margin-bottom: 2%;
         height: 55vh;
-        padding: 10px;
         border-radius: 10px;
         box-shadow: rgba(60, 64, 67, 0.315) 0px 1px 2px 0px, rgba(60, 64, 67, 0.377) 0px 2px 6px 2px;
     }
