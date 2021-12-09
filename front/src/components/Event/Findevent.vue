@@ -1,13 +1,17 @@
 <template>
-    <div class="card">
-        <img src="../../assets/ZiClJf-1920w.jpg" alt="">
-        <div class="main">
-            <h2 id="title">{{Event.title}}</h2>
-            <button id="showDetail" @click = "ShowDetail">Show more</button>
-
-            <div class="body">
-                <button id="join" @click="toJoin" v-if="joinEventisVisible" >Join</button>
-                <button id="quit" @click ="toJoin" v-else  >Quit</button>
+    <div class="card" v-if="showFind">
+        <div class="content">
+            <img :src="url + Event.photo" alt="">
+            <div class="main">
+                <h2 id="title">{{Event.title}}</h2>
+                <div class="main_content">
+                    <button id="showDetail" @click = "ShowDetail">Show more</button>
+                    <div class="body">
+                        <button id="join" @click="toJoin(Event.id)" v-if="joinEventisVisible" >Join</button>
+                        <button id="quit" @click="unJoin(Event.id)" v-else  >Quit</button>
+                    </div>
+                </div>
+               
             </div>
         </div>
         <dialog-findevent v-if="showDialog"
@@ -15,6 +19,7 @@
                 @cancel="cancel"
         />
     </div>
+    
 </template>
 
 <script>
@@ -26,37 +31,107 @@ export default {
     props: ["Event"],
     data() {
         return {
+            // eventUserdisplay: [],
             joinEventisVisible: true,
             showDialog: false,
             eventLists: [],
+            joinList: [],
+            showFind: false,
+            url: 'http://127.0.0.1:8000/storage/imageEvent/',
         };
   },
-  methods: {
-    toJoin() {
-      this.joinEventisVisible = !this.joinEventisVisible;
+    methods: {
+        // userJoined() {
+        //     const userid = localStorage.getItem('userID')
+        //     for(let event of this.eventLists){
+        //         for(let join of this.joinList){
+        //             if(event.id == join.event_id && join.user_id == userid){
+                            // this.joinEventisVisible = false
+        //             }
+        //         }
+        //     }
+        // },
+
+        toJoin(id) {
+            let userid = localStorage.getItem('userID');
+            let eventjoin = {
+                user_id: userid,
+                event_id: id,
+            }
+            axios.post(API_URL+ "joins", eventjoin).then(res => {
+                console.log(res.data);
+                this.getJoinslist();
+            })
+
+            this.joinEventisVisible = !this.joinEventisVisible;
+        },
+        unJoin(id) {
+            let eventid = "";
+            for(let join of this.joinList){
+                if(join.event_id == id){
+                    eventid = join.id;
+                }
+            }
+            axios.delete(API_URL + "joins/" + eventid).then(res => {
+                console.log(res.data);
+                this.getJoinslist();
+            })
+            this.joinEventisVisible = !this.joinEventisVisible;
+        },
+        ShowDetail(){
+            this.showDialog = true;
+        },
+        cancel(){
+            this.showDialog = false;
+        },
+        getEvent(){
+            axios.get(API_URL + "events").then(res => {
+            console.log(res.data);
+            this.eventLists = res.data;
+            })
+        },
+        // diplayEvent() {
+        //     let userid = localStorage.getItem('userID');
+        //     for(let event of this.eventLists){
+        //         if(event.user_id == userid){
+        //             this.eventUserdiaplay.push(event)
+        //         }
+        //     }
+        // },
+        getJoinslist() {
+            axios.get(API_URL + "joins").then(res => {
+            console.log(res.data);
+            this.joinList = res.data;
+            })
+        },
+    
     },
-    ShowDetail(){
-        this.showDialog = true;
+    mounted() {
+        if(this.Event != null){
+            this.showFind = true;
+        }
     },
-    cancel(){
-        this.showDialog = false;
-    },
-    getEvent(){
-        axios.get(API_URL + "events").then(res => {
-        console.log(res.data);
-        this.eventLists = res.data;
-    })
-},
-  },
-};
+    
+}
 </script>
 
 <style scoped>
+    .content{
+        display: flex;
+        justify-content: space-between;
+    }
+    .main{
+        width: 75%;
+    }
+    .main_content{
+        margin-top: 8%;
+        display: flex;
+    }
     .card{
         background:#fff;
-        width: 30%;
-        margin-bottom: 2%;
-        height: 55vh;
+        /* margin-top: -5%; */
+        width: 55%;
+        height: 25vh;
         padding: 10px;
         border-radius: 10px;
         box-shadow: rgba(60, 64, 67, 0.315) 0px 1px 2px 0px, rgba(60, 64, 67, 0.377) 0px 2px 6px 2px;
@@ -69,6 +144,7 @@ export default {
     }
     #join,
     #quit{
+        margin-left: 178px;
         padding: 5px 25px;
         border: none;
         outline: none;
@@ -84,23 +160,25 @@ export default {
     }
     #showDetail{
         font-size: 18px;
-        margin-top: 10%;
         color: rgb(30, 30, 139);
-        margin-left: 35%;
+        margin-left: 38%;
+        background: none;
     }
-    
+    #showDetail:hover{
+        text-decoration: underline;
+    }
     img{
-        width: 100%;
-        height: 187px;
+        width: 180px;
+        height: 21vh;
     }
     .body{
-        display: flex;
         align-items: center;
         justify-content: flex-end;
     }
     #title{
         padding: 5px;
     }
+
   
 
 </style>

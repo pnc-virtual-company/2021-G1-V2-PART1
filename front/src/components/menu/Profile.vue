@@ -44,12 +44,13 @@
         box-sizing: border-box;
         font-family: 'Poppins', sans-serif;
     }
+ 
     .main_box{
         position: relative;
         height: 90vh;
         border: none;
-        margin-top: -200px;
         width: 20%;
+        margin-top: -20px;
         background: rgba(28, 31, 31, 0.904);
     }
     .main_box .sidebar_menu {

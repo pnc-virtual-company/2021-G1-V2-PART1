@@ -1,19 +1,23 @@
 <template>
   <section>
-    <the-navigation @sign-out = "signout" v-if="isNotMenu" @user-profile = "ShowProfile" @find-event="Findevent"></the-navigation>
+    <the-navigation @sign-out = "signout" v-if="isNotMenu" @user-profile = "ShowProfile" @find-event="Findevent" @notfind-event="NotFind"></the-navigation>
     <div class="content">
       <profile v-if="profile"></profile>
-      <router-view v-if="isFindevent" @signin-user = "notMenu" @new-user = "signup"></router-view>
-    </div>
+      <router-view v-if="isFindevent" @signin-user = "notMenu" @new-user = "signup" :closeEvent="eventLists"></router-view>
 
-    <div class="event" v-if = "findEvent">
+      <!-- ============Find event============= -->
+      <div class="event" v-if = "findEvent">
+        <input id="search" type="search" placeholder="search event to join...">
       <ul>
-        <findEvent-card
+        <findEvent-card  
           v-for="event of eventLists"
           :key="event.id"
           :Event="event"
         ></findEvent-card>
       </ul>
+
+    </div>
+
     </div>
    
 
@@ -30,7 +34,7 @@ export default {
     TheNavigation,
     Profile
   },
-
+  
   data() {
     return{
       isNotMenu: false,
@@ -44,9 +48,14 @@ export default {
     Findevent(findevent){
       this.isFindevent = findevent;
       this.findEvent = !findevent ;
-      console.log(this.isFindevent + " " + this.findEvent);
+      
     },
-    
+    NotFind(findevent){
+      this.isFindevent = findevent;
+      this.findEvent = !findevent;
+      // this.$emit('close-findEvent', this.findEvent);
+      
+    },
     getEvent(){
       axios.get(API_URL).then(res => {
         this.eventLists = res.data;
@@ -100,15 +109,24 @@ export default {
   html {
     font-family: "Jost", sans-serif;
   }
+  input[type=search]{
+    border: 1px solid rgb(172, 160, 160);
+    outline: none;
+    border-radius: 20px;
+    margin-top: 3%;
+    padding: 5px 10px;
+    margin-left: 500px;
+  }
+  .event{
+    width: 100%;
 
+  }
   ul{
     display: flex;
-    justify-content: space-evenly;
     flex-wrap: wrap;
-    align-items: center;
-    width: 80%;
-    margin-left: 10%;
-    margin-top: 5%;
+    justify-content: center;
+    height: 77vh;
+    overflow-y: scroll;
   }
 </style>
 

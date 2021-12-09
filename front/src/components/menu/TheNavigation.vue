@@ -45,7 +45,7 @@
 import axios from 'axios';
 const API_URL = 'http://127.0.0.1:8000/api/users';
 export default {
-  emits: ['user-profile','sign-out','find-event'],
+  emits: ['user-profile','sign-out','find-event','notfind-event'],
   data(){
     return{
       signOut: false,
@@ -69,7 +69,7 @@ export default {
       this.$emit('find-event',this.isFindevent);
     },
     notFindevent(){
-      this.$emit('find-event',this.findevent);
+      this.$emit('notfind-event',this.findevent);
     }
   },
   mounted() {
@@ -93,9 +93,8 @@ body{
   font-family: sans-serif;
 }
 
-
 img{
-  margin-top: 12%;
+  margin-top: 10%;
   width: 50px;
   height: 50px;
   border-radius: 360px;
@@ -106,6 +105,7 @@ header {
   top: 0;
   width: 100%;
   background-color:#000;
+  margin-bottom: -15px;
 }
 .container-user {
   display: flex;
@@ -221,7 +221,6 @@ nav a {
   border: none;
   background: none;
   font-size: 15px;
-  /* background: red; */
   text-decoration: none;
 }
 #btnSignout:hover{

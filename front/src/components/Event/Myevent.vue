@@ -32,12 +32,12 @@
                       <input type="date" class="form-control" id="recipient-name" placeholder="End date" v-model = "enddate">
                     </div>
                     <div class="form-group">
-                      <textarea class="form-control" id="message-text" placeholder="description" v-model = "description"></textarea>
-                    </div>
                     <div class="form-group">
                       <select class="form-control" id="select" v-model="category">
                         <option v-for="category of categories " :key="category.title" :value = category.id>{{category.title}}</option>
                       </select>
+                      <textarea class="form-control" id="message-text" placeholder="description" v-model = "description"></textarea>
+                    </div>
                     </div>
                     <div class="form-group">
                       <input type="file" class="form-control" id="recipient-name" placeholder="End date" @change = "onFileSelected">
@@ -58,7 +58,7 @@
         <!-- // ================Card my event view============================= -->
 
         <div class="cards">
-            <div class="container-card" v-for = "event of eventLists" :key="event.id ">
+            <div class="container-card" v-for="event of eventLists" :key="event.id ">
               <div class="main">
                   <div class="img">
                     
@@ -134,6 +134,7 @@
         displayDialog:false,
         url : 'http://127.0.0.1:8000/storage/imageEvent/',
         messageError: '',
+        listJoins: ""
       }
     },
     methods: {
@@ -215,17 +216,18 @@
         })
       },
 
-      getUserJoined(){
-        axios.get(API_URL + "joins").then(res => {
-          console.log(res.data);
-        })
-      }
+      // getUserJoined(){
+      //   axios.get(API_URL + "joins").then(res => {
+      //     this.listJoins = res.data;
+      //     console.log(res.data);
+      //   })
+      // }
     },
 
     mounted() {
       this.getEvent();
       this.getCategories();
-      this.getUserJoined();
+      // this.getUserJoined();
     },
   }
 </script>
