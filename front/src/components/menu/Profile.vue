@@ -5,8 +5,8 @@
             <!-- ======ul>li*8>a======= -->
             <div class="menu">
                 <ul>
-                    <li><a href="#"><i class="fal fa-user-circle"></i>
-                        Profile</a></li>
+                    <li><a href="#"><router-link v-bind:to="'/Manage_profile'" ><i class="fal fa-user-circle"></i>
+                        Profile</router-link></a></li>
                     <li>
                         <label class="switch">
                         <input type="checkbox" checked>
@@ -23,8 +23,8 @@
                         Services</a></li>
                     <li><a href="#"><i class="fal fa-cog"></i>
                         Setting</a></li>
-                    <li><a href="#"><i style="color:red" class="fal fa-repeat"></i>
-                        Log out</a></li>
+                    <li><a href="#"><router-link v-bind:to="'/signin'" ><i style="color:red" class="fal fa-repeat"></i>
+                        Log out</router-link></a></li>
                 </ul>
             </div> 
         </div>
