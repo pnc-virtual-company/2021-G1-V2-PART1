@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <img src="../../assets/ZiClJf-1920w.jpg" alt="">
+        <img :src="url+ Event.photo" alt="">
         <div class="main">
             <h2 id="title">{{Event.title}}</h2>
             <button id="showDetail" @click = "ShowDetail">Show more</button>
@@ -29,6 +29,7 @@ export default {
             joinEventisVisible: true,
             showDialog: false,
             eventLists: [],
+            url: "http://127.0.0.1:8000/storage/imageEvent/"
         };
   },
   methods: {
@@ -85,10 +86,9 @@ export default {
         background: orange;
     }
     #showDetail{
-        font-size: 18px;
-        margin-top: 10%;
+        font-size: 15px;
         color: rgb(30, 30, 139);
-        margin-left: 35%;
+        margin-left: 34%;
     }
     
     img{
@@ -103,6 +103,9 @@ export default {
     #title{
         padding: 5px;
     }
-  
+    .main{
+
+        height: 16vh;
+    }
 
 </style>
