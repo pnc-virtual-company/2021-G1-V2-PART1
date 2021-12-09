@@ -3,15 +3,21 @@
       <div class="dialog">
         <div class="dialog__content">
           <h1 id="edit">Do you want to update?</h1>
+          <label for="title">Title</label>
           <input id="title" type="text" v-model="title">
+          <label for="city">City</label>
           <input id="city" type="text" v-model="city">
+          <label for="startdate">Start date</label>
           <input id="date" type="date" v-model="startdate">
+          <label for="enddate">End date</label>
           <input id="date" type="date" v-model="enddate">
+          <label for="description">Description</label>
           <input id="description" type="text" v-model="description">
+          <label for="categories">Categories</label>
           <select name="categories" id="categories">
             <option :value= category.id>{{category.title}}</option>
           </select>
-          <input type="file" @change="onFileSelected">
+          <!-- <input type="file" @change="onFileSelected"> -->
           <p style="color:red;margin-top:2%;">{{sms}}</p>
         </div>
         <hr>
@@ -46,16 +52,20 @@ export default {
         this.image = event.target.files[0];
       },
       confirm(){
-        const updatEvent = new FormData();
-        updatEvent.append('title',this.title);
-        updatEvent.append('city',this.city);
-        updatEvent.append('startdate',this.startdate);
-        updatEvent.append('enddate',this.enddate);
-        updatEvent.append('description',this.description);
-        updatEvent.append('photo',this.image);
-        updatEvent.append('category_id',this.category);
-
-        this.$emit('update',this.data.id, updatEvent, false);
+        // const updatEvent = new FormData();
+        // updatEvent.append('title',this.title);
+        // updatEvent.append('city',this.city);
+        // updatEvent.append('startdate',this.startdate);
+        // updatEvent.append('enddate',this.enddate);
+        // updatEvent.append('description',this.description);
+        const updateEvent = {
+          title: this.title,
+          city: this.city,
+          startdate: this.startdate,
+          enddate: this.enddate,
+          description: this.description
+        }
+        this.$emit('update',this.data.id, updateEvent, false);
       },
       cancel(){
         // this.sms = "";
@@ -79,7 +89,7 @@ export default {
    .overlay {
       position: fixed;
       background: #fff;
-      top: 13%;
+      top: 2%;
       left: 31%;
       width: 40%;
       z-index: 10;

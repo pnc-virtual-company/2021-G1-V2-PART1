@@ -21,7 +21,12 @@
                       <input type="text" class="form-control" id="recipient-name" placeholder="title" v-model = "title">
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control" id="recipient-name" placeholder="city" v-model = "city">
+                      <input v-on:keyup = "searchCoutry" type="search" class="form-control" id="recipient-name" placeholder="country" v-model = "countryName">
+                    </div>
+                    <div class="form-group">
+                      <select name="" id="" v-model ="citySelected">
+                        <option v-for="city of citys" :key="city" :value=city>{{city}}</option>
+                      </select>
                     </div>
                     <div class="form-group">
                        <label for="">Start date</label>
@@ -88,18 +93,18 @@
       
           <!-- //=============Dialog Btn====================== -->
 
-          <!-- <Dialog v-if="displayDialog" 
+          <Dialog v-if="displayDialog" 
                   :data = "eventInfo"
                   @cancel = "cancel" 
                   @delete = "removeEvent" 
-          /> -->
+          />
           <!-- ==================Dialog Edid Event================= -->
-          <!-- <DialogEditEvent v-if="displayEdit"
+          <DialogEditEvent v-if="displayEdit"
                   :data = "eventInfo"
                   :sms = "messageError"
                   @cancel = "cancel"
                   @update = "UpdateEvent"
-           /> -->
+           />
           <!-- ===============End dialog================== -->
         
         </div>
@@ -110,17 +115,17 @@
 
 <script>
 
-  // import Dialog from './Dialog.vue'
-  // import DialogEditEvent from './DialogEditEvent.vue'
+  import Dialog from './Dialog.vue'
+  import DialogEditEvent from './DialogEditEvent.vue'
   import axios from 'axios';
   const API_URL = 'http://127.0.0.1:8000/api/';
 
   export default {
-    // components: { Dialog , DialogEditEvent},
+    components: { Dialog , DialogEditEvent},
     data () {
       return {
         title: "",
-        city: "",
+        countryName: "",
         startdate: "",
         enddate: "",
         description: "",
@@ -135,6 +140,9 @@
         url : 'http://127.0.0.1:8000/storage/imageEvent/',
         messageError: '',
         joinerList: [],
+        countries: [],
+        citys:[],
+        citySelected: ""
       }
     },
     methods: {
@@ -143,29 +151,39 @@
       },
       Addevent() {
         let userid = localStorage.getItem('userID');
-        console.log(userid);
-        const newEvent = new FormData();
-        newEvent.append('title',this.title);
-        newEvent.append('city',this.city);
-        newEvent.append('startdate',this.startdate);
-        newEvent.append('enddate',this.enddate);
-        newEvent.append('description',this.description);
-        newEvent.append('photo',this.photo);
-        newEvent.append('category_id',this.category);
-        newEvent.append('user_id',userid);
-      
-        axios.post(API_URL + "events", newEvent).then(res => {
-          this.eventLists.push(res.data.event);
-          console.log(res.data)
-        })
-        .catch(error => {
-              let status = error.response.status;
-              if(status === 422) {
-              this.isInvalid = true
-              this.errorMessage = 'Invalid command, please create again';
-              }
-          })
+        let eventplace = this.citySelected + " | " + this.countryName;
+        if(this.startdate <= this.enddate){
+          let newEvent = new FormData();
+          newEvent.append('title',this.title);
+          newEvent.append('city',eventplace);
+          newEvent.append('startdate',this.startdate);
+          newEvent.append('enddate',this.enddate);
+          newEvent.append('description',this.description);
+          newEvent.append('photo',this.photo);
+          newEvent.append('category_id',this.category);
+          newEvent.append('user_id',userid);
 
+          axios.post(API_URL + "events", newEvent).then(res => {
+            this.getEvent();
+            console.log("Created!" + res.data);
+            this.title = '';
+            this.countryName = '';
+            this.startdate = '';
+            this.enddate = '';
+            this.description = "";
+            this.photo = "";
+          })
+          .catch(error => {
+                let status = error.response.status;
+                if(status === 422) {
+                this.isInvalid = true
+                this.errorMessage = 'Invalid command, please create again';
+                }
+          })
+        }else{
+          console.log("End date must me grater than start date!!!!!");
+        }
+       
       },
 
       cancel() {
@@ -190,13 +208,14 @@
             this.displayDialog = isFalse;
             
       },
-      UpdateEvent(id,eventUpdated,isFalse) {
-            axios.put(API_URL + "events/" + id , eventUpdated).then(res => {
-                console.log(res.data.id);
-                this.getEvent();
-                this.displayEdit = isFalse;
-                this.messageError = "";
-            }) 
+      UpdateEvent(id,updateEvent,isFalse) {
+          console.log(updateEvent);
+          axios.put(API_URL + "events/" + id , updateEvent).then(res => {
+              console.log(res.data);
+              this.getEvent();
+              this.displayEdit = isFalse;
+              this.messageError = "";
+          }) 
             .catch(error => {
               let status = error.response.status;
               if(status === 500) {
@@ -211,10 +230,11 @@
         axios.get(API_URL + "events").then(res => {
           let events = res.data;
           this.eventLists = [];
+          console.log(events);
           for(let event of events){
             if(event.user_id == myID){
               this.eventLists.push(event);
-              console.log(event);
+
             }
           }
           
@@ -227,21 +247,21 @@
         })
       },
 
-      getUserJoined(){
-        axios.get('http://127.0.0.1:8000/api/joins').then(res => {
-          this.joinerList = res.data;
-  
+      getCountries(){
+        axios.get('http://127.0.0.1:8000/api/countries').then(res => {
+          this.countries = res.data;
         })
       },
-      getCountries(){
-
-      },
+      searchCoutry() {
+        this.citys = this.countries[this.countryName];
+      }
     },
     
     mounted() {
       this.getEvent();
-      this.getUserJoined();
       this.getCategories();
+      this.getCountries();
+      console.log(this.citySelected);
     },
   }
 </script>
