@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card" v-if="displayCard">
         <img src="../../assets/ZiClJf-1920w.jpg" alt="">
         <div class="main">
             <h2 id="title">{{Event.title}}</h2>
@@ -23,12 +23,13 @@ import axios from 'axios';
 const API_URL = 'http://127.0.0.1:8000/api/';
 export default {
     components: { DialogFindevent },
-    props: ["Event"],
+    props: ["Event","showData"],
     data() {
         return {
             joinEventisVisible: true,
             showDialog: false,
             eventLists: [],
+            displayCard: true,
         };
   },
   methods: {
@@ -45,9 +46,16 @@ export default {
         axios.get(API_URL + "events").then(res => {
         console.log(res.data);
         this.eventLists = res.data;
-    })
-},
+        })
+    },
+
   },
+  mounted() {
+      if(this.Event !== null){
+        this.displayCard = false;
+      }
+  },
+
 };
 </script>
 

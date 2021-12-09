@@ -1,11 +1,12 @@
 <template>
   <section>
-    <the-navigation @sign-out = "signout" v-if="isNotMenu" @user-profile = "ShowProfile" @find-event="Findevent"></the-navigation>
+    <the-navigation @sign-out = "signout" v-if="isNotMenu" @user-profile = "ShowProfile" @find-event="Findevent" :showData="findEvent"></the-navigation>
     <div class="content">
       <profile v-if="profile"></profile>
       <router-view v-if="isFindevent" @signin-user = "notMenu" @new-user = "signup"></router-view>
     </div>
 
+    <!-- =============Find event component======== -->
     <div class="event" v-if = "findEvent">
       <ul>
         <findEvent-card
@@ -30,13 +31,13 @@ export default {
     TheNavigation,
     Profile
   },
-
   data() {
     return{
       isNotMenu: false,
       profile: false,
       isFindevent: true,
       findEvent: false,
+      events: null,
       eventLists: [],
     }
   },
@@ -44,7 +45,7 @@ export default {
     Findevent(findevent){
       this.isFindevent = findevent;
       this.findEvent = !findevent ;
-      console.log(this.isFindevent + " " + this.findEvent);
+      console.log( "Router :" +this.isFindevent + " " + "FindEvent: " + this.findEvent);
     },
     
     getEvent(){
