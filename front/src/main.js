@@ -10,20 +10,24 @@ import Categories from "./components/Event/Categories.vue";
 import Profile from "./components/menu/Profile.vue";
 import Findevent from "./components/Event/Findevent.vue";
 import Manage_profile from "./components/menu/Manage_profile.vue";
+import about from "./components/menu/about.vue";
+import service from "./components/menu/service.vue";
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/', component:  Profile},
-        { path: '/Manage_profile', component:  Manage_profile},
-            // { path: '/', component: signin },
-            { path: '/signin', component: signin },
-            { path: '/home', component: Home },
-            { path: '/signup', component: signup },
-            { path: '/myevent', component: Myevent },
-            { path: '/findevent', component: Findevent },
-            { path: '/categories', component: Categories },
-        ]
+        { path: '/', component: Profile },
+        { path: '/Manage_profile', component: Manage_profile },
+        // { path: '/', component: signin },
+        { path: '/signin', component: signin },
+        { path: '/home', component: Home },
+        { path: '/signup', component: signup },
+        { path: '/myevent', component: Myevent },
+        { path: '/findevent', component: Findevent },
+        { path: '/categories', component: Categories },
+        { path: '/about', component: about },
+        { path: '/service', component: service },
+    ]
 });
 
 const app = createApp(App);
@@ -33,4 +37,3 @@ app.component("findEvent-card", Findevent);
 
 app.use(router);
 app.mount("#app");
-

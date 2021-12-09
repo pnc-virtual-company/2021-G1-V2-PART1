@@ -17,11 +17,11 @@
                         Notification</a></li>
                     <li><a href="#"><i class="fas fa-calendar-week"></i>
                         Events</a></li>
-                    <li><a href="#"><i class="fas fa-question-circle"></i>
-                        About</a></li>
-                    <li><a href="#"><i class="fas fa-sliders-h"></i>
-                        Services</a></li>
-                    <li><a href="#"><i class="fal fa-cog"></i>
+                   <li><router-link to="/about" ><i class="fas fa-question-circle"></i>
+                        About</router-link></li>
+                    <li><router-link to="/service" ><i class="fas fa-sliders-h"></i>
+                        Services</router-link ></li>
+                   <li><a href="#"><i class="fal fa-cog"></i>
                         Setting</a></li>
                     <li><a href="#"><router-link v-bind:to="'/signin'" ><i style="color:red" class="fal fa-repeat"></i>
                         Log out</router-link></a></li>
