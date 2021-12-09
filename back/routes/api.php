@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\JoinController;
+use App\Http\Controllers\CountriesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -55,3 +56,8 @@ Route::delete('/joins/{id}', [JoinController::class, 'delete']);
 
 
 Route::get('/events/search/{title}', [EventController::class, 'search']);
+
+
+// public ====================Get Countries==============================
+
+Route::get('/countries', [CountriesController::class, 'getCountry']);

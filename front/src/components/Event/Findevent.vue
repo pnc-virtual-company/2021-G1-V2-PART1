@@ -52,7 +52,6 @@
             joinValue: true,
             allEvents: [],
             searchevent: '',
-
             url : 'http://127.0.0.1:8000/storage/imageEvent/'
         }
     },
@@ -84,10 +83,7 @@
         }
     },
     mounted() {
-        axios.get(API_URL).then(res => {
-            this.allEvents = res.data;
-            console.log(this.allEvents);
-        })
+        this.getEvent();
     },
     };
 </script>

@@ -14,7 +14,7 @@ class EventController extends Controller
      */
     public function getEvents()
     {
-        return Event::with('category')->latest()->get();
+        return Event::with('category','join')->latest()->get();
     }
 
     /**
@@ -44,6 +44,7 @@ class EventController extends Controller
         $event->description = $request->description;
         $event->photo = $request->file('photo')->hashName();
         $event->category_id = $request->category_id;
+        $event->user_id = $request->user_id;
 
         $event->save();
        

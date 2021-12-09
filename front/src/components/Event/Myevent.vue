@@ -63,7 +63,7 @@
                   <div class="img">
                     
                       <!-- ===================Display Image====================== -->
-                      <img class="img-1" :src="url+event.photo" alt="">
+                      <img class="img-1" :src="url + event.photo" alt="">
 
                   </div>
                   <div class="text">
@@ -88,18 +88,18 @@
       
           <!-- //=============Dialog Btn====================== -->
 
-          <Dialog v-if="displayDialog" 
+          <!-- <Dialog v-if="displayDialog" 
                   :data = "eventInfo"
                   @cancel = "cancel" 
                   @delete = "removeEvent" 
-          />
+          /> -->
           <!-- ==================Dialog Edid Event================= -->
-          <DialogEditEvent v-if="displayEdit"
+          <!-- <DialogEditEvent v-if="displayEdit"
                   :data = "eventInfo"
                   :sms = "messageError"
                   @cancel = "cancel"
                   @update = "UpdateEvent"
-           />
+           /> -->
           <!-- ===============End dialog================== -->
         
         </div>
@@ -110,13 +110,13 @@
 
 <script>
 
-  import Dialog from './Dialog.vue'
-  import DialogEditEvent from './DialogEditEvent.vue'
+  // import Dialog from './Dialog.vue'
+  // import DialogEditEvent from './DialogEditEvent.vue'
   import axios from 'axios';
   const API_URL = 'http://127.0.0.1:8000/api/';
 
   export default {
-    components: { Dialog , DialogEditEvent},
+    // components: { Dialog , DialogEditEvent},
     data () {
       return {
         title: "",
@@ -134,6 +134,7 @@
         displayDialog:false,
         url : 'http://127.0.0.1:8000/storage/imageEvent/',
         messageError: '',
+        joinerList: [],
       }
     },
     methods: {
@@ -141,6 +142,8 @@
         this.photo = event.target.files[0];
       },
       Addevent() {
+        let userid = localStorage.getItem('userID');
+        console.log(userid);
         const newEvent = new FormData();
         newEvent.append('title',this.title);
         newEvent.append('city',this.city);
@@ -149,11 +152,11 @@
         newEvent.append('description',this.description);
         newEvent.append('photo',this.photo);
         newEvent.append('category_id',this.category);
+        newEvent.append('user_id',userid);
       
         axios.post(API_URL + "events", newEvent).then(res => {
           this.eventLists.push(res.data.event);
-          this.getEvent();
-          console.log("created")
+          console.log(res.data)
         })
         .catch(error => {
               let status = error.response.status;
@@ -180,8 +183,9 @@
       },
       removeEvent(id,isFalse) {
             axios.delete(API_URL + "events/" + id).then(res => {
-                console.log(res.data.id);
                 this.getEvent();
+                console.log(res.data);
+                console.log("Deleted");
             })
             this.displayDialog = isFalse;
             
@@ -201,30 +205,43 @@
               }
           })
       },
+
       getEvent() {
+        let myID = localStorage.getItem('userID');
         axios.get(API_URL + "events").then(res => {
-          this.eventLists = res.data;
-          console.log(res.data);
+          let events = res.data;
+          this.eventLists = [];
+          for(let event of events){
+            if(event.user_id == myID){
+              this.eventLists.push(event);
+              console.log(event);
+            }
+          }
+          
         })
       },
+
       getCategories(){
         axios.get(API_URL + "categories").then(res => {
-          console.log(res.data);
           this.categories = res.data;
         })
       },
 
       getUserJoined(){
-        axios.get(API_URL + "joins").then(res => {
-          console.log(res.data);
+        axios.get('http://127.0.0.1:8000/api/joins').then(res => {
+          this.joinerList = res.data;
+  
         })
-      }
-    },
+      },
+      getCountries(){
 
+      },
+    },
+    
     mounted() {
       this.getEvent();
-      this.getCategories();
       this.getUserJoined();
+      this.getCategories();
     },
   }
 </script>
