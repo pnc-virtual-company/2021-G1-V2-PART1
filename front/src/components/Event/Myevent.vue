@@ -21,7 +21,12 @@
                       <input type="text" class="form-control" id="recipient-name" placeholder="title" v-model = "title">
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control" id="recipient-name" placeholder="city" v-model = "city">
+                      <input v-on:keyup = "searchCoutry" type="search" class="form-control" id="recipient-name" placeholder="country" v-model = "countryName">
+                    </div>
+                    <div class="form-group">
+                      <select name="" id="" v-model ="citySelected">
+                        <option v-for="city of citys" :key="city" :value=city>{{city}}</option>
+                      </select>
                     </div>
                     <div class="form-group">
                        <label for="">Start date</label>
@@ -63,7 +68,7 @@
                   <div class="img">
                     
                       <!-- ===================Display Image====================== -->
-                      <img class="img-1" :src="url+event.photo" alt="">
+                      <img class="img-1" :src="url + event.photo" alt="">
 
                   </div>
                   <div class="text">
@@ -120,7 +125,7 @@
     data () {
       return {
         title: "",
-        city: "",
+        countryName: "",
         startdate: "",
         enddate: "",
         description: "",
@@ -134,7 +139,10 @@
         displayDialog:false,
         url : 'http://127.0.0.1:8000/storage/imageEvent/',
         messageError: '',
-        listJoins: ""
+        joinerList: [],
+        countries: [],
+        citys:[],
+        citySelected: ""
       }
     },
     methods: {
@@ -142,28 +150,40 @@
         this.photo = event.target.files[0];
       },
       Addevent() {
-        const newEvent = new FormData();
-        newEvent.append('title',this.title);
-        newEvent.append('city',this.city);
-        newEvent.append('startdate',this.startdate);
-        newEvent.append('enddate',this.enddate);
-        newEvent.append('description',this.description);
-        newEvent.append('photo',this.photo);
-        newEvent.append('category_id',this.category);
-      
-        axios.post(API_URL + "events", newEvent).then(res => {
-          this.eventLists.push(res.data.event);
-          this.getEvent();
-          console.log("created")
-        })
-        .catch(error => {
-              let status = error.response.status;
-              if(status === 422) {
-              this.isInvalid = true
-              this.errorMessage = 'Invalid command, please create again';
-              }
-          })
+        let userid = localStorage.getItem('userID');
+        let eventplace = this.citySelected + " | " + this.countryName;
+        if(this.startdate <= this.enddate){
+          let newEvent = new FormData();
+          newEvent.append('title',this.title);
+          newEvent.append('city',eventplace);
+          newEvent.append('startdate',this.startdate);
+          newEvent.append('enddate',this.enddate);
+          newEvent.append('description',this.description);
+          newEvent.append('photo',this.photo);
+          newEvent.append('category_id',this.category);
+          newEvent.append('user_id',userid);
 
+          axios.post(API_URL + "events", newEvent).then(res => {
+            this.getEvent();
+            console.log("Created!" + res.data);
+            this.title = '';
+            this.countryName = '';
+            this.startdate = '';
+            this.enddate = '';
+            this.description = "";
+            this.photo = "";
+          })
+          .catch(error => {
+                let status = error.response.status;
+                if(status === 422) {
+                this.isInvalid = true
+                this.errorMessage = 'Invalid command, please create again';
+                }
+          })
+        }else{
+          console.log("End date must me grater than start date!!!!!");
+        }
+       
       },
 
       cancel() {
@@ -181,8 +201,9 @@
       },
       removeEvent(id,isFalse) {
             axios.delete(API_URL + "events/" + id).then(res => {
-                console.log(res.data.id);
                 this.getEvent();
+                console.log(res.data);
+                console.log("Deleted");
             })
             this.displayDialog = isFalse;
             
@@ -203,31 +224,44 @@
               }
           })
       },
+
       getEvent() {
+        let myID = localStorage.getItem('userID');
         axios.get(API_URL + "events").then(res => {
-          this.eventLists = res.data;
-          console.log(res.data);
+          let events = res.data;
+          this.eventLists = [];
+          console.log(events);
+          for(let event of events){
+            if(event.user_id == myID){
+              this.eventLists.push(event);
+
+            }
+          }
+          
         })
       },
+
       getCategories(){
         axios.get(API_URL + "categories").then(res => {
-          console.log(res.data);
           this.categories = res.data;
         })
       },
 
-      // getUserJoined(){
-      //   axios.get(API_URL + "joins").then(res => {
-      //     this.listJoins = res.data;
-      //     console.log(res.data);
-      //   })
-      // }
+      getCountries(){
+        axios.get('http://127.0.0.1:8000/api/countries').then(res => {
+          this.countries = res.data;
+        })
+      },
+      searchCoutry() {
+        this.citys = this.countries[this.countryName];
+      }
     },
-
+    
     mounted() {
       this.getEvent();
       this.getCategories();
-      // this.getUserJoined();
+      this.getCountries();
+      console.log(this.citySelected);
     },
   }
 </script>

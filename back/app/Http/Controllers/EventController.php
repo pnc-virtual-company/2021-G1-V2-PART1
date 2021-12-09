@@ -14,7 +14,7 @@ class EventController extends Controller
      */
     public function getEvents()
     {
-        return Event::with('category')->latest()->get();
+        return Event::with('category','join')->latest()->get();
     }
 
     /**
