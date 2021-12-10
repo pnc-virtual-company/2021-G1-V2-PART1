@@ -7,14 +7,22 @@
 
       <!-- =============Find event component======== -->
       <div class="event" v-if = "findEvent">
-        <input v-on:keyup = "search" type="search" placeholder="search event to join..." v-model= "searchevent">
-        <ul>
-          <findEvent-card  
-            v-for="event of eventLists"
-            :key="event.id"
-            :Event="event"
-          ></findEvent-card>
-        </ul>
+        <div id="searchbtn">
+          <label for="search-title">Search title</label>
+          <input v-on:keyup = "search" type="search" placeholder="search event to join..." v-model= "searchevent" class="eventsearch">
+          <label for="search-country">Search countries</label>
+          <input v-on:keyup = "searchCity" type="search" placeholder="search city" v-model= "searchCity">
+        </div>
+        <div class="main_card">
+          <ul>
+            <findEvent-card  
+              v-for="event of eventLists"
+              :key="event.id"
+              :Event="event"
+            ></findEvent-card>
+          </ul>
+        </div>
+        
       </div>
 
     </div>
@@ -43,6 +51,9 @@ export default {
       eventName: "",
       searchevent:"",
       eventInfo: "",
+      searchCity: "",
+      
+
     }
   },
   methods: {
@@ -103,18 +114,16 @@ export default {
 </script>
 
 <style scoped>
-  input[type=search]{
-    border: 1px solid rgb(1, 112, 156);
-    outline: none;
-    margin-left: 67%;
-    border-radius: 10px;
-    padding:5px 10px;
-    margin-top: 2%;
-    background: rgb(202, 233, 248);
-    color: rgb(10, 5, 1);
-    text-align: center;
-    
+  #searchbtn{
+    margin-top: 3%;
+    margin-bottom: 2%;
+    width: 60%;
+    margin-left: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
   }
+
   body{
     margin: 0;
     padding: 0;
@@ -123,7 +132,6 @@ export default {
   .content{
     display: flex;
   }
-
   * {
     box-sizing: border-box;
     margin: 0;
@@ -134,23 +142,25 @@ export default {
     font-family: "Jost", sans-serif;
   }
   input[type=search]{
+    width: 25%;
     border: 1px solid rgb(172, 160, 160);
     outline: none;
     border-radius: 20px;
-    margin-top: 3%;
     padding: 5px 10px;
-    margin-left: 500px;
   }
   .event{
     width: 100%;
-
+  }
+  .main_card{
+    height: 70vh;
+    overflow-y: scroll;
   }
   ul{
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    height: 77vh;
-    overflow-y: scroll;
+    flex-wrap: wrap;
+    width: 60%;
+    margin-left: 20%;
   }
 </style>
 

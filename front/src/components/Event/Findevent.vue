@@ -98,23 +98,25 @@ export default {
 <style scoped>
     .content{
         display: flex;
+        height: 100%;
         justify-content: space-between;
     }
     .main{
         width: 75%;
     }
     .main_content{
-        margin-top: 8%;
+        margin-top: 9%;
         display: flex;
+        align-items: flex-end;
     }
     .card{
-        background:#fff;
-        /* margin-top: -5%; */
-        width: 55%;
+        width: 100%;
+        margin-top: 3%;
         height: 25vh;
         padding: 10px;
         border-radius: 10px;
-        box-shadow: rgba(60, 64, 67, 0.315) 0px 1px 2px 0px, rgba(60, 64, 67, 0.377) 0px 2px 6px 2px;
+        background:#fff;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     }
     
     button{
@@ -139,9 +141,9 @@ export default {
         background: orange;
     }
     #showDetail{
-        font-size: 18px;
+        font-size: 15px;
         color: rgb(30, 30, 139);
-        margin-left: 38%;
+        margin-left: 40%;
         background: none;
     }
     #showDetail:hover{
@@ -149,14 +151,14 @@ export default {
     }
     img{
         width: 180px;
-        height: 21vh;
+        height: 100%;
     }
     .body{
         align-items: center;
         justify-content: flex-end;
     }
     #title{
-        padding: 5px;
+        padding: 5px 20px;
     }
 
   
