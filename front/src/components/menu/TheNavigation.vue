@@ -93,9 +93,8 @@ body{
   font-family: sans-serif;
 }
 
-
 img{
-  margin-top: 12%;
+  margin-top: 10%;
   width: 50px;
   height: 50px;
   border-radius: 360px;
@@ -106,6 +105,7 @@ header {
   top: 0;
   width: 100%;
   background-color:#000;
+  margin-bottom: -15px;
 }
 .container-user {
   display: flex;
@@ -190,8 +190,7 @@ h2 {
   font-size: 12px;
   transition: 0.4s;
   line-height: 20px;
-  width: 0px;
-  
+  width: 0;
 }
 nav {
   background: #000;
@@ -220,13 +219,14 @@ nav a {
 #btnSignout{
   border: none;
   background: none;
-  font-size: 15px;
-  /* background: red; */
+  font-size: 13px;
   text-decoration: none;
 }
 #btnSignout:hover{
   color: rgb(50, 50, 207);
   text-decoration: underline;
 }
-
+ul li a{
+  font-size: 13px;
+}
 </style>

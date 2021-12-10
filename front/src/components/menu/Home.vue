@@ -20,11 +20,10 @@
     .home {
         display: flex;
         align-items: center;
-        height: 575px;
+        height: 511px;
         background: url('https://img3.goodfon.com/wallpaper/nbig/7/26/chasy-budilnik-vremya-4010.jpg') no-repeat;
         background-size: cover;
         background-position: center;
-        margin-top: -2%;
         width: 100%;
     }
     #event{
