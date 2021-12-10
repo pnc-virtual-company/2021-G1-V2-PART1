@@ -120,8 +120,8 @@
 .container-profile {
   
   position: relative;
-  top: 10%;
-  left: 50%;
+  top: 1%;
+  left: 25%;
   /* transform: translate(50%,50%); */
   max-width: 700px;
   max-height: 500px;
@@ -133,6 +133,7 @@
   border-radius: 5px;
   margin: 30px;
    /* background: linear-gradient(135deg, #90b7d1, #693c7a); */
+   /* z-index: -1; */
 }
 
 .container-profile .title {
