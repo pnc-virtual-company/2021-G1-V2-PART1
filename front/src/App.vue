@@ -43,6 +43,8 @@ export default {
       eventName: "",
       searchevent:"",
       eventInfo: "",
+      userid:""
+      
     }
   },
   methods: {
@@ -52,22 +54,26 @@ export default {
     },
     getEvent(){
       axios.get(API_URL).then(res => {
-        this.eventLists = res.data;
+        this.eventLists = [];
+        for(let event of res.data){
+          if(event.user_id != this.userid){
+            this.eventLists.push(event);
+          }
+        }
+
+        
       })
     },
     search(){
-      let myID = localStorage.getItem('userID');
       if(this.searchevent !== ""){
           axios.get(API_URL + "/search/" + this.searchevent).then(res => {
-            let allevents = res.data;
             this.eventLists = [];
-            for(let event of allevents){
-              if(event.user_id !== myID){
+            for(let event of res.data){
+              if(event.user_id != this.userid){
                 this.eventLists.push(event);
               }
             }
         })
-
       }else{
           this.getEvent();
       }
@@ -93,8 +99,8 @@ export default {
   },
   mounted() {
     this.getEvent();
-    let username = localStorage.getItem('userID');
-    if(username !== null ){
+    this.userid = localStorage.getItem('userID');
+    if(this.userid !== null ){
       this.isNotMenu = true;
       this.$router.push('/home');
     }

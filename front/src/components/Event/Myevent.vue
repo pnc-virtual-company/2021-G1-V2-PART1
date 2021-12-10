@@ -75,7 +75,7 @@
                       <h1 id="title">{{event.title}}</h1>
                       <div id="time">
                           <p class="date">{{event.startdate}}</p>
-                          <p class="member">6 members</p>
+                          <p class="member">{{event.join.length}} members</p>
                       </div>
                   </div>
               </div>
