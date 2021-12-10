@@ -23,7 +23,7 @@
 
 <script>
 import TheNavigation from './components/menu/TheNavigation.vue';
-import Profile from './components/menu/Profile.vue';
+import Profile from './view/Profile.vue';
 import axios from 'axios';
 const API_URL = 'http://127.0.0.1:8000/api/events';
 export default {
