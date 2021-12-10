@@ -51,8 +51,8 @@ export default {
       eventName: "",
       searchevent:"",
       eventInfo: "",
-      userid:""
-      
+      userid:"",
+      searchCity:[],
     }
   },
   methods: {

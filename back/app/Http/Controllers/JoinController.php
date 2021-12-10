@@ -7,6 +7,16 @@ use App\Models\Join;
 class JoinController extends Controller
 {
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getJoins()
+    {
+        return Join::with('user','event')->get();
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

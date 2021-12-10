@@ -45,12 +45,13 @@ Route::post('/events', [EventController::class, 'store']);
 Route::put('/events/{id}', [EventController::class, 'update']);
 Route::delete('/events/{id}', [EventController::class, 'delete']);
 
-// public ====================Create Join===============================
+// public ====================Create Join==============================
 
+Route::get('/joins', [JoinController::class, 'getJoins']);
 Route::post('/joins', [JoinController::class, 'store']);
 Route::delete('/joins/{id}', [JoinController::class, 'delete']);
 
-// ==================== Route Search events==============================
+// ==================== Route Search events
 
 
 Route::get('/events/search/{title}', [EventController::class, 'search']);
