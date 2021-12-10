@@ -12,11 +12,11 @@
 <div class="row">
   <div class="column">
     <div class="card">
-     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIwD8dxYjWkUz_zh5nYbi7KWfqDxbn7_4GdA&usqp=CAU" alt="Avatar" class="avatar"> <div class="container">
-        <h2>Jane Doe</h2>
+     <img src="../../assets/6.jpg" alt="Avatar" class="avatar"> <div class="container">
+        <h2>Ahbanna</h2>
         <p class="title">CEO & Founder</p>
         <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-        <p>jane@example.com</p>
+        <p>ahbanna@gmail.com</p>
         <p><button class="button">Contact</button></p>
       </div>
     </div>
@@ -24,12 +24,12 @@
 
   <div class="column">
     <div class="card">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZKWPMhnDeTvIP46Q0INNknVGEpgtnCLLK5w&usqp=CAU" alt="Mike" >
+      <img src="../../assets/7.jpg" alt="" >
       <div class="container">
-        <h2>Mike Ross</h2>
+        <h2>Tichto CD</h2>
         <p class="title">Art Director</p>
         <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-        <p>mike@example.com</p>
+        <p>tichto.cd@gmail.com</p>
         <p><button class="button">Contact</button></p>
       </div>
     </div>
@@ -37,13 +37,13 @@
   
   <div class="column">
     <div class="card">
-     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZKWPMhnDeTvIP46Q0INNknVGEpgtnCLLK5w&usqp=CAU" alt="Mike" >
+     <img src="../../assets/8.png" alt="" >
      
       <div class="container">
-        <h2>John Doe</h2>
+        <h2>Technology Deser</h2>
         <p class="title">Designer</p>
         <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-        <p>john@example.com</p>
+        <p>technology.designer@email.com</p>
         <p><button class="button">Contact</button></p>
       </div>
     </div>
