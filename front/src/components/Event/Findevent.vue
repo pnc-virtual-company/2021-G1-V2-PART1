@@ -7,8 +7,8 @@
                 <div class="main_content">
                     <button id="showDetail" @click = "ShowDetail">Show more</button>
                     <div class="body">
-                        <button id="join" @click="toJoin(Event.id)" v-if="joinEventisVisible" >Join</button>
-                        <button id="quit" @click="unJoin(Event.id)" v-else  >Quit</button>
+                        <button id="join" @click="toJoin(Event.id)" v-if="joinEventisVisible" >join</button>
+                        <button id="quit"  @click="unJoin(Event.id)" v-else>Quit</button>
                     </div>
                 </div>
                
@@ -35,6 +35,7 @@ export default {
             showDialog: false,
             joinList: [],
             showFind: false,
+            userid:'',
             url: 'http://127.0.0.1:8000/storage/imageEvent/',
         };
   },
@@ -48,9 +49,9 @@ export default {
             }
             axios.post(API_URL+ "joins", eventjoin).then(res => {
                 console.log(res.data);
-                this.joinEventisVisible = !this.joinEventisVisible;
                 this.getJoinslist();
             })
+            this.joinEventisVisible = !this.joinEventisVisible;
 
         },
 
@@ -63,9 +64,9 @@ export default {
             }
             axios.delete(API_URL + "joins/" + eventid).then(res => {
                 console.log(res.data);
-                this.joinEventisVisible = !this.joinEventisVisible;
                 this.getJoinslist();
             })
+            this.joinEventisVisible = !this.joinEventisVisible;
            
         },
         ShowDetail(){
@@ -77,17 +78,24 @@ export default {
       
         getJoinslist() {
             axios.get(API_URL + "joins").then(res => {
-                console.log(res.data);
                 this.joinList = res.data;
             })
         },
+      
+        
+
     
     },
     mounted() {
+        this.userid = localStorage.getItem('userID');
         this.getJoinslist();
-        console.log(this.Event);
         if(this.Event != null){
             this.showFind = true;
+             for(let join of this.Event.join){
+                if(this.userid == join.user_id){
+                    this.joinEventisVisible = false
+                }
+            }
         }
     },
     
