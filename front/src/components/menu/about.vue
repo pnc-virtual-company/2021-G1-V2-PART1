@@ -12,11 +12,12 @@
 <div class="row">
   <div class="column">
     <div class="card">
-     <img src="../../assets/9.jpg" alt="Avatar" class="avatar"> <div class="container">
-        <h2>Ahbanna</h2>
+     <img src="../../assets/19.png" alt="Avatar" class="avatar"> 
+      <div class="container">
+        <h2>Sreytouch Moch</h2>
         <p class="title">CEO & Founder</p>
         <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-        <p>jane@example.com</p>
+        <p>Sreytouch.Moch@gmail.com</p>
         <p><button class="button">Contact</button></p>
       </div>
     </div>
@@ -24,12 +25,12 @@
 
   <div class="column">
     <div class="card">
-      <img src="../../assets/9.jpg" alt="" >
+      <img src="../../assets/15.jpg" alt="" >
       <div class="container">
-        <h2>Tichto CD</h2>
+        <h2>Chanthy Tha</h2>
         <p class="title">Art Director</p>
         <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-        <p>mike@example.com</p>
+        <p>Chanthy.Tha@gmail.com</p>
         <p><button class="button">Contact</button></p>
       </div>
     </div>
@@ -37,13 +38,52 @@
   
   <div class="column">
     <div class="card">
-     <img src="../../assets/9.jpg" alt="" >
+     <img src="../../assets/18.png" alt="" >
      
       <div class="container">
-        <h2>Technology Deser</h2>
+        <h2>Chanthea Phon</h2>
         <p class="title">Designer</p>
         <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-        <p>technology@example.com</p>
+        <p>Chanthea.Phon@email.com</p>
+        <p><button class="button">Contact</button></p>
+      </div>
+    </div>
+  </div>
+   <div class="column">
+    <div class="card">
+     <img src="../../assets/13.jpg" alt="Avatar" class="avatar"> 
+      <div class="container">
+        <h2>Vun Yin</h2>
+        <p class="title">CEO & Founder</p>
+        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+        <p>Vun.Yin@gmail.com</p>
+        <p><button class="button">Contact</button></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <img src="../../assets/14.jpg" alt="" >
+      <div class="container">
+        <h2>Vantheav Thav</h2>
+        <p class="title">Art Director</p>
+        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+        <p>Vantheav.Thav@gmail.com</p>
+        <p><button class="button">Contact</button></p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="card">
+     <img src="../../assets/20.png" alt="" >
+     
+      <div class="container">
+        <h2>Sophanan Mey</h2>
+        <p class="title">Designer</p>
+        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+        <p>Sophanan.Mey@email.com</p>
         <p><button class="button">Contact</button></p>
       </div>
     </div>
@@ -88,8 +128,8 @@ img{
   margin-left: 10px;
   margin-top: 4px;
   vertical-align: middle;
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
 }
 .container {
