@@ -11,7 +11,7 @@
           <label for="search-title">Search title</label>
           <input v-on:keyup = "search" type="search" placeholder="search event to join..." v-model= "searchevent" class="eventsearch">
           <label for="search-country">Search countries</label>
-          <input v-on:keyup = "searchCity" type="search" placeholder="search city" v-model= "searchCity">
+          <input v-on:keyup = "searchCity" type="search" placeholder="search city" v-model= "searchCityName">
         </div>
         <div class="main_card">
           <ul>
@@ -54,7 +54,7 @@ export default {
       searchevent:"",
       eventInfo: "",
       userid:"",
-      searchCity:[],
+      searchCityName: '',
     }
   },
   methods: {
