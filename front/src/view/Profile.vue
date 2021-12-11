@@ -52,6 +52,7 @@
         width: 20%;
         margin-top: -20px;
         background: rgba(28, 31, 31, 0.904);
+        /* z-index: 1; */
     }
     .main_box .sidebar_menu {
         box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);

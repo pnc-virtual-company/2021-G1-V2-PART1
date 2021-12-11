@@ -49,7 +49,6 @@ Route::delete('/events/{id}', [EventController::class, 'delete']);
 
 Route::get('/joins', [JoinController::class, 'getJoins']);
 Route::post('/joins', [JoinController::class, 'store']);
-Route::put('/joins/{id}', [JoinController::class, 'update']);
 Route::delete('/joins/{id}', [JoinController::class, 'delete']);
 
 // ==================== Route Search events

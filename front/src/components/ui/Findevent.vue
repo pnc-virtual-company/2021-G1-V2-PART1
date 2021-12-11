@@ -7,8 +7,8 @@
                 <div class="main_content">
                     <button id="showDetail" @click = "ShowDetail">Show more</button>
                     <div class="body">
-                        <button id="join" @click="toJoin(Event.id)" v-if="joinEventisVisible" >join</button>
-                        <button id="quit"  @click="unJoin(Event.id)" v-else>Quit</button>
+                        <button id="join" @click="toJoin(Event.id)" v-if="joinEventisVisible" >Join</button>
+                        <button id="quit" @click="unJoin(Event.id)" v-else >Quit</button>
                     </div>
                 </div>
                
@@ -34,16 +34,16 @@ export default {
             joinEventisVisible: true,
             showDialog: false,
             showFind: false,
-            userid:'',
+            userid: '',
+            joinList: [],
             url: 'http://127.0.0.1:8000/storage/imageEvent/',
         };
   },
     methods: {
        
         toJoin(id) {
-            let userid = localStorage.getItem('userID');
             let eventjoin = {
-                user_id: userid,
+                user_id: this.userid,
                 event_id: id,
             }
             axios.post(API_URL+ "joins", eventjoin).then(res => {
@@ -51,7 +51,6 @@ export default {
                 this.getJoinslist();
             })
             this.joinEventisVisible = !this.joinEventisVisible;
-
         },
 
         unJoin(id) {
@@ -64,9 +63,8 @@ export default {
             axios.delete(API_URL + "joins/" + eventid).then(res => {
                 console.log(res.data);
                 this.getJoinslist();
-            })
+            });
             this.joinEventisVisible = !this.joinEventisVisible;
-           
         },
         ShowDetail(){
             this.showDialog = true;
@@ -74,11 +72,17 @@ export default {
         cancel(){
             this.showDialog = false;
         },
+      
+        getJoinslist() {
+            axios.get(API_URL + "joins").then(res => {
+                this.joinList = res.data;
+            })
+        },
     
     },
     mounted() {
+        this.getJoinslist()
         this.userid = localStorage.getItem('userID');
-        
         // ================Display Orther Event =========
         if(this.Event != null){
             this.showFind = true;
@@ -97,23 +101,25 @@ export default {
 <style scoped>
     .content{
         display: flex;
+        height: 100%;
         justify-content: space-between;
     }
     .main{
         width: 75%;
     }
     .main_content{
-        margin-top: 8%;
+        margin-top: 9%;
         display: flex;
+        align-items: flex-end;
     }
     .card{
-        background:#fff;
-        /* margin-top: -5%; */
-        width: 55%;
+        width: 100%;
+        margin-top: 3%;
         height: 25vh;
         padding: 10px;
         border-radius: 10px;
-        box-shadow: rgba(60, 64, 67, 0.315) 0px 1px 2px 0px, rgba(60, 64, 67, 0.377) 0px 2px 6px 2px;
+        background:#fff;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     }
     
     button{
@@ -138,9 +144,9 @@ export default {
         background: orange;
     }
     #showDetail{
-        font-size: 18px;
+        font-size: 15px;
         color: rgb(30, 30, 139);
-        margin-left: 38%;
+        margin-left: 40%;
         background: none;
     }
     #showDetail:hover{
@@ -148,14 +154,14 @@ export default {
     }
     img{
         width: 180px;
-        height: 21vh;
+        height: 100%;
     }
     .body{
         align-items: center;
         justify-content: flex-end;
     }
     #title{
-        padding: 5px;
+        padding: 5px 20px;
     }
 
   

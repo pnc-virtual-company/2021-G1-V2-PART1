@@ -13,28 +13,28 @@
     </div>
     <div class="row">
       <div class="column">
-        <img src="../../assets/1.png" alt="" srcset="" />
+        <img src="../assets/1.png" alt="" srcset="" />
         <div class="div">
             <h2>Innovate</h2>
             <p>Design Thinking Strategy Technology Architecture Digital Product Strategy Innovation Sprints</p>    
         </div>  
       </div>
       <div class="column">
-           <img src="../../assets/2.png" alt="" srcset="" />
+           <img src="../assets/2.png" alt="" srcset="" />
            <div class="div">
            <h2>Design</h2> 
            <p>Design Thinking Strategy Technology Architecture Digital Product Strategy Innovation Sprints</p>
            </div>
       </div>
       <div class="column">
-          <img src="../../assets/3.png" alt="" srcset="" />
+          <img src="../assets/3.png" alt="" srcset="" />
           <div class="div">
           <h2>Develop</h2> 
           <p>Design Thinking Strategy Technology Architecture Digital Product Strategy Innovation Sprints</p>
           </div>
       </div>
       <div class="column">
-            <img src="../../assets/4.png" alt="" srcset="" />
+            <img src="../assets/4.png" alt="" srcset="" />
             <div class="div">
             <h2>Grow</h2>
              <p>Design Thinking Strategy Technology Architecture Digital Product Strategy Innovation Sprints</p> 
