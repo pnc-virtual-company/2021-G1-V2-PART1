@@ -55,19 +55,14 @@
 section {
   background: #010713;
 }
-
+.about{
+  height: 90vh;
+}
 .about-section {
   padding: 50px;
   text-align: center;
-
   color: white;
 }
-/* .column {
-  float: left;
-  width: 25%;
-} */
-
-/* Clear floats after the columns */
 .row:after {
 
   content: "";

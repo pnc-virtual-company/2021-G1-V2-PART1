@@ -122,6 +122,7 @@
 
   export default {
     components: { Dialog , DialogEditEvent},
+    emits: ['other-event'],
     data () {
       return {
         title: "",
@@ -134,6 +135,7 @@
         showDialog: false,
         displayEdit: false,
         eventLists: [],
+        otherEvent: true,
         categories: [],
         eventInfo: "",
         displayDialog:false,
@@ -165,6 +167,7 @@
 
           axios.post(API_URL + "events", newEvent).then(res => {
             this.getEvent();
+            this.$emit('other-event', this.otherEvent);
             console.log("Created!" + res.data);
             this.title = '';
             this.countryName = '';
@@ -202,8 +205,8 @@
       removeEvent(id,isFalse) {
             axios.delete(API_URL + "events/" + id).then(res => {
                 this.getEvent();
-                console.log(res.data);
-                console.log("Deleted");
+                this.$emit('other-event', this.otherEvent);
+                return res.data;
             })
             this.displayDialog = isFalse;
             
@@ -211,10 +214,11 @@
       UpdateEvent(id,updateEvent,isFalse) {
           console.log(updateEvent);
           axios.put(API_URL + "events/" + id , updateEvent).then(res => {
-              console.log(res.data);
               this.getEvent();
               this.displayEdit = isFalse;
               this.messageError = "";
+              this.$emit('other-event', this.otherEvent);
+              return res.data;
           }) 
             .catch(error => {
               let status = error.response.status;
@@ -228,17 +232,16 @@
       getEvent() {
         let myID = localStorage.getItem('userID');
         axios.get(API_URL + "events").then(res => {
-          let events = res.data;
+          this.$emit('other-event', this.otherEvent);
           this.eventLists = [];
-          console.log(events);
-          for(let event of events){
+          for(let event of res.data){
             if(event.user_id == myID){
               this.eventLists.push(event);
-
             }
           }
-          
         })
+        
+        
       },
 
       getCategories(){
@@ -261,7 +264,6 @@
       this.getEvent();
       this.getCategories();
       this.getCountries();
-      console.log(this.citySelected);
     },
   }
 </script>

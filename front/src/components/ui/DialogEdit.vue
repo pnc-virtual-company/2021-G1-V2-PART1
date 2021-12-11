@@ -3,7 +3,9 @@
       <div class="dialog">
         <div class="dialog__content">
           <h1 id="edit">Do you want to update?</h1>
+          <label for="title">Title</label>
           <input id="title" type="text" v-model="title">
+          <label for="description">Description</label>
           <input id="description" type="text" v-model="description">
         </div>
         <hr />
@@ -51,7 +53,6 @@ export default {
 <style scoped>
 
    .overlay {
-      height: 34%;
       position: fixed;
       background: #fff;
       top: 5px;
@@ -65,13 +66,14 @@ export default {
     width: 100%;
     height: 6vh;
     border: 1px solid gray;
+    border-radius: 3px;
+    padding: 10px;
   }
   #title{
     margin-bottom: 3%;
   }
   #edit{
     font-size: 20px;
-    margin-bottom: 2%;
     text-align: center;
   }
   .dialog {
@@ -88,8 +90,8 @@ export default {
   }
   .dialog__footer {
     display: flex;
+    margin-bottom: 2%;
     justify-content: flex-end;
-    margin-top: -1%;
   }
   .dialog__cancel,
   .dialog__confirm{
@@ -97,7 +99,7 @@ export default {
     outline: none;
     padding: 3px 10px;
     color: #fff;
-    border-radius: 20px;
+    border-radius:15px;
     cursor: pointer;
   }
   .dialog__cancel {

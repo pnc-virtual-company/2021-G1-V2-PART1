@@ -22,8 +22,6 @@
                         Services</router-link ></li>
                    <li><a href="#"><i class="fal fa-cog"></i>
                         Setting</a></li>
-                    <li><a href="#"><router-link v-bind:to="'/signin'" ><i style="color:red" class="fal fa-repeat"></i>
-                        Log out</router-link></a></li>
                 </ul>
             </div> 
         </div>
@@ -32,7 +30,19 @@
 
 <script>
     export default {
-        
+        emits: ['sign-out'],
+        data(){
+            return{
+                signoutUser: false,
+            }
+        },
+        methods: {
+            signout(){
+                this.$emit('sign-out', this.signoutUser);
+                localStorage.clear();
+                console.log("Sign out | " + this.signoutUser);
+            },
+        },
     }
 </script>
 
@@ -50,7 +60,7 @@
         border: none;
         width: 20%;
         margin-top: -20px;
-        background: rgba(13, 14, 14, 0.966);
+        background: rgba(5, 5, 5, 0.966);
     }
     .main_box .sidebar_menu {
         box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);

@@ -2,8 +2,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "../view/Home.vue";
-import signin from "../components/ui/signin.vue";
-import signup from "../components/ui/signup.vue";
+import signin from "../components/authentication/signin.vue";
+import signup from "../components/authentication/signup.vue";
 import Myevent from "../components/ui/Myevent.vue";
 import Categories from "../components/ui/Categories.vue";
 import Findevent from "../components/ui/Findevent.vue";

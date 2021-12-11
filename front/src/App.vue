@@ -1,9 +1,9 @@
 <template>
   <section>
-    <the-navigation @sign-out = "signout" v-if="isNotMenu" @user-profile = "ShowProfile" @find-event="Findevent"></the-navigation>
+    <the-navigation @sign-out="Signout" v-if="isNotMenu" @user-profile = "ShowProfile" @find-event="Findevent"></the-navigation>
     <div class="content">
       <profile v-if="profile"></profile>
-      <router-view v-if="isFindevent" @signin-user = "notMenu" @new-user = "signup" :closeEvent="eventLists"></router-view>
+      <router-view v-if="isFindevent" @signin-user = "notMenu" @new-user = "signup" :closeEvent="eventLists" @other-event="getEvent"></router-view>
 
       <!-- =============Find event component======== -->
       <div class="event" v-if = "findEvent">
@@ -33,7 +33,7 @@
 import TheNavigation from './components/menu/TheNavigation.vue';
 import findEvent from './components/ui/Findevent.vue';
 import Profile from './view/Profile.vue';
-import axios from 'axios';
+import axios from './axios-http';
 const API_URL = 'http://127.0.0.1:8000/api/events';
 export default {
   components: {
@@ -62,18 +62,23 @@ export default {
       this.isFindevent = findevent;
       this.findEvent = !findevent ;
     },
-    getEvent(){
+    getEvent(events){
+      console.log(events);
+      this.getAllEvent();
+    },
+
+    getAllEvent(){
       axios.get(API_URL).then(res => {
         this.eventLists = [];
         for(let event of res.data){
           if(event.user_id != this.userid){
             this.eventLists.push(event);
+            console.log(this.eventLists);
           }
         }
-
-        
       })
     },
+
     search(){
       if(this.searchevent !== ""){
           axios.get(API_URL + "/search/" + this.searchevent).then(res => {
@@ -85,30 +90,29 @@ export default {
             }
         })
       }else{
-          this.getEvent();
-      }
-            
+        this.getAllEvent();
+      }     
     },
-
     ShowProfile(profile){
       this.profile = profile
-      console.log(profile); 
     },
 
     notMenu(action) {
       this.isNotMenu = action
-      console.log(this.isNotMenu);
     },
-    signout(actions) {
-      this.isNotMenu = actions
+    Signout(actions) {
+      this.isFindevent = !actions
+      this.profile = actions;
+      this.findEvent = actions;
+      this.profile = actions;
+      this.isNotMenu = actions;
     },
     signup(signup){
       this.isNotMenu = signup;
-      console.log(this.isNotMenu);
     }
   },
   mounted() {
-    this.getEvent();
+    this.getAllEvent();
     this.userid = localStorage.getItem('userID');
     if(this.userid !== null ){
       this.isNotMenu = true;

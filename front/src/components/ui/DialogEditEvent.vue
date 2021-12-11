@@ -52,12 +52,6 @@ export default {
         this.image = event.target.files[0];
       },
       confirm(){
-        // const updatEvent = new FormData();
-        // updatEvent.append('title',this.title);
-        // updatEvent.append('city',this.city);
-        // updatEvent.append('startdate',this.startdate);
-        // updatEvent.append('enddate',this.enddate);
-        // updatEvent.append('description',this.description);
         const updateEvent = {
           title: this.title,
           city: this.city,

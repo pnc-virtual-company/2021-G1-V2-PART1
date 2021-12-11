@@ -93,6 +93,7 @@ export default {
             exiteMessage: "The categories is already exists",
             searchcategory:"",
             categoryInfo: "",
+            userid: "",
         }
     },
     methods: {
@@ -107,7 +108,8 @@ export default {
         createCategory() {
             const newCategory = {
                 title: this.categoryName,
-                description: this.description
+                description: this.description,
+                user_id: this.userid,
             }
            
             axios.post(API_URL, newCategory).then(res => {
@@ -144,7 +146,6 @@ export default {
         getCategory(){
              axios.get(API_URL).then(res => {
                 this.categoryLists = res.data;
-                console.log(this.categoryLists);
             })
         },
         search(){
@@ -160,6 +161,7 @@ export default {
     },
     mounted() {
         this.getCategory();
+        this.userid = localStorage.getItem('userID');
     },
 }
 </script>

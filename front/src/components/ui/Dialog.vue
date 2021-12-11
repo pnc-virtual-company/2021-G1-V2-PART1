@@ -2,7 +2,8 @@
     <div class="overlay">
       <div class="dialog">
         <div class="dialog__content">
-          <h2 class="dialog__title">{{data.title}}</h2>
+          <p style="color:red;">Remove item? Are you sure to remove?</p>
+          <h3 class="dialog__title">{{data.title}}</h3>
           <p class="dialog__description">{{data.description}}</p>
         </div><hr />
 
@@ -43,17 +44,19 @@ export default {
   
   }
   .overlay {
-      height: 30%;
       position: fixed;
       background: #fff;
       box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
       top: 5px;
       right: 0px;
-      bottom: 0px;
       left: 35%;
       width: 30%;
       z-index: 10;
       border-radius: 10px;
+  }
+  hr{
+    margin: 0;
+    padding: 0;
   }
   .dialog__content {
     padding-left: 0.75rem;
