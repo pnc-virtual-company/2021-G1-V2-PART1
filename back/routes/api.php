@@ -56,6 +56,10 @@ Route::delete('/joins/{id}', [JoinController::class, 'delete']);
 
 Route::get('/events/search/{title}', [EventController::class, 'search']);
 
+// ==================== Route search event by cities ====================
+
+Route::get('/events/search/{city}', [EventController::class, 'searchbycity']);
+
 // public ====================Get Countries==============================
 
 Route::get('/countries', [CountriesController::class, 'getCountry']);

@@ -11,7 +11,7 @@
           <label for="search-title">Search title</label>
           <input v-on:keyup = "search" type="search" placeholder="search event to join..." v-model= "searchevent" class="eventsearch">
           <label for="search-country">Search countries</label>
-          <input v-on:keyup = "searchCity" type="search" placeholder="search city" v-model= "searchCity">
+          <input v-on:keyup = "searchCity" type="search" placeholder="search city" v-model= "searchCityName">
         </div>
         <div class="main_card">
           <ul>
@@ -52,7 +52,7 @@ export default {
       searchevent:"",
       eventInfo: "",
       userid:"",
-      searchCity:[],
+      searchCityName: '',
     }
   },
   methods: {
@@ -67,10 +67,24 @@ export default {
           if(event.user_id != this.userid){
             this.eventLists.push(event);
           }
-        }
-
-        
+        }      
       })
+    },
+    searchCity(){
+      if(this.searchCityName !== ""){
+        axios.get(API_URL + "/search/" + this.searchCityName).then(res =>{
+          console.log(res.data)
+           this.eventLists = [];
+            for(let events of res.data){
+              if(events.user_id != this.userid){
+                this.eventLists.push(events);
+                // console.log(events);
+              }
+            }
+        })
+      }else{
+          this.getEvent();
+      }
     },
     search(){
       if(this.searchevent !== ""){

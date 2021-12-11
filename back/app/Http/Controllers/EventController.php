@@ -92,4 +92,9 @@ class EventController extends Controller
     {
         return Event::where('title','like','%'.$title.'%')->get();
     }
+
+    public function searchbycity($cities)
+    {
+        return Event::where('city','like','%'.$cities.'%')->get();
+    }
 }
