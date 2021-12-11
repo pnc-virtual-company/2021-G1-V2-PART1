@@ -15,11 +15,11 @@
         </div>
         <div class="main_card">
           <ul>
-            <findEvent-card  
+            <find-event 
               v-for="event of eventLists"
               :key="event.id"
               :Event="event"
-            ></findEvent-card>
+            ></find-event>
           </ul>
         </div>
         
@@ -31,13 +31,15 @@
 
 <script>
 import TheNavigation from './components/menu/TheNavigation.vue';
-import Profile from './components/menu/Profile.vue';
+import findEvent from './components/ui/Findevent.vue';
+import Profile from './view/Profile.vue';
 import axios from 'axios';
 const API_URL = 'http://127.0.0.1:8000/api/events';
 export default {
   components: {
     TheNavigation,
-    Profile
+    Profile,
+    findEvent
   },
   
   data() {

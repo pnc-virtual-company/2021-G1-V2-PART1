@@ -8,7 +8,7 @@
                     <button id="showDetail" @click = "ShowDetail">Show more</button>
                     <div class="body">
                         <button id="join" @click="toJoin(Event.id)" v-if="joinEventisVisible" >Join</button>
-                        <button id="quit" @click="unJoin(Event.id)" v-else  >Quit</button>
+                        <button id="quit" @click="unJoin(Event.id)" v-else >Quit</button>
                     </div>
                 </div>
                
@@ -33,25 +33,24 @@ export default {
         return {
             joinEventisVisible: true,
             showDialog: false,
-            joinList: [],
             showFind: false,
+            userid: '',
+            joinList: [],
             url: 'http://127.0.0.1:8000/storage/imageEvent/',
         };
   },
     methods: {
        
         toJoin(id) {
-            let userid = localStorage.getItem('userID');
             let eventjoin = {
-                user_id: userid,
+                user_id: this.userid,
                 event_id: id,
             }
             axios.post(API_URL+ "joins", eventjoin).then(res => {
                 console.log(res.data);
-                this.joinEventisVisible = !this.joinEventisVisible;
                 this.getJoinslist();
             })
-
+            this.joinEventisVisible = !this.joinEventisVisible;
         },
 
         unJoin(id) {
@@ -63,10 +62,9 @@ export default {
             }
             axios.delete(API_URL + "joins/" + eventid).then(res => {
                 console.log(res.data);
-                this.joinEventisVisible = !this.joinEventisVisible;
                 this.getJoinslist();
-            })
-           
+            });
+            this.joinEventisVisible = !this.joinEventisVisible;
         },
         ShowDetail(){
             this.showDialog = true;
@@ -77,15 +75,15 @@ export default {
       
         getJoinslist() {
             axios.get(API_URL + "joins").then(res => {
-                console.log(res.data);
                 this.joinList = res.data;
             })
         },
     
     },
     mounted() {
+        this.getJoinslist()
         this.userid = localStorage.getItem('userID');
-        this.getJoinslist();
+        // ================Display Orther Event =========
         if(this.Event != null){
             this.showFind = true;
              for(let join of this.Event.join){
