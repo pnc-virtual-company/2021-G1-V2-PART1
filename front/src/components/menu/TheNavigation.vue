@@ -104,7 +104,7 @@ header {
   position: sticky;
   top: 0;
   width: 100%;
-  background-color:#000;
+  background-color:rgb(0, 0, 0);
   margin-bottom: -15px;
 }
 .container-user {
@@ -193,7 +193,7 @@ h2 {
   width: 0;
 }
 nav {
-  background: #000;
+  background: rgb(0, 0, 0);
 }
 ul {
   display: flex;

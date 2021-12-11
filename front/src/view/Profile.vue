@@ -7,12 +7,11 @@
                 <ul>
                     <li><a href="#"><router-link v-bind:to="'/Manage_profile'" ><i class="fal fa-user-circle"></i>
                         Profile</router-link></a></li>
-                    <li>
+                    <li style="font-size:13px;">
                         <label class="switch">
                         <input type="checkbox" checked>
-                        <span class="slider round"></span>
-                        </label>
-                    Dark mode</li>
+                        <span class="slider round"></span></label>Dark mode
+                    </li>
                     <li><a href="#"><i class="fal fa-bell"></i>
                         Notification</a></li>
                     <li><a href="#"><i class="fas fa-calendar-week"></i>
@@ -37,7 +36,7 @@
     }
 </script>
 
-<style >
+<style>
     * {
         margin: 0;
         padding: 0;
@@ -51,8 +50,7 @@
         border: none;
         width: 20%;
         margin-top: -20px;
-        background: rgba(28, 31, 31, 0.904);
-        /* z-index: 1; */
+        background: rgba(13, 14, 14, 0.966);
     }
     .main_box .sidebar_menu {
         box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
@@ -68,7 +66,6 @@
         font-size: 25px;
         font-weight: 500;
         position: absolute;
-        /* left: 50px; */
         line-height: 60px;
         text-decoration: none;
     }
@@ -81,14 +78,8 @@
          padding: 14px 20px;
          transition: all 0.3s linear;
      }
-    .sidebar_menu .menu i {
-        color: #fff;
-        font-size: 20px;
-        padding-right: 8px;
-    }
      .sidebar_menu .menu a {
          color: #fff;
-         font-size: 15px;
          text-decoration: none;
      }
     .sidebar_menu .menu li:hover {
@@ -103,7 +94,7 @@
     }
     .social_media a{
         float: left;
-        font-size: 20px;
+        font-size: 1px;
         color: #fff;
         text-decoration: none;
         text-transform: uppercase;
@@ -123,7 +114,6 @@
     }
     .main_box .btn_one i {
         color: #fff;
-        font-size: 30px;
         font-weight: 700;
         position: absolute;
         left: 16px;
@@ -133,10 +123,8 @@
         transition: all 0.3s linear;
     }
     .sidebar_menu .btn_two i {
-        font-size: 25px;
         line-height: 60px;
         position: absolute;
-        /* left: 240px; */
         cursor: pointer;
         opacity: 0;
         transition: all 0.3s linear;
@@ -162,12 +150,17 @@
     ul li{
         list-style: none;
     }
+    ul li a{
+        font-size: 13px;
+    }
     /* =============Dark mode style ================= */
+
     .switch {
         position: relative;
         display: inline-block;
-        width: 40px;
-        height: 25px;
+        width: 34px;
+        height: 20px;
+        margin-right: 5px;
         }
 
     .switch input { 
@@ -191,10 +184,8 @@
     .slider:before {
         position: absolute;
         content: "";
-        height: 20px;
-        width: 20px;
-        left: 4px;
-        bottom: 2.5px;
+        height: 19px;
+        width: 19px;
         background-color: white;
         -webkit-transition: .4s;
         transition: .4s;
