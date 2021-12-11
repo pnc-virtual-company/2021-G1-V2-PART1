@@ -1,77 +1,100 @@
 <template>
-    <div class="">
+    <div class="profile">
         <div class="container-profile">
             <div class="blog-header">
             <div class="blog-profile">
-                <div class="profile-circle"></div>
-                <div class="titil">username</div>
-            </div>
-            <div class="button-submit">
-                <input type="submit" value="Save" class="save">
-                <input type="submit" value="Cancel" class="cancel">
+                <div class="profile-circle">
+                  <img :src="url + userInfo.profile" alt="">
+                </div>
             </div>
             </div>
             <form action="#">
+                <h4 class="blog-info">Information</h4>
+                <hr style="color: #000">
                 <div class="user-details">
                     <div>
                     <div class="input-box">
-                        <span class="details">First Name</span>
-                        <input type="text" placeholder="Enter your First name" required> 
+                        <span class="details">First Name:</span>
+                        <span class="blog-name">{{userInfo.name}}</span>
                     </div>
                     <div class="input-box">
-                        <span class="details">Email</span>
-                        <input type="text" placeholder="Enter your Email" required> 
+                        <span class="details">Email:</span>
+                        <span class="blog-name">{{userInfo.email}}</span>
                     </div>
                     <div class="input-box">
-                        <span class="details">Country</span>
-                        <input type="text" placeholder="Enter your Country" required> 
+                        <span class="details">Country:</span>
+                        <span class="blog-name">country</span>
                     </div>
                     </div>
                     <div>
                     <div class="input-box">
-                        <span class="details">Last Name</span>
-                        <input type="text" placeholder="Enter your last name" required> 
+                        <span class="details">Last Name:</span>
+                        <span class="blog-name">Pha</span> 
                     </div>
                     
                     <div class="input-box">
-                        <span class="details">Phone Number</span>
-                        <input type="text" placeholder="Enter your Phone Number" required> 
+                        <span class="details">Phone Number:</span>
+                        <span class="blog-name">+855 88 970 800 1</span> 
                     </div>
                     
                     <div class="input-box">
-                        <span class="details">National</span>
-                        <input type="text" placeholder="Enter your National" required> 
+                        <span class="details">National:</span>
+                        <span class="blog-name">Khmer</span> 
                     </div>
                     </div>
                 
                 </div>
-                <div class="input-box">
-                    <span class ="details">Description</span>
-                    <textarea id="description" name="subject" placeholder="Write something.." style="height:140px"></textarea>
-                </div>
+              
             </form>
         </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
+const API_URL = 'http://127.0.0.1:8000/api/';
     export default {
-        
+      data(){
+        return {
+          userInfo: "",
+          url : 'http://127.0.0.1:8000/storage/imageUser/',
+        }
+      },
+      methods: {
+        getuserInfo(){
+          let userid = localStorage.getItem('userID');
+          axios.get(API_URL + "users").then(res => {
+            for(let user of res.data){
+              if(user.id == userid){
+                this.userInfo = user;
+              }
+            }
+          })
+        }
+      },
+      mounted() {
+        this.getuserInfo()
+      },
     }
 </script>
 
-<style >
+
+
+<style scoped>
     *{
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-/* body {
-  
-} */
-
-
+.profile{
+  width: 100%;
+}
+img{
+  width: 100%;
+  height: 100%;
+  border-radius: 360px;
+}
 .blog-header{
   display: flex;
   justify-content: space-between;
@@ -91,7 +114,6 @@
   height: 80px;
   width: 80px;
   border-radius: 50%;
-  background: rgb(148, 147, 147);
   cursor: pointer;
 }
 .button-submit{
@@ -118,22 +140,14 @@
   outline: none;
 }
 .container-profile {
-  
-  position: relative;
-  top: 1%;
-  left: 25%;
-  /* transform: translate(50%,50%); */
-  max-width: 700px;
-  max-height: 500px;
-  width: 100%;
-  height: 100%;
+  margin-left: 20%;
+  margin-top: 4%;
+  width: 60%;
+  height: 60vh;
   background: rgb(255, 252, 252);
   box-shadow: rgba(60, 64, 67, 0.315) 0px 1px 2px 0px, rgba(60, 64, 67, 0.377) 0px 2px 6px 2px;
   padding: 25px 30px;
   border-radius: 5px;
-  margin: 30px;
-   /* background: linear-gradient(135deg, #90b7d1, #693c7a); */
-   /* z-index: -1; */
 }
 
 .container-profile .title {
@@ -143,7 +157,6 @@
 }
 
 .container-profile .title::before {
-  /* content: ''; */
   position: absolute;
   left: 0;
   bottom: 0;
@@ -156,7 +169,22 @@
   justify-content: space-between;
   margin: 20px 0 12px 0;
   margin-top: 10px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
+}
+
+.blog-info {
+  text-align:center;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.details {
+  margin-right: 25px;
+}
+.blog-name {
+  border-bottom: 1px solid #000;
+}
+.input-box {
+  margin-bottom: 10px;
 }
 form .user-details .input-box {
   /* margin-bottom: 5px; */
