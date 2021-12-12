@@ -17,11 +17,6 @@
       </div>
         
       </div>
-      <div class="search-box">
-          <input class="search-txt"  type="text" name="" placeholder="Type to search...">
-          <i class="fas fa-search search-btn"></i>
-      </div>
-
       <ul>
         <li>
           <router-link @click="notFindevent" to="/home" >Home</router-link>
@@ -152,46 +147,6 @@ h2 {
   margin-right: 10px
 }
 
-
-
-.search-box {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  float: right;
-  background: #475161;
-  height: 30px;
-  border-radius: 50px;
-  padding: 10px;
-  margin-top: 15px;
-  margin-right: 20px;
-  margin-right: 10px;
-  
-}
-.search-box:hover > .search-txt {
-  width: 100px;
-  padding: 0 6px;
-  
-}
-.search-btn {
-  color: #fff;
-  height: 15px;
-  width: 15px;
-  line-height: 15px;
-  font-size: 15px;
-  
-}
-.search-txt {
-  border: none;
-  background: none; 
-  outline: none;
-  padding: 0;
-  color: white;
-  font-size: 12px;
-  transition: 0.4s;
-  line-height: 20px;
-  width: 0;
-}
 nav {
   background: rgb(0, 0, 0);
 }

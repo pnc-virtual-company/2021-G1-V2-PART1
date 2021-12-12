@@ -1,50 +1,39 @@
 <template>
     <div class="profile">
         <div class="container-profile">
-            <div class="blog-header">
             <div class="blog-profile">
-                <div class="profile-circle">
-                  <img :src="url + userInfo.profile" alt="">
-                </div>
+              <img :src="url + userInfo.profile" alt="">
             </div>
-            </div>
+
             <form action="#">
                 <h4 class="blog-info">Information</h4>
                 <hr style="color: #000">
                 <div class="user-details">
                     <div>
-                    <div class="input-box">
-                        <span class="details">First Name:</span>
-                        <span class="blog-name">{{userInfo.name}}</span>
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Email:</span>
-                        <span class="blog-name">{{userInfo.email}}</span>
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Country:</span>
-                        <span class="blog-name">country</span>
-                    </div>
-                    </div>
-                    <div>
-                    <div class="input-box">
-                        <span class="details">Last Name:</span>
-                        <span class="blog-name">Pha</span> 
-                    </div>
+                      <div id="main" class="input-box">
+                          <span class="details">Full Name:</span>
+                          <span class="blog-name">{{userInfo.name}}</span>
+                      </div>
+                      <div class="input-box">
+                          <span class="details">Email:</span>
+                          <span class="blog-name">{{userInfo.email}}</span>
+                      </div>
+                      <div class="input-box">
+                          <span class="details">Country:</span>
+                          <span class="blog-name">{{userInfo.country}}</span>
+                      </div>
                     
-                    <div class="input-box">
-                        <span class="details">Phone Number:</span>
-                        <span class="blog-name">+855 88 970 800 1</span> 
+                      <div class="input-box">
+                          <span class="details">Phone Number:</span>
+                          <span class="blog-name">0{{userInfo.phone}}</span> 
+                      </div>
+                      
+                      <div class="input-box">
+                          <span class="details">National:</span>
+                          <span class="blog-name">{{userInfo.nationality}}</span> 
+                      </div>
                     </div>
-                    
-                    <div class="input-box">
-                        <span class="details">National:</span>
-                        <span class="blog-name">Khmer</span> 
-                    </div>
-                    </div>
-                
                 </div>
-              
             </form>
         </div>
     </div>
@@ -87,6 +76,9 @@ const API_URL = 'http://127.0.0.1:8000/api/';
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+#main{
+  margin-top: 10%;
+}
 .profile{
   width: 100%;
 }
@@ -100,8 +92,8 @@ img{
   justify-content: space-between;
 }
 .blog-profile{
-  display: flex;
-  
+  width: 15%;
+  height: 18vh;
 }
 .titil {
   line-height: 90px;
@@ -109,12 +101,6 @@ img{
   font-size:25px;
   font-weight: 600;
   text-transform: uppercase;
-}
-.profile-circle {
-  height: 80px;
-  width: 80px;
-  border-radius: 50%;
-  cursor: pointer;
 }
 .button-submit{
   margin-top: 30px;

@@ -3,15 +3,22 @@
       <div class="blog-card">
             
         <!-- dailog boostrap -->
-
-          <button id="createEvent" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create Event</button>
-
+          
+          <div class="head">
+            <div class="left">
+              <h2 style="margin-top: 10px">Event lists</h2>
+              <p style="color:green;" v-if="isCreated">{{errorMessage}}</p>
+              <p style="color:red;" v-else>{{errorMessage}}</p>
+            </div>
+           
+            <button id="createEvent" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create Event</button>
+          </div>
           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">New Event</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button style="color:white;" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -24,29 +31,30 @@
                       <input v-on:keyup = "searchCoutry" type="search" class="form-control" id="recipient-name" placeholder="country" v-model = "countryName">
                     </div>
                     <div class="form-group">
-                      <select name="" id="" v-model ="citySelected">
+                      <label for="selectCity">Select city : </label>
+                      <select id="city" v-model ="citySelected">
+                        <option value="">Select city</option>
                         <option v-for="city of citys" :key="city" :value=city>{{city}}</option>
                       </select>
                     </div>
                     <div class="form-group">
-                       <label for="">Start date</label>
-                      <input type="date" class="form-control" id="recipient-name" placeholder="start date" v-model = "startdate">
+                      <label id="startDate" for="startdate">Start date :</label>
+                      <input type="datetime-local" placeholder="start date" v-model = "startdate">
+                      <label id="endDate" for="enddate">End date :</label>
+                      <input id="endDate" type="datetime-local"  placeholder="End date" v-model = "enddate">
                     </div>
-                    <div class="form-group">
-                      <label for="">End date</label>
-                      <input type="date" class="form-control" id="recipient-name" placeholder="End date" v-model = "enddate">
-                    </div>
-                    <div class="form-group">
-                    <div class="form-group">
-                      <select class="form-control" id="select" v-model="category">
+                   
+                    <div class="Classcategory">
+                      <label>Select category</label>
+                      <select id="category" v-model="category">
                         <option v-for="category of categories " :key="category.title" :value = category.id>{{category.title}}</option>
                       </select>
-                      <textarea class="form-control" id="message-text" placeholder="description" v-model = "description"></textarea>
-                    </div>
                     </div>
                     <div class="form-group">
-                      <input type="file" class="form-control" id="recipient-name" placeholder="End date" @change = "onFileSelected">
+                      <textarea class="form-control" id="description" placeholder="description" v-model = "description"></textarea>
                     </div>
+                    <input type="file" placeholder="End date" @change = "onFileSelected">
+                
                   </form>
                 </div>
                 <div class="modal-footer">
@@ -131,26 +139,34 @@
         enddate: "",
         description: "",
         photo: null,
-        category: "",
+        category: "Food",
         showDialog: false,
         displayEdit: false,
-        eventLists: [],
+        isCreated: false,
         otherEvent: true,
-        categories: [],
-        eventInfo: "",
         displayDialog:false,
-        url : 'http://127.0.0.1:8000/storage/imageEvent/',
+        eventInfo: "",
+        errorMessage: "",
         messageError: '',
+        eventLists: [],
+        categories: [],
         joinerList: [],
         countries: [],
         citys:[],
-        citySelected: ""
+        citySelected: "",
+        url : 'http://127.0.0.1:8000/storage/imageEvent/',
       }
     },
     methods: {
       onFileSelected(event){
         this.photo = event.target.files[0];
       },
+      // callFunction: function () {
+      //   let date = new Date();
+      //   let currentDate = new Date().toJSON().slice(0,10) +" "+ date.toLocaleTimeString();
+      //   console.log(currentDate);
+      // },
+
       Addevent() {
         let userid = localStorage.getItem('userID');
         let eventplace = this.citySelected + " | " + this.countryName;
@@ -167,6 +183,7 @@
 
           axios.post(API_URL + "events", newEvent).then(res => {
             this.getEvent();
+            this.isCreated = true;
             this.$emit('other-event', this.otherEvent);
             console.log("Created!" + res.data);
             this.title = '';
@@ -175,16 +192,18 @@
             this.enddate = '';
             this.description = "";
             this.photo = "";
+            this.errorMessage = "Event create successfully !";
           })
           .catch(error => {
                 let status = error.response.status;
                 if(status === 422) {
-                this.isInvalid = true
+                 this.isCreated = false;
                 this.errorMessage = 'Invalid command, please create again';
                 }
           })
+
         }else{
-          console.log("End date must me grater than start date!!!!!");
+          this.errorMessage = "End date must me grater than start date!!";
         }
        
       },
@@ -206,6 +225,8 @@
             axios.delete(API_URL + "events/" + id).then(res => {
                 this.getEvent();
                 this.$emit('other-event', this.otherEvent);
+                this.isCreated = true;
+                this.errorMessage = "Deleted successfully !";
                 return res.data;
             })
             this.displayDialog = isFalse;
@@ -218,6 +239,8 @@
               this.displayEdit = isFalse;
               this.messageError = "";
               this.$emit('other-event', this.otherEvent);
+              this.isCreated = true;
+              this.errorMessage = "Updated successfully !";
               return res.data;
           }) 
             .catch(error => {
@@ -264,6 +287,7 @@
       this.getEvent();
       this.getCategories();
       this.getCountries();
+      // this.callFunction();
     },
   }
 </script>
@@ -275,7 +299,52 @@
     margin: 0;
     padding: 0;
   }
- 
+  .head{
+    width: 51%;
+    margin-top: 2%;
+    margin-left: 24%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  input[type=datetime-local]{
+    width: 30%;
+    padding: 3px;
+    border: 1px solid rgb(197, 191, 191);
+    border-radius: 5px;
+  }
+  input[type=file]{
+    border: none;
+    outline: none;
+  }
+  #startDate{
+    margin-right: 3%;
+  }
+  #endDate{
+    margin-left: 3%;
+  }
+  #description{
+    margin-top: 3%;
+  }
+  #city{
+    width: 30%;
+    margin-left: 2%;
+    padding: 3px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid rgb(170, 166, 166);
+  }
+  #category{
+    width: 75%;
+    margin-left: 2%;
+    padding: 7px;
+    outline: none;
+    border: 1px solid rgb(177, 170, 170);
+    border-radius: 5px;
+  }
+  .Classcategory{
+    border: none;
+  }
   .cards{
     overflow-y: scroll;
     height: 69vh;
@@ -283,11 +352,12 @@
   }
   #createEvent{
     background: teal;
-    width: 8%;
-    margin-left: 67%;
-    margin-top: 5%;
+    width: 15%;
   }
- 
+  .modal-header{
+    background: teal;
+    color: #fff;
+  }
   .container-card {
       margin-left: 10px;
       display: flex;

@@ -36,7 +36,8 @@
             </div>
             </div>
         </div>
-        <p id="exite" style="color:red">{{exiteMessage}}</p>
+        <p id="exite" v-if="isCreated" style="color:red">{{exiteMessage}}</p>
+        <p id="exite" v-else style="color:green;">{{exiteMessage}}</p>
         <!-- //================search btn==================== -->
 
         <input v-on:keyup = "search" id="search" class="form-control" type="search" placeholder="Search" aria-label="Search" v-model="searchcategory">
@@ -46,7 +47,7 @@
             <div class="categoryList">
                 <div v-for="categories of categoryLists" :key="categories.id" class="category">
                     <p class="card-title">{{categories.title}}</p>
-                    <div class="icon">
+                    <div class="icon" v-if="categories.user_id == userid">
                         <i @click = "ShowDilogEdit(categories)" id="edit" class="fas fa-pencil-alt"></i>
                         <i  @click = "ShowDialog(categories)"  id="delete" class="fa fa-trash"></i>
 
@@ -87,10 +88,12 @@ export default {
         return{
             showDialog: false,
             showEdit: false,
+            isMycategory: false,
+            isCreated: false,
             categoryLists: [],
             categoryName: "",
             description: "",
-            exiteMessage: "The categories is already exists",
+            exiteMessage: "",
             searchcategory:"",
             categoryInfo: "",
             userid: "",
@@ -115,14 +118,21 @@ export default {
             axios.post(API_URL, newCategory).then(res => {
                 console.log(res.data);
                 this.getCategory();
+                this.exiteMessage = "Created successfully!";
                 this.categoryName = "";
                 this.description = "";
+            })
+            .catch(error => {
+                console.log(error);
+                this.isCreated = true;
+                this.exiteMessage = 'The categories is already exists';
             })
            
         },
         removeCategory(id,isFalse) {
             axios.delete(API_URL + "/" + id).then(res => {
                 console.log(res.data.id);
+                this.exiteMessage = "Deleted successfully!";
                 this.getCategory();
                 this.showDialog = isFalse;
             })
@@ -134,6 +144,7 @@ export default {
                 console.log(res.data);
                 this.getCategory();
                 this.showEdit = isFalse
+                this.exiteMessage = "Updated successfully!";
             })
            
         },

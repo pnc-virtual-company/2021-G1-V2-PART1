@@ -15,10 +15,21 @@
                 </div>
                 <div>
                     <input class="password" type="password" placeholder="Password" v-model="password" required/>
+                    <input  class="password_confirm" type="password" placeholder="Confirm password" v-model="confirmation_password" required/>
+                </div>
+                <div>
+                    <select name="country" id="country" v-model="country">
+                        <option value="Cambodia">Cambodia</option>
+                        <option value="French">French</option>
+                    </select>
+                    <select name="nationality" id="nationality" v-model="nationality">
+                        <option value="Khmer">Khmer</option>
+                        <option value="Cambodian">Cambodian</option>
+                    </select>
                 </div>
 
                  <div>
-                    <input  class="password" type="password" placeholder="Confirm password" v-model="confirmation_password" required/>
+                    <input class="number" type="number" placeholder="Phone number" v-model="phone" required/>
                 </div>
 
                 <div>
@@ -47,6 +58,9 @@ export default {
             email: '',
             password: '',
             confirmation_password: '',
+            country: "Cambodia",
+            nationality: "Cambodian",
+            phone: "",
             image: '',
             errorMessage: "",
             userSignup: true,
@@ -65,8 +79,10 @@ export default {
             newUser.append('email',this.email);
             newUser.append('password',this.password);
             newUser.append('password_confirmation',this.confirmation_password);
+            newUser.append('country',this.country);
+            newUser.append('nationality',this.nationality);
+            newUser.append('phone',this.phone);
             newUser.append('profile',this.image);
-            console.log(newUser);
 
             axios.post(API_URL + "signup" , newUser).then(res => {
                 console.log(res.data);
@@ -121,23 +137,49 @@ export default {
         margin-top: 15%;
     }
     form{
+        margin-top: 3%;
         background: #fff;
         width: 49%;
-        margin-top: 5%;
-        margin-left: 6%;
+        padding: 5px;
     }
     #signup{
         margin-bottom: 5%;
     }
     .text,
-    .password,
+    .number,
     .email{
-        width: 90%;
-        height: 7vh;
-        margin-bottom: 20px;
+        width: 100%;
+        margin-bottom: 15px;
         outline: none;
         border:1px solid gray;
         border-radius: 5px;
+        padding: 10px;
+    }
+    .password{
+        width: 48%;
+        outline: none;
+        border:1px solid gray;
+        border-radius: 5px;
+        padding: 10px;
+    }
+    .password_confirm{
+        margin-left: 2%;
+        margin-bottom: 15px;
+        outline: none;
+        border:1px solid gray;
+        border-radius: 5px;
+        padding: 10px;
+    }
+    select{
+        width: 49%;
+        outline: none;
+        padding: 10px;
+        border-radius: 3px;
+        margin-bottom: 15px;
+        border:1px solid gray;
+    }
+    #nationality{
+        margin-left: 2%;
     }
     h3{
         font-size: 30px;
@@ -145,15 +187,13 @@ export default {
 
     }
     .add_back{
-        width: 90%;
+        margin-top: 8%;
         display: flex;
         align-items: center;
         justify-content: space-around;
-        padding-top: 20px;
     }
     .next{
         width: 80px;
-        margin-left: 100px;
         height: 5vh;
         border-radius: 5px;
         background: #15910a98;
@@ -172,7 +212,6 @@ export default {
         border-radius: 5px;
         margin-left: 10px;
         padding: 5px 20px;
-        margin-top: 2%;
         color:white;
     }
     .back:hover{

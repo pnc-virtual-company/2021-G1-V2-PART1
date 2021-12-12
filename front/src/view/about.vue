@@ -109,7 +109,12 @@ html {
   margin-bottom: 16px;
   padding: 0 8px;
 }
-
+h2{
+  color: #000;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px;
+}
 .review .box-container .box .stars i {
     color: var(--pink);
     font-size: 2rem;
