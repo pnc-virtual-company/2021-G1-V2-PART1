@@ -184,6 +184,8 @@ export default {
 <style scroped>
     section{
         width: 100%;
+        height: 90vh;
+        background: rgb(204, 201, 201);
     }
     .create{
         display: flex;

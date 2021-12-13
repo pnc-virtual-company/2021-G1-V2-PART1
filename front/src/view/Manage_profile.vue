@@ -81,6 +81,8 @@ const API_URL = 'http://127.0.0.1:8000/api/';
 }
 .profile{
   width: 100%;
+  height: 100vh;
+  background: #fff;
 }
 img{
   width: 100%;

@@ -74,7 +74,6 @@ export default {
         for(let event of res.data){
           if(event.user_id != this.userid){
             this.eventLists.push(event);
-            console.log(this.eventLists);
           }
         }
       })
@@ -141,6 +140,10 @@ export default {
   #findEvent{
     margin-top: 2%;
     margin-left: 24%;
+    color: #fff;
+  }
+  label{
+    color: #fff;
   }
   #searchbtn{
     margin-top: 1%;
@@ -179,6 +182,7 @@ export default {
   .event{
     width: 100%;
     background-image: url('./assets/findevent_bg.jpg');
+    background-size: cover;
   }
   .main_card{
     height: 67.8vh;

@@ -127,6 +127,7 @@ h2{
 .main{
   width: 100%;
   height: 90vh;
+  background: #fff;
   overflow-y: scroll;
 }
 .row{

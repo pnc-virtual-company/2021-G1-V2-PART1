@@ -177,7 +177,7 @@ export default {
         background: rgba(0, 0, 0, 0.23);
     }
     .password_confirm{
-        margin-left: 3%;
+        margin-left: 4%;
         margin-bottom: 15px;
         outline: none;
         border:1px solid gray;
@@ -197,7 +197,7 @@ export default {
         background: rgba(0, 0, 0, 0.23);
     }
     #nationality{
-        margin-left: 1%;
+        margin-left: 2%;
     }
     h3{
         font-size: 30px;

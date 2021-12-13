@@ -119,10 +119,14 @@ export default {
         height: 25vh;
         padding: 10px;
         border-radius: 10px;
-        background:#fff;
+        background:rgba(255, 255, 255, 0.377);
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     }
-    
+    .card:hover{
+        cursor: pointer;
+        width: 99%;
+        background:rgba(255, 255, 255, 0.589);
+    }
     button{
         cursor: pointer;
         border: none;
@@ -147,7 +151,7 @@ export default {
     #showDetail{
         font-size: 15px;
         color: rgb(30, 30, 139);
-        margin-left: 30%;
+        margin-left: 42%;
         background: none;
     }
     #showDetail:hover{

@@ -295,9 +295,12 @@
 <style scoped>
   section{
     width: 100%;
+    height: 90vh;
     margin: 0;
     padding: 0;
+    background: rgb(204, 201, 201);
   }
+ 
   .head{
     width: 51%;
     margin-top: 2%;
@@ -346,7 +349,7 @@
   }
   .cards{
     overflow-y: scroll;
-    height: 69vh;
+    height: 70vh;
     border: none;
   }
   #createEvent{
@@ -354,7 +357,7 @@
     width: 15%;
   }
   .modal-header{
-    background: teal;
+    background: rgba(0, 128, 128, 0.651);
     color: #fff;
   }
   .container-card {
@@ -363,13 +366,18 @@
       align-items: center;
       justify-content: space-between;
       padding: 10px;
-      background: #fff;
+      background: rgba(255, 255, 255, 0.644);
       margin: auto;
       margin-top: 3%;
       border-radius: 10px;
       width: 700px;
       height: 100px;
       box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  }
+  .container-card:hover{
+    width: 52%;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.788);
   }
   .main{
       width: 75%;

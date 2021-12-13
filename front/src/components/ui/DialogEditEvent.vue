@@ -13,10 +13,10 @@
           <input id="date" type="date" v-model="enddate">
           <label for="description">Description</label>
           <input id="description" type="text" v-model="description">
-          <label for="categories">Categories</label>
+          <!-- <label for="categories">Categories</label>
           <select name="categories" id="categories">
             <option :value= category.id>{{category.title}}</option>
-          </select>
+          </select> -->
           <!-- <input type="file" @change="onFileSelected"> -->
           <p style="color:red;margin-top:2%;">{{sms}}</p>
         </div>

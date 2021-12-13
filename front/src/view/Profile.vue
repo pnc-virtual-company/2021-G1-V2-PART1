@@ -1,5 +1,4 @@
 <template>
-  
     <div class="main_box">
         <div class="sidebar_menu">
             <!-- ======ul>li*8>a======= -->
@@ -56,7 +55,7 @@
  
     .main_box{
         position: relative;
-        height: 90vh;
+        height: 100vh;
         border: none;
         width: 20%;
         margin-top: -20px;
