@@ -169,11 +169,10 @@
 
       Addevent() {
         let userid = localStorage.getItem('userID');
-        let eventplace = this.citySelected + " | " + this.countryName;
         if(this.startdate <= this.enddate){
           let newEvent = new FormData();
           newEvent.append('title',this.title);
-          newEvent.append('city',eventplace);
+          newEvent.append('city',this.citySelected);
           newEvent.append('startdate',this.startdate);
           newEvent.append('enddate',this.enddate);
           newEvent.append('description',this.description);

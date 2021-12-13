@@ -7,11 +7,12 @@
 
       <!-- =============Find event component======== -->
       <div class="event" v-if = "findEvent">
+        <h2 id="findEvent">Find event</h2>
         <div id="searchbtn">
           <label for="search-title">Search title</label>
           <input v-on:keyup = "search" type="search" placeholder="search event to join..." v-model= "searchevent" class="eventsearch">
-          <label for="search-country">Search countries</label>
-          <input v-on:keyup = "searchCity" type="search" placeholder="search city" v-model= "searchCityName">
+          <label for="search-country">Search city</label>
+          <input v-on:keyup = "searchCity" type="search" placeholder="search city.." v-model= "searchCityName">
         </div>
         <div class="main_card">
           <ul>
@@ -123,8 +124,12 @@ export default {
 </script>
 
 <style scoped>
+  #findEvent{
+    margin-top: 2%;
+    margin-left: 24%;
+  }
   #searchbtn{
-    margin-top: 3%;
+    margin-top: 1%;
     margin-bottom: 2%;
     width: 60%;
     margin-left: 20%;
@@ -159,9 +164,10 @@ export default {
   }
   .event{
     width: 100%;
+    background-image: url('./assets/findevent_bg.jpg');
   }
   .main_card{
-    height: 70vh;
+    height: 67.8vh;
     overflow-y: scroll;
   }
   ul{

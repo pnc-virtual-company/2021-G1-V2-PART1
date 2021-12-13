@@ -118,6 +118,7 @@ export default {
             axios.post(API_URL, newCategory).then(res => {
                 console.log(res.data);
                 this.getCategory();
+                this.isCreated = false;
                 this.exiteMessage = "Created successfully!";
                 this.categoryName = "";
                 this.description = "";
@@ -132,6 +133,7 @@ export default {
         removeCategory(id,isFalse) {
             axios.delete(API_URL + "/" + id).then(res => {
                 console.log(res.data.id);
+                this.isCreated = false;
                 this.exiteMessage = "Deleted successfully!";
                 this.getCategory();
                 this.showDialog = isFalse;
@@ -144,6 +146,7 @@ export default {
                 console.log(res.data);
                 this.getCategory();
                 this.showEdit = isFalse
+                this.isCreated = false;
                 this.exiteMessage = "Updated successfully!";
             })
            

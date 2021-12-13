@@ -1,4 +1,5 @@
 <template>
+    <div class="signin_user">
        <div class="register">
             <div class="event">
                 <h1 id="EventMe">Event me</h1>
@@ -6,7 +7,7 @@
             
             <form @submit.prevent="LoginUser">
                 <div class="container">
-                    <h3>LOG IN</h3>
+                    <h3 style="color:#fff;">LOG IN</h3>
                     <div id="email">
                         <input type="email" class="text" placeholder="Email Or Mobile Number" autofocus v-model="storeEmail"/>
                     </div>
@@ -22,13 +23,14 @@
                     </div>
                 
                     <div class="signup-1">
-                        <p>Have any account?</p>
+                        <p style="color:#fff;">Have any account?</p>
                         <h4 id="signup" @click="signup">Sign Up</h4>
                     </div>
                 </div>
             </form>
 
         </div>
+    </div>
 </template>
 <script>
 import axios from 'axios';
@@ -73,6 +75,13 @@ export default {
 </script>
 
 <style scoped>
+    .signin_user{
+        width: 100%;
+        height: 100vh;
+        background-image: url('../../assets/test.gif');
+        position: center;
+        background-size: cover;
+    }
     .register{
         font-family: sans-serif;
         display: flex;
@@ -82,10 +91,11 @@ export default {
         height: 80vh;
         margin-left: 15%;
         box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        background: rgba(14, 13, 13, 0.5);
     }
     .event{
         width: 50%;
-        background-color: #9e9e9e;
+        background: rgba(0,0,0,0.3);
         color: white;
         text-shadow: 5px 5px #70625c;
         text-align: center;
@@ -99,14 +109,18 @@ export default {
     }
     form{
         width: 55%;
+        margin-top: 1%;
     }
     .text, .password{
         width: 90%;
         height: 40px;
+        padding: 10px;
         margin-bottom: 10px;
         outline: none;
-        border:1px solid gray;
+        border:1px solid rgb(179, 170, 170);
         border-radius: 3px;
+        color: #fff;
+        background: rgb(88, 86, 86);
     }
     .container{
         font-family: sans-serif;
@@ -137,7 +151,7 @@ export default {
         text-decoration: underline;
     }
     .add{
-        margin-top: 10%;
+        margin-top: 15%;
         margin-left:12%;
     }
     a {
@@ -148,7 +162,7 @@ export default {
         border: none;
         outline: none;
         border-radius: 5px;
-        margin-left: 22%;
+        margin-left: 21%;
         padding: 8px 15px;
         color: white;
         background: teal;
