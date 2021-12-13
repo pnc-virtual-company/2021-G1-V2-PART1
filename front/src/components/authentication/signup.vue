@@ -21,11 +21,18 @@
                     <div>
                         <select name="country" id="country" v-model="country">
                             <option value="Cambodia">Cambodia</option>
-                            <option value="French">French</option>
+                            <option value="French">France</option>
+                            <option value="French">Thailand</option>
+                            <option value="French">Philippines</option>
+                            <option value="French">Vietnam</option>
+            
                         </select>
                         <select name="nationality" id="nationality" v-model="nationality">
-                            <option value="Khmer">Khmer</option>
+                            <option value="Khmer">Thai</option>
                             <option value="Cambodian">Cambodian</option>
+                            <option value="Cambodian">Filipinos</option>
+                            <option value="Cambodian">French</option>
+                            <option value="Cambodian">Vietnamese</option>
                         </select>
                     </div>
 
