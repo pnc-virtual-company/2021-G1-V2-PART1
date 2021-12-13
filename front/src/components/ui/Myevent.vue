@@ -125,9 +125,8 @@
 
   import Dialog from './Dialog.vue'
   import DialogEditEvent from './DialogEditEvent.vue'
-  import axios from 'axios';
-  const API_URL = 'http://127.0.0.1:8000/api/';
-
+  import axios from '../../axios-http.js';
+  
   export default {
     components: { Dialog , DialogEditEvent},
     emits: ['other-event'],
@@ -180,7 +179,7 @@
           newEvent.append('category_id',this.category);
           newEvent.append('user_id',userid);
 
-          axios.post(API_URL + "events", newEvent).then(res => {
+          axios.post("events", newEvent).then(res => {
             this.getEvent();
             this.isCreated = true;
             this.$emit('other-event', this.otherEvent);
@@ -221,7 +220,7 @@
           this.eventInfo = event;
       },
       removeEvent(id,isFalse) {
-            axios.delete(API_URL + "events/" + id).then(res => {
+            axios.delete("events/" + id).then(res => {
                 this.getEvent();
                 this.$emit('other-event', this.otherEvent);
                 this.isCreated = true;
@@ -233,7 +232,7 @@
       },
       UpdateEvent(id,updateEvent,isFalse) {
           console.log(updateEvent);
-          axios.put(API_URL + "events/" + id , updateEvent).then(res => {
+          axios.put("events/" + id , updateEvent).then(res => {
               this.getEvent();
               this.displayEdit = isFalse;
               this.messageError = "";
@@ -253,7 +252,7 @@
 
       getEvent() {
         let myID = localStorage.getItem('userID');
-        axios.get(API_URL + "events").then(res => {
+        axios.get("events").then(res => {
           this.$emit('other-event', this.otherEvent);
           this.eventLists = [];
           for(let event of res.data){
@@ -267,13 +266,13 @@
       },
 
       getCategories(){
-        axios.get(API_URL + "categories").then(res => {
+        axios.get("categories").then(res => {
           this.categories = res.data;
         })
       },
 
       getCountries(){
-        axios.get('http://127.0.0.1:8000/api/countries').then(res => {
+        axios.get('countries').then(res => {
           this.countries = res.data;
         })
       },

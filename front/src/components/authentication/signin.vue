@@ -33,8 +33,9 @@
     </div>
 </template>
 <script>
-import axios from 'axios';
-const API_URL = "http://127.0.0.1:8000/api";
+
+import axios from '../../axios-http.js';
+
 export default {
     emits: ["signin-user"],
     data() {
@@ -54,7 +55,7 @@ export default {
                 password: this.storePassword,
             };
 
-            axios.post(API_URL + "/signin",user).then(res => {
+            axios.post("signin",user).then(res => {
                 this.users = res.data.user;
                 this.$router.push('/home');
                 this.$emit("signin-user", this.signin);

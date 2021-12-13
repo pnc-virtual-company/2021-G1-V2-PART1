@@ -34,8 +34,8 @@
 import TheNavigation from './components/menu/TheNavigation.vue';
 import findEvent from './components/ui/Findevent.vue';
 import Profile from './view/Profile.vue';
-import axios from './axios-http';
-const API_URL = 'http://127.0.0.1:8000/api/events';
+
+import axios from './axios-http.js';
 export default {
   components: {
     TheNavigation,
@@ -69,7 +69,7 @@ export default {
     },
 
     getAllEvent(){
-      axios.get(API_URL).then(res => {
+      axios.get('events').then(res => {
         this.eventLists = [];
         for(let event of res.data){
           if(event.user_id != this.userid){
@@ -81,7 +81,7 @@ export default {
 
     search(){
       if(this.searchevent !== ""){
-          axios.get(API_URL + "/search/" + this.searchevent).then(res => {
+          axios.get("search/" + this.searchevent).then(res => {
             this.eventLists = [];
             for(let event of res.data){
               if(event.user_id != this.userid){
@@ -95,7 +95,7 @@ export default {
     },
     searchCity(){
       if(this.searchCityName !== ""){
-        axios.get(API_URL + "/searchCity/" + this.searchCityName).then(res => {
+        axios.get("searchCity/" + this.searchCityName).then(res => {
           this.eventLists = [];
           for(let event of res.data){
             if(event.user_id != this.userid){

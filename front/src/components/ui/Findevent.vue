@@ -25,8 +25,7 @@
 
 <script>
 import DialogFindevent from './DialogFindevent.vue';
-import axios from 'axios';
-const API_URL = 'http://127.0.0.1:8000/api/';
+import axios from '../../axios-http.js';
 export default {
     components: { DialogFindevent },
     props: ["Event"],
@@ -47,7 +46,7 @@ export default {
                 user_id: this.userid,
                 event_id: id,
             }
-            axios.post(API_URL+ "joins", eventjoin).then(res => {
+            axios.post("joins", eventjoin).then(res => {
                 console.log(res.data);
                 this.getJoinslist();
             })
@@ -61,7 +60,7 @@ export default {
                     eventid = join.id;
                 }
             }
-            axios.delete(API_URL + "joins/" + eventid).then(res => {
+            axios.delete("joins/" + eventid).then(res => {
                 console.log(res.data);
                 this.getJoinslist();
             });
@@ -75,7 +74,7 @@ export default {
         },
       
         getJoinslist() {
-            axios.get(API_URL + "joins").then(res => {
+            axios.get("joins").then(res => {
                 this.joinList = res.data;
             })
         },
