@@ -130,7 +130,7 @@ export default {
            
         },
         removeCategory(id,isFalse) {
-            axios.delete("categories/" + id).then(res => {
+            axios.delete("categories" + "/" + id).then(res => {
                 console.log(res.data.id);
                 this.isCreated = false;
                 this.exiteMessage = "Deleted successfully!";
@@ -157,13 +157,13 @@ export default {
         },
 
         getCategory(){
-            axios.get('categories').then(res => {
+            axios.get("categories").then(res => {
                 this.categoryLists = res.data;
             })
         },
         search(){
             if(this.searchcategory !== ""){
-                axios.get("search/" + this.searchcategory).then(res => {
+                axios.get("categories" + "/search/" + this.searchcategory).then(res => {
                 this.categoryLists = res.data;
                 })
             }else{
