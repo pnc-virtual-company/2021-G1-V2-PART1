@@ -169,6 +169,7 @@ nav a {
 .router-link-active {
   background: teal;
   border-radius: 2px;
+  font-weight: bolder;
 }
 
 #btnSignout{
