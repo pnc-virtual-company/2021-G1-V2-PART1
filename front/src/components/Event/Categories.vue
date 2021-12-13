@@ -93,6 +93,7 @@ export default {
             exiteMessage: "The categories is already exists",
             searchcategory:"",
             categoryInfo: "",
+            btnShow: false,
         }
     },
     methods: {
@@ -142,6 +143,7 @@ export default {
         },
 
         getCategory(){
+            // let localUserID = localStorage.getItem('userID');
              axios.get(API_URL).then(res => {
                 this.categoryLists = res.data;
                 console.log(this.categoryLists);
