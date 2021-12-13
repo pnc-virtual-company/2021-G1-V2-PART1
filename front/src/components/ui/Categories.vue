@@ -74,10 +74,10 @@
 
 
 <script>
-import axios from 'axios';
+import axios from '../../axios-http.js';
 import Dialog from './Dialog.vue'
 import DialogEdit from './DialogEdit.vue'
-const API_URL = 'http://127.0.0.1:8000/api/categories';
+
 export default {
      components: {
         Dialog,
@@ -115,7 +115,7 @@ export default {
                 user_id: this.userid,
             }
            
-            axios.post(API_URL, newCategory).then(res => {
+            axios.post("categories", newCategory).then(res => {
                 console.log(res.data);
                 this.getCategory();
                 this.isCreated = false;
@@ -131,7 +131,7 @@ export default {
            
         },
         removeCategory(id,isFalse) {
-            axios.delete(API_URL + "/" + id).then(res => {
+            axios.delete("categories" + "/" + id).then(res => {
                 console.log(res.data.id);
                 this.isCreated = false;
                 this.exiteMessage = "Deleted successfully!";
@@ -142,7 +142,7 @@ export default {
             
         },
         updateCategory(id,categories, isFalse) {
-            axios.put(API_URL + "/" + id , categories ).then(res => {
+            axios.put("categories/" + id , categories ).then(res => {
                 console.log(res.data);
                 this.getCategory();
                 this.showEdit = isFalse
@@ -158,14 +158,13 @@ export default {
         },
 
         getCategory(){
-            // let localUserID = localStorage.getItem('userID');
-             axios.get(API_URL).then(res => {
+            axios.get("categories").then(res => {
                 this.categoryLists = res.data;
             })
         },
         search(){
             if(this.searchcategory !== ""){
-                axios.get(API_URL + "/search/" + this.searchcategory).then(res => {
+                axios.get("categories" + "/search/" + this.searchcategory).then(res => {
                 this.categoryLists = res.data;
                 })
             }else{

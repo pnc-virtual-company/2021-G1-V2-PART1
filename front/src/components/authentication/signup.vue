@@ -50,8 +50,8 @@
 </template>
 
 <script>
-import axios from 'axios';
-const API_URL = "http://127.0.0.1:8000/api/";
+import axios from '../../axios-http.js';
+
 export default {
     emits: ['new-user'],
     data() {
@@ -86,7 +86,7 @@ export default {
             newUser.append('phone',this.phone);
             newUser.append('profile',this.image);
 
-            axios.post(API_URL + "signup" , newUser).then(res => {
+            axios.post("signup" , newUser).then(res => {
                 console.log(res.data);
                 localStorage.setItem('userID', res.data.user.id);
                 this.$emit('new-user', this.userSignup);

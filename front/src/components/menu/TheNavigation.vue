@@ -37,8 +37,8 @@
 
 
 <script>
-import axios from 'axios';
-const API_URL = 'http://127.0.0.1:8000/api/users';
+import axios from '../../axios-http.js';
+
 export default {
   emits: ['user-profile','sign-out','find-event'],
   data(){
@@ -69,7 +69,7 @@ export default {
   },
   mounted() {
     let userid = localStorage.getItem('userID');
-    axios.get(API_URL).then(res => {
+    axios.get("users").then(res => {
         let users = res.data;
         for(let user of users){
           if(user.id == userid){
