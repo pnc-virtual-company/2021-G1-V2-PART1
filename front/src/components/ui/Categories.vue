@@ -158,6 +158,7 @@ export default {
         },
 
         getCategory(){
+            // let localUserID = localStorage.getItem('userID');
              axios.get(API_URL).then(res => {
                 this.categoryLists = res.data;
             })

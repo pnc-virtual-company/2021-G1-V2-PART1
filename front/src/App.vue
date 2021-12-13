@@ -94,6 +94,20 @@ export default {
         this.getAllEvent();
       }     
     },
+    searchCity(){
+      if(this.searchCityName !== ""){
+        axios.get(API_URL + "/searchCity/" + this.searchCityName).then(res => {
+          this.eventLists = [];
+          for(let event of res.data){
+            if(event.user_id != this.userid){
+              this.eventLists.push(event);
+            }
+          }
+        })
+      }else{
+        this.getAllEvent();
+      }
+    },
     ShowProfile(profile){
       this.profile = profile
     },
