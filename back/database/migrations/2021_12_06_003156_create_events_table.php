@@ -17,8 +17,8 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('city');
-            $table->string('startdate');
-            $table->string('enddate');
+            $table->dateTime('startdate');
+            $table->dateTime('enddate');
             $table->text('description');
             $table->string('photo')->nullable();
             $table->foreignId('category_id')->constrained()->onDelete('CASCADE');

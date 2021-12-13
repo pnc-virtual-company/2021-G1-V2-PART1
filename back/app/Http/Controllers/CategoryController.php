@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function getCategory()
     {
-        return Category::with('event')->latest()->get();
+        return Category::with('user')->latest()->get();
     }
 
     /**
@@ -28,6 +28,7 @@ class CategoryController extends Controller
         $category = new Category();
         $category->title = $request->title;
         $category->description = $request->description;
+        $category->user_id = $request->user_id;
 
         $category->save();
         return response()->json(['message' => "created successfully" , "category" => $category],201);

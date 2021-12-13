@@ -15,4 +15,7 @@ class Category extends Model
     public function event(){
         return $this->hasMany(Event::class);
     }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

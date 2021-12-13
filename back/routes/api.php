@@ -49,13 +49,16 @@ Route::delete('/events/{id}', [EventController::class, 'delete']);
 
 Route::get('/joins', [JoinController::class, 'getJoins']);
 Route::post('/joins', [JoinController::class, 'store']);
-Route::put('/joins/{id}', [JoinController::class, 'update']);
 Route::delete('/joins/{id}', [JoinController::class, 'delete']);
 
 // ==================== Route Search events
 
 
 Route::get('/events/search/{title}', [EventController::class, 'search']);
+
+// ==================== Route search event by cities ====================
+
+Route::get('/events/searchCity/{city}', [EventController::class, 'searchbycity']);
 
 // public ====================Get Countries==============================
 
