@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function getCategory()
     {
-        return Category::latest()->get();
+        return Category::with('event')->latest()->get();
     }
 
     /**
