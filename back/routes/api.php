@@ -52,14 +52,10 @@ Route::post('/joins', [JoinController::class, 'store']);
 Route::delete('/joins/{id}', [JoinController::class, 'delete']);
 
 // ==================== Route Search events
-
-
 Route::get('/events/search/{title}', [EventController::class, 'search']);
 
 // ==================== Route search event by cities ====================
-
 Route::get('/events/searchCity/{city}', [EventController::class, 'searchbycity']);
 
 // public ====================Get Countries==============================
-
 Route::get('/countries', [CountriesController::class, 'getCountry']);

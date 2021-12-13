@@ -5,7 +5,7 @@
             <div class="main">
                 <h2 id="title">{{Event.title}}</h2>
                 <div class="main_content">
-                    <p style="margin-bottom:-2px">{{Event.join.length}} members</p>
+                    <!-- <p style="margin-bottom:-2px">{{Event.join.length}} members</p> -->
                     <button id="showDetail" @click = "ShowDetail">Show more</button>
                     <div class="body">
                         <button id="join" @click="toJoin(Event.id)" v-if="joinEventisVisible" >Join</button>
