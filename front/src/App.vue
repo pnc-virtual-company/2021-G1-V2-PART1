@@ -81,7 +81,7 @@ export default {
 
     search(){
       if(this.searchevent !== ""){
-          axios.get("search/" + this.searchevent).then(res => {
+          axios.get("events/search/" + this.searchevent).then(res => {
             this.eventLists = [];
             for(let event of res.data){
               if(event.user_id != this.userid){
@@ -95,7 +95,7 @@ export default {
     },
     searchCity(){
       if(this.searchCityName !== ""){
-        axios.get("searchCity/" + this.searchCityName).then(res => {
+        axios.get("events/searchCity/" + this.searchCityName).then(res => {
           this.eventLists = [];
           for(let event of res.data){
             if(event.user_id != this.userid){
