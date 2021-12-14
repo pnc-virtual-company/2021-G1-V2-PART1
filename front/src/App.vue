@@ -34,8 +34,8 @@
 import TheNavigation from './components/menu/TheNavigation.vue';
 import findEvent from './components/ui/Findevent.vue';
 import Profile from './view/Profile.vue';
-
 import axios from './axios-http.js';
+
 export default {
   components: {
     TheNavigation,
@@ -69,7 +69,7 @@ export default {
     },
 
     getAllEvent(){
-      axios.get('events').then(res => {
+      axios.get("events").then(res => {
         this.eventLists = [];
         for(let event of res.data){
           if(event.user_id != this.userid){

@@ -126,7 +126,6 @@
   import Dialog from './Dialog.vue'
   import DialogEditEvent from './DialogEditEvent.vue'
   import axios from '../../axios-http.js';
-  
   export default {
     components: { Dialog , DialogEditEvent},
     emits: ['other-event'],
